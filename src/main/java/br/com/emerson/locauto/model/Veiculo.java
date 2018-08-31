@@ -1,5 +1,11 @@
 package br.com.emerson.locauto.model;
 
+/**
+ * @author Emerson Sousa
+ * 
+ * Esta classe representa o Veículo na aplicação.
+ */
+
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;

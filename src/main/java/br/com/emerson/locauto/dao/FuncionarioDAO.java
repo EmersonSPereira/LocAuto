@@ -1,5 +1,10 @@
 package br.com.emerson.locauto.dao;
 
+/**
+ * @author Emerson Sousa
+ * 
+ * Esta classe faz o gerenciamento (CRUD) da classe Funcionário no banco de dados
+ */
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -15,6 +20,12 @@ public class FuncionarioDAO {
 
 	private final Logger logger = LoggerFactory.getLogger(FuncionarioDAO.class);
 
+	/**
+	 * Salva um Funcionario no banco de dados caso a mesmo não exista,
+	 * se já existe faz um upload do Funcionario no banco.
+	 * @param funcionario
+	 * @return
+	 */
 	public Funcionario salvar(Funcionario funcionario) {
 
 		EntityManager em = new ConnectionFactory().getConection();
@@ -47,6 +58,11 @@ public class FuncionarioDAO {
 
 	}
 
+	/**
+	 * Busca  o funcionário no banco de dados pelo o id passado como parâmetro e retorna o funcionário encontrado.
+	 * @param id
+	 * @return
+	 */
 	public Funcionario buscaPorId(Integer id) {
 
 		EntityManager em = new ConnectionFactory().getConection();
@@ -66,6 +82,10 @@ public class FuncionarioDAO {
 		return funcionario;
 
 	}
+	/**
+	 * Recupera uma lista de todos os funcionários armazenados no banco.
+	 * @return
+	 */
 
 	public List<Funcionario> buscaTodos() {
 
@@ -85,6 +105,11 @@ public class FuncionarioDAO {
 		return funcionario;
 	}
 
+	/**
+	 * Deleta do banco de dados o funcionário com id passado como parâmetro.
+	 * @param id
+	 * @return
+	 */
 	public boolean deleta(Integer id) {
 
 		EntityManager em = new ConnectionFactory().getConection();

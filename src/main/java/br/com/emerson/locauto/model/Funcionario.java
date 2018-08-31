@@ -1,4 +1,9 @@
 package br.com.emerson.locauto.model;
+/**
+ * @author Emerson Sousa
+ * 
+ * Esta classe representa o Funcionário na aplicação.
+ */
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;

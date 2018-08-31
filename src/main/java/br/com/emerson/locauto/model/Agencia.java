@@ -1,5 +1,11 @@
 package br.com.emerson.locauto.model;
 
+/**
+ * @author Emerson Sousa
+ * 
+ * Esta classe representa a Agência na aplicação.
+ */
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

@@ -3,6 +3,12 @@ package br.com.emerson.locauto.model;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+/**
+ * @author Emerson Sousa
+ * 
+ * Esta classe representa um veículo do tipo motocicleta na aplicação.
+ */
+
 @Entity
 @DiscriminatorValue(value = "M")
 public class Motocicleta extends Veiculo {

@@ -1,4 +1,9 @@
 package br.com.emerson.locauto.dao;
+/**
+ * @author Emerson Sousa
+ * 
+ * Esta classe faz o gerenciamento (CRUD) da classe Veículo no banco de dados
+ */
 
 import java.util.List;
 
@@ -15,7 +20,12 @@ public class VeiculoDAO {
 	
 	private final Logger logger = LoggerFactory.getLogger(VeiculoDAO.class);
 	
-	
+	/**
+	 * Salva um Veículo no banco de dados caso a mesmo não exista,
+	 * se já existe faz um upload do Veículo no banco.
+	 * @param veiculo
+	 * @return
+	 */
 	public Veiculo salvar(Veiculo veiculo) {
 		
 		EntityManager em  =  new ConnectionFactory().getConection();		
@@ -43,7 +53,11 @@ public class VeiculoDAO {
 		return veiculo;
 	}
 	
-	
+	/**
+	 * Busca  o Veículo no banco de dados pelo o id passado como parâmetro e retorna o Veículo encontrado.
+	 * @param id
+	 * @return
+	 */
 	public Veiculo buscaPorId(Integer id) {
 		
 		EntityManager em = new ConnectionFactory().getConection();
@@ -64,7 +78,10 @@ public class VeiculoDAO {
 		
 		
 	}
-	
+	/**
+	 * Recupera uma lista de todos os Veículos armazenados no banco.
+	 * @return
+	 */
 	public List<Veiculo> buscaTodos(){
 		
 		EntityManager em = new ConnectionFactory().getConection();
@@ -83,6 +100,11 @@ public class VeiculoDAO {
 		return veiculos;
 	}
 	
+	/**
+	 * Deleta do banco de dados o Veículo com id passado como parâmetro.
+	 * @param id
+	 * @return
+	 */
 	public boolean deleta(Integer id) {
 		
 		EntityManager em = new ConnectionFactory().getConection();
