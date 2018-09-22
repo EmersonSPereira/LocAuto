@@ -5,6 +5,7 @@
 	<groupId>br.com.emerson</groupId>
 	<artifactId>LocAuto</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 
 	<dependencies>
 
