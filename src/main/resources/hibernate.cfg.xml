@@ -3,14 +3,21 @@
     "-//Hibernate/Hibernate Configuration DTD//EN"
     "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 
- 
+
 <hibernate-configuration>
-    <session-factory>
-        <mapping class="br.com.emerson.locauto.model.Agencia" />
-        <mapping class="br.com.emerson.locauto.model.Funcionario" />
-        <mapping class="br.com.emerson.locauto.model.Veiculo" />
-    </session-factory>
-	    
+	<session-factory>
+		<mapping class="br.com.emerson.locauto.model.Agencia" />
+		<mapping class="br.com.emerson.locauto.model.Funcionario" />
+		<mapping class="br.com.emerson.locauto.model.Gerente" />
+		<mapping class="br.com.emerson.locauto.model.Locador" />
+		<mapping class="br.com.emerson.locauto.model.Veiculo" />
+		<mapping class="br.com.emerson.locauto.model.Carro" />
+		<mapping class="br.com.emerson.locauto.model.Motocicleta" />
+		<mapping class="br.com.emerson.locauto.model.Cliente" />
+		<mapping class="br.com.emerson.locauto.model.ClientePF" />
+		<mapping class="br.com.emerson.locauto.model.ClientePJ" />
+	</session-factory>
+
 </hibernate-configuration>
 
 

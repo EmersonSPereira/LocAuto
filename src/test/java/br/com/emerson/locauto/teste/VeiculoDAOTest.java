@@ -1,25 +1,32 @@
 package br.com.emerson.locauto.teste;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import br.com.emerson.locauto.model.Carro;
 import br.com.emerson.locauto.model.Motocicleta;
 import br.com.emerson.locauto.model.Veiculo;
-import br.com.emerson.locauto.service.VeiculoServiceImpl;
+import br.com.emerson.locauto.service.VeiculoService;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:spring-servlet-test.xml"})
 public class VeiculoDAOTest {
 
 	@Autowired
-	VeiculoServiceImpl dao;
-	Motocicleta moto;
-	Carro carro;
-	List<Veiculo> veiculos;
+	private VeiculoService dao;
+	private Motocicleta moto;
+	private Carro carro;
+	private List<Veiculo> veiculos;
 
 	@Before
 	public void setUp() throws Exception {

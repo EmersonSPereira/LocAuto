@@ -34,7 +34,7 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 	 */
 	public Veiculo salvar(Veiculo veiculo) {
 
-		sessionFactory.getCurrentSession().save(veiculo);
+		sessionFactory.getCurrentSession().saveOrUpdate(veiculo);
 		return veiculo;
 
 	}

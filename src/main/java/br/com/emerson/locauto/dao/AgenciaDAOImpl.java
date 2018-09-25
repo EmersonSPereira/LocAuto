@@ -36,7 +36,7 @@ public class AgenciaDAOImpl implements AgenciaDAO {
 
 		//logger.info("Iniciando conexao para salvar/editar registro da agencia");
 		
-		sessionFactory.getCurrentSession().save(agencia);
+		sessionFactory.getCurrentSession().saveOrUpdate(agencia);;;
 		
 		return agencia;
 //		

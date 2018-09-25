@@ -6,35 +6,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.emerson.locauto.dao.AgenciaDAO;
-import br.com.emerson.locauto.model.Agencia;
+import br.com.emerson.locauto.dao.ClienteDAO;
+import br.com.emerson.locauto.model.Cliente;
 
 @Service
-public class AgenciaServiceImpl implements AgenciaService {
-	
+public class ClienteServiceImpl implements ClienteService {
+
 	@Autowired
-	private AgenciaDAO dao;
-	
+	private ClienteDAO dao;
+
 	@Transactional
-	public Agencia salvar(Agencia agencia) {
-		
-		return dao.salvar(agencia);
+	public Cliente salvar(Cliente cliente) {
+
+		return dao.salvar(cliente);
 	}
-	
+
 	@Transactional
-	public Agencia buscaPorId(Integer id) {
-		
+	public Cliente buscaPorId(Integer id) {
+
 		return dao.buscaPorId(id);
 	}
-	
+
 	@Transactional
-	public List<Agencia> buscaTodos() {
+	public List<Cliente> buscaTodos() {
 
 		return dao.buscaTodos();
 	}
-	
+
 	@Transactional
 	public boolean deleta(Integer id) {
+
 		Boolean result = dao.deleta(id);
 		return result;
 	}

@@ -34,7 +34,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
 	 */
 	public Funcionario salvar(Funcionario funcionario) {
 
-		sessionFactory.getCurrentSession().save(funcionario);
+		sessionFactory.getCurrentSession().saveOrUpdate(funcionario);
 		return funcionario;
 
 	}

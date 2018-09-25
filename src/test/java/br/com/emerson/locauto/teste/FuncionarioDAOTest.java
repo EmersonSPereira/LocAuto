@@ -9,20 +9,25 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import br.com.emerson.locauto.dao.FuncionarioDAOImpl;
 import br.com.emerson.locauto.model.Funcionario;
 import br.com.emerson.locauto.model.Gerente;
 import br.com.emerson.locauto.model.Locador;
+import br.com.emerson.locauto.service.FuncionarioService;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:spring-servlet-test.xml"})
 public class FuncionarioDAOTest {
 
 	@Autowired
-	FuncionarioDAOImpl dao;
-	Gerente f1;
-	Locador f2;
-	List<Funcionario> funcionarios;
+	private FuncionarioService dao;
+	private Gerente f1;
+	private Locador f2;
+	private List<Funcionario> funcionarios;
 
 	@Before
 	public void setUp() throws Exception {

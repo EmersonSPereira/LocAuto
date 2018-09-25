@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.emerson.locauto.dao.FuncionarioDAOImpl;
+import br.com.emerson.locauto.dao.FuncionarioDAO;
 import br.com.emerson.locauto.model.Funcionario;
 
 
@@ -14,7 +14,7 @@ import br.com.emerson.locauto.model.Funcionario;
 public class FuncionarioServiceImpl implements FuncionarioService{
 	
 	@Autowired
-	private FuncionarioDAOImpl dao;
+	private FuncionarioDAO dao;
 	
 	@Transactional
 	public Funcionario salvar(Funcionario funcionario) {

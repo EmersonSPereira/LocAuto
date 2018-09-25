@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.emerson.locauto.dao.VeiculoDAOImpl;
+import br.com.emerson.locauto.dao.VeiculoDAO;
 import br.com.emerson.locauto.model.Veiculo;
 
 @Service
 public class VeiculoServiceImpl implements VeiculoService {
 	
 	@Autowired
-	private VeiculoDAOImpl dao;
+	private VeiculoDAO dao;
 	
 	@Transactional
 	public Veiculo salvar(Veiculo veiculo) {
