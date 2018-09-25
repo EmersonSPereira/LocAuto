@@ -6,15 +6,17 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.emerson.locauto.dao.VeiculoDAO;
 import br.com.emerson.locauto.model.Carro;
 import br.com.emerson.locauto.model.Motocicleta;
 import br.com.emerson.locauto.model.Veiculo;
+import br.com.emerson.locauto.service.VeiculoServiceImpl;
 
 public class VeiculoDAOTest {
 
-	VeiculoDAO dao;
+	@Autowired
+	VeiculoServiceImpl dao;
 	Motocicleta moto;
 	Carro carro;
 	List<Veiculo> veiculos;
@@ -22,8 +24,7 @@ public class VeiculoDAOTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		dao = new VeiculoDAO();
-
+		
 		moto = new Motocicleta();
 		moto.setMarca("Honda");
 		moto.setCor("Azul");
@@ -42,7 +43,7 @@ public class VeiculoDAOTest {
 		carro.setCor("Vermelho");
 		carro.setPotencia(65);
 		carro.setRenavam("546546545");
-		carro.setAcessorios("Ar, Trava, Direção");
+		carro.setAcessorios("Ar, Trava, Direï¿½ï¿½o");
 		carro.setAgencia("Campina Grande");
 		carro.setTipoCombustivel("Gasolina");
 		carro.setAno(2010);
@@ -77,8 +78,8 @@ public class VeiculoDAOTest {
 		//salvando um veiculo no banco
 		dao.salvar(carro);
 		
-		/* O método buscaTodos retorna uma lista de veiculos com todos os veiculos
-		 * contidos no banco, o teste abaixo verifica se a lista é vazia, como anteriormente
+		/* O mï¿½todo buscaTodos retorna uma lista de veiculos com todos os veiculos
+		 * contidos no banco, o teste abaixo verifica se a lista ï¿½ vazia, como anteriormente
 		 * foi inserido um veiculo no banco o teste tem que dar falso.
 		 */
 		assertFalse(dao.buscaTodos().isEmpty());

@@ -9,15 +9,17 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.emerson.locauto.dao.FuncionarioDAO;
+import br.com.emerson.locauto.dao.FuncionarioDAOImpl;
 import br.com.emerson.locauto.model.Funcionario;
 import br.com.emerson.locauto.model.Gerente;
 import br.com.emerson.locauto.model.Locador;
 
 public class FuncionarioDAOTest {
 
-	FuncionarioDAO dao;
+	@Autowired
+	FuncionarioDAOImpl dao;
 	Gerente f1;
 	Locador f2;
 	List<Funcionario> funcionarios;
@@ -25,15 +27,15 @@ public class FuncionarioDAOTest {
 	@Before
 	public void setUp() throws Exception {
 
-		dao = new FuncionarioDAO();
+		
 
 		f1 = new Gerente();
 		f1.setCpf("454654564-54");
 		f1.setDataNascimento("21/10/1999");
 		f1.setEmail("lalalall@gmail.com,");
-		f1.setEndereço("Rua lalala, monte santo,888, campina grande, Paraiba");
+		f1.setEndereco("Rua lalala, monte santo,888, campina grande, Paraiba");
 		f1.setNaturalidade("Campina Grande");
-		f1.setNome("Jõao Pedro");
+		f1.setNome("Jï¿½ao Pedro");
 		f1.setRg("46546465");
 		f1.setTelefone("8399887415");
 
@@ -41,7 +43,7 @@ public class FuncionarioDAOTest {
 		f2.setCpf("999887055-53");
 		f2.setDataNascimento("08/5/1985");
 		f2.setEmail("lalalall@gmail.com,");
-		f2.setEndereço("Rua lalala, Santo Antonio,26, campina grande, Paraiba");
+		f2.setEndereco("Rua lalala, Santo Antonio,26, campina grande, Paraiba");
 		f2.setNaturalidade("Campina Grande");
 		f2.setNome("Araujo SIlva");
 		f2.setRg("555555");
@@ -56,10 +58,10 @@ public class FuncionarioDAOTest {
 
 		// setando o id do funcionario a ser editado
 		f1.setId(1);
-		f1.setNome("João");
+		f1.setNome("Joï¿½o");
 
 		// test editar funcionario
-		assertEquals("João", dao.salvar(f1).getNome());
+		assertEquals("Joï¿½o", dao.salvar(f1).getNome());
 	}
 
 	@Test
@@ -80,8 +82,8 @@ public class FuncionarioDAOTest {
 		dao.salvar(f2);
 
 		/*
-		 * O método buscaTodos retorna uma lista de Funcionarios com todos os veiculos
-		 * contidos no banco, o teste abaixo verifica se a lista é vazia, como
+		 * O mï¿½todo buscaTodos retorna uma lista de Funcionarios com todos os veiculos
+		 * contidos no banco, o teste abaixo verifica se a lista ï¿½ vazia, como
 		 * anteriormente foi inserido um funcionario no banco o teste tem que dar falso.
 		 */
 

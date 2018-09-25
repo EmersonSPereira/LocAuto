@@ -6,19 +6,21 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.emerson.locauto.dao.AgenciaDAO;
+
 import br.com.emerson.locauto.model.Agencia;
+import br.com.emerson.locauto.service.AgenciaServiceImpl;
 
 public class AgenciaDAOTest {
 
-	AgenciaDAO dao;
+	@Autowired
+	AgenciaServiceImpl dao;
 	Agencia ag1,ag2;
 	List<Agencia> agencias;
 
 	@Before
 	public void setUp() throws Exception {
-		dao = new AgenciaDAO();
 		
 		ag1 = new Agencia();
 		ag1.setCnpj("546545465451");
@@ -44,7 +46,7 @@ public class AgenciaDAOTest {
 		// salvando agencia primeira vez
 		assertEquals(ag1, dao.salvar(ag1));
 
-		// Testando edição da agencia
+		// Testando ediï¿½ï¿½o da agencia
 		ag1.setId(1);// setando o id da agencia a ser editada
 		ag1.setGerenteResponsavel("Emerson");
 		assertEquals("Emerson", dao.salvar(ag1).getGerenteResponsavel());
@@ -65,12 +67,12 @@ public class AgenciaDAOTest {
 	@Test
 	public void TestDeleta() {
 		
-		//inserindo agêcias no banco
+		//inserindo agï¿½cias no banco
 		dao.salvar(ag1);
 		dao.salvar(ag2);
 		
 		
-		//realizando uma busca, para pegar uma agencia com id válido
+		//realizando uma busca, para pegar uma agencia com id vï¿½lido
 		agencias = dao.buscaTodos();
 		
 		Agencia agencia = agencias.get(agencias.size() - 1);
@@ -80,7 +82,7 @@ public class AgenciaDAOTest {
 		//O teste deleta uma agencia do banco
 		assertTrue(dao.deleta(idValido));
 		
-		//falha ao deletar id não existente
+		//falha ao deletar id nï¿½o existente
 		assertFalse(dao.deleta(5464646));
 
 

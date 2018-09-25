@@ -2,7 +2,7 @@ package br.com.emerson.locauto.model;
 /**
  * @author Emerson Sousa
  * 
- * Esta classe representa o Funcionário na aplicação.
+ * Esta classe representa o Funcionï¿½rio na aplicaï¿½ï¿½o.
  */
 
 import javax.persistence.DiscriminatorColumn;
@@ -29,7 +29,7 @@ public class Funcionario {
 	private String rg;
 	private String dataNascimento;
 	private String naturalidade;
-	private String endereço;
+	private String endereco;
 	private String telefone;
 	private String email;
 
@@ -81,12 +81,12 @@ public class Funcionario {
 		this.naturalidade = naturalidade;
 	}
 
-	public String getEndereço() {
-		return endereço;
+	public String getEndereco() {
+		return endereco;
 	}
 
-	public void setEndereço(String endereço) {
-		this.endereço = endereço;
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 	public String getTelefone() {
