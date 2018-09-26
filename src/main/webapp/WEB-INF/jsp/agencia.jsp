@@ -3,28 +3,11 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-	<title>Spring 3 MVC Series - Contact Manager</title>
-	<style type="text/css">
-		body {
-			font-family: sans-serif;
-		}
-		.data, .data td {
-			border-collapse: collapse;
-			width: 100%;
-			border: 1px solid #aaa;
-			margin: 2px;
-			padding: 2px;
-		}
-		.data th {
-			font-weight: bold;
-			background-color: #5C82FF;
-			color: white;
-		}
-	</style>
+	<title>Cadastro de agência</title>
 </head>
 <body>
 
-<h2>Gerenciamento</h2>
+<h2>Cadastro Agência</h2>
 
 <form:form method="post" action="add.html" modelAttribute="contact">
 
@@ -53,28 +36,10 @@
 </table>	
 </form:form>
 
+<a href="exibeAgencias">Exibe Agências</a>
+
 	
-<h3>Agencias</h3>
-<c:if  test="${!empty contactList}">
-<table class="data">
-<tr>
-	<th style="width: 150px; ">cnpj</th>
-	<th>inscEstadual</th>
-	<th>GerenteResponsavel</th>
-	<th>Telefone</th>
-	<th>&nbsp;</th>
-</tr>
-<c:forEach items="${contactList}" var="contact">
-	<tr>
-		<td>${contact.cnpj} </td>
-		<td>${contact.inscEstadual}</td>
-		<td>${contact.gerenteResponsavel}</td>
-		<td>${contact.telefone}</td>
-		<td><a href="delete/${contact.id}">delete</a></td>
-	</tr>
-</c:forEach>
-</table>
-</c:if>
+
 
 
 </body>

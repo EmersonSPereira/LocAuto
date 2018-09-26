@@ -24,9 +24,9 @@ public class AgenciaController {
 	public String listContacts(Map<String, Object> map) {
 
 		map.put("contact", new Agencia());
-		map.put("contactList", agenciaService.buscaTodos());
+		
 
-		return "contact";
+		return "agencia";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -42,7 +42,13 @@ public class AgenciaController {
 
 		agenciaService.deleta(agenciaId);
 
-		return "redirect:/index";
+		return "redirect:/exibeAgencias";
+	}
+	
+	@RequestMapping("/exibeAgencias")
+	public String exibeAgencias(Map<String, Object> map) {
+		map.put("contactList", agenciaService.buscaTodos());
+		return "exibeAgencias";
 	}
 
 }

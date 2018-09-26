@@ -20,7 +20,6 @@
 	</build>
 	<properties>
 		<org.springframework.version>5.1.0.RELEASE</org.springframework.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
