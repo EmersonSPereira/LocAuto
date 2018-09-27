@@ -1,5 +1,7 @@
 package br.com.emerson.locauto.model;
 
+import javax.persistence.Column;
+
 /**
  * @author Emerson Sousa
  * 
@@ -33,6 +35,8 @@ public class Veiculo {
 	private String cor;
 	private String tipoCombustivel;
 	private String agencia;
+	@Column(insertable = false, updatable = false)
+	private String tipo;
 
 	public Integer getId() {
 		return id;
@@ -104,6 +108,14 @@ public class Veiculo {
 
 	public void setAgencia(String agencia) {
 		this.agencia = agencia;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }

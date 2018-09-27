@@ -9,5 +9,6 @@ public interface VeiculoDAO {
 	public Veiculo salvar(Veiculo veiculo);
 	public Veiculo buscaPorId(Integer id);
 	public List<Veiculo> buscaTodos();
+	public List<Veiculo> buscaPorTipo(String tipo);
 	public boolean deleta(Integer id);
 }

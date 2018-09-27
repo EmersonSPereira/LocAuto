@@ -58,6 +58,20 @@ public class ClienteDAOImpl implements ClienteDAO {
 
 		return cliente;
 	}
+	
+	/**
+	 * Recupera os clientes pelo tipo passado pelo parametro podendo ser PF ou PJ
+	 * @param tipo
+	 * @return
+	 */
+	public List<Cliente> buscaPorTipo(String tipo) {
+
+		List<Cliente> cliente = null;
+
+		cliente = sessionFactory.getCurrentSession().createQuery("select c from Cliente c where c.tipo = :tipo", Cliente.class).setParameter("tipo", tipo).getResultList();
+
+		return cliente;
+	}
 
 	/**
 	 * Deleta do banco de dados o cliente com id passado como parametro.

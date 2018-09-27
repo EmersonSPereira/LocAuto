@@ -9,6 +9,7 @@ public interface ClienteService {
 	public Cliente salvar(Cliente cliente);
 	public Cliente buscaPorId(Integer id);
 	public List<Cliente> buscaTodos();
+	public List<Cliente> buscaPorTipo(String tipo);
 	public boolean deleta(Integer id);
 
 

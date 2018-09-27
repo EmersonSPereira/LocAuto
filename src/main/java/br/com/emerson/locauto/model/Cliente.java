@@ -1,5 +1,6 @@
 package br.com.emerson.locauto.model;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
@@ -22,37 +23,39 @@ public class Cliente {
 	private String endereco;
 	private String telefone;
 	private String email;
-
+	@Column(insertable=false, updatable=false)
+    private String tipo;
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 	public String getEndereco() {
 		return endereco;
 	}
-
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-
 	public String getTelefone() {
 		return telefone;
 	}
-
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	
 
 }

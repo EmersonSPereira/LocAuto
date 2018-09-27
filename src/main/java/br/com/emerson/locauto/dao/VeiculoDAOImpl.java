@@ -13,6 +13,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 
@@ -66,6 +67,20 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 		List<Veiculo> veiculos = null;
 
 		veiculos = sessionFactory.getCurrentSession().createQuery("from Veiculo").list();
+
+		return veiculos;
+	}
+	
+	/**
+	 * Recupera os veiculos pelo tipo passado pelo parametro podendo ser C para carrto ou M para motocicleta
+	 * @param tipo
+	 * @return
+	 */
+	public List<Veiculo> buscaPorTipo(String tipo) {
+
+		List<Veiculo> veiculos = null;
+
+		veiculos = sessionFactory.getCurrentSession().createQuery("select c from Veiculo c where c.tipo = :tipo", Veiculo.class).setParameter("tipo", tipo).getResultList();
 
 		return veiculos;
 	}

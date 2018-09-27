@@ -47,7 +47,7 @@ public class ClienteController {
 	@RequestMapping("/exibeClientes")
 	public String exibeAgencias(Map<String, Object> map) {
 		
-		map.put("listaclientes", clienteService.buscaTodos());
+		map.put("listaclientes", clienteService.buscaPorTipo("PF"));
 		
 		return "exibeClientes";
 	}

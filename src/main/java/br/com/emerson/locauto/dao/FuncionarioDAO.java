@@ -9,6 +9,7 @@ public interface FuncionarioDAO {
 	public Funcionario salvar(Funcionario funcionario);
 	public Funcionario buscaPorId(Integer id);
 	public List<Funcionario> buscaTodos();
+	public List<Funcionario> buscaPorTipo(String tipo);
 	public boolean deleta(Integer id);
 
 }

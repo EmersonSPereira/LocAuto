@@ -32,6 +32,12 @@ public class ClienteServiceImpl implements ClienteService {
 
 		return dao.buscaTodos();
 	}
+	
+	@Transactional
+	public List<Cliente> buscaPorTipo(String tipo) {
+
+		return dao.buscaPorTipo(tipo);
+	}
 
 	@Transactional
 	public boolean deleta(Integer id) {

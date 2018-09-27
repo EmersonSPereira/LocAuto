@@ -5,6 +5,7 @@ package br.com.emerson.locauto.model;
  * Esta classe representa o Funcion�rio na aplica��o.
  */
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
@@ -32,6 +33,8 @@ public class Funcionario {
 	private String endereco;
 	private String telefone;
 	private String email;
+	@Column(insertable = false, updatable = false)
+	private String tipo;
 
 	public Integer getId() {
 		return id;
@@ -103,6 +106,14 @@ public class Funcionario {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }
