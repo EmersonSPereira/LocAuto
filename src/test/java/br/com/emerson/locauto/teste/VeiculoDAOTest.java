@@ -14,12 +14,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import br.com.emerson.locauto.model.Carro;
+import br.com.emerson.locauto.model.Cliente;
 import br.com.emerson.locauto.model.Motocicleta;
 import br.com.emerson.locauto.model.Veiculo;
 import br.com.emerson.locauto.service.VeiculoService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring-servlet-test.xml"})
+@ContextConfiguration(locations = { "classpath:spring-servlet-test.xml" })
 public class VeiculoDAOTest {
 
 	@Autowired
@@ -30,8 +31,7 @@ public class VeiculoDAOTest {
 
 	@Before
 	public void setUp() throws Exception {
-		
-		
+
 		moto = new Motocicleta();
 		moto.setMarca("Honda");
 		moto.setCor("Azul");
@@ -71,44 +71,54 @@ public class VeiculoDAOTest {
 
 	@Test
 	public void testBuscaPorId() {
-		//alterando a cor da moto com id = 1 para posteriormente comparar no teste de busca
-		moto.setId(1);
-		moto.setCor("Preta");
+		// salvando um veiculo no banco
 		dao.salvar(moto);
 
-		//teste de busca
-		assertEquals("Preta", dao.buscaPorId(1).getCor());
+		// recuperando o id do ultimo cliente adicionado no banco
+
+		veiculos = dao.buscaTodos();
+		Veiculo veiculo = veiculos.get(veiculos.size() - 1); // recuperando o ultimo cliente inserido no banco
+		Integer idultimo = veiculo.getId(); // recuperando o id do cliente
+
+		//alterando a cor para comparar na busca
+		moto.setId(idultimo);
+		moto.setCor("Preta");
+		dao.salvar(moto);
+		// teste de busca
+		assertEquals("Preta", dao.buscaPorId(idultimo).getCor());
 	}
 
 	@Test
 	public void testBuscaTodos() {
-		//salvando um veiculo no banco
+		// salvando um veiculo no banco
 		dao.salvar(carro);
-		
-		/* O m�todo buscaTodos retorna uma lista de veiculos com todos os veiculos
-		 * contidos no banco, o teste abaixo verifica se a lista � vazia, como anteriormente
-		 * foi inserido um veiculo no banco o teste tem que dar falso.
+
+		/*
+		 * O m�todo buscaTodos retorna uma lista de veiculos com todos os veiculos
+		 * contidos no banco, o teste abaixo verifica se a lista � vazia, como
+		 * anteriormente foi inserido um veiculo no banco o teste tem que dar falso.
 		 */
 		assertFalse(dao.buscaTodos().isEmpty());
 	}
 
 	@Test
 	public void testDeleta() {
-		
-		//salvando um veiculo no banco
+
+		// salvando um veiculo no banco
 		dao.salvar(carro);
 
-		//recebendo todos os veiculos no banco
+		// recebendo todos os veiculos no banco
 		veiculos = dao.buscaTodos();
-		Veiculo veiculo = veiculos.get(veiculos.size()- 1);
+		Veiculo veiculo = veiculos.get(veiculos.size() - 1);
 		Integer idValido = veiculo.getId();
 
-		/* O metodo deleta recebe um id como parametro e deleta o veiculo que possui o id do
-		 * banco, o teste abaixo deleta o ultimo veiculo inserido no banco
+		/*
+		 * O metodo deleta recebe um id como parametro e deleta o veiculo que possui o
+		 * id do banco, o teste abaixo deleta o ultimo veiculo inserido no banco
 		 */
 		assertTrue(dao.deleta(idValido));
 
-		//testando o metodo deleta passando um Id inexistente
+		// testando o metodo deleta passando um Id inexistente
 		assertFalse(dao.deleta(498498456));
 
 	}

@@ -3,13 +3,13 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-	<title>Cadastro de cliente</title>
+	<title>Cadastro de Funcionário</title>
 </head>
 <body>
 
-<h2>Cadastro cliente pessoa física</h2>
+<h2>Cadastro de Funcionário: Locador</h2>
 
-<form:form method="post" action="salvaClientePF.html" modelAttribute="clientePF">
+<form:form method="post" action="salvaFuncionarioL.html" modelAttribute="funcionarioL">
 
 	<table>
 	<tr>
@@ -25,8 +25,8 @@
 		<td><form:input path="rg" /></td>
 	</tr>
 	<tr>
-		<td><form:label path="datNasc">Data de Nascimento:</form:label></td>
-		<td><form:input path="datNasc" /></td>
+		<td><form:label path="dataNascimento">Data de Nascimento:</form:label></td>
+		<td><form:input path="dataNascimento" /></td>
 	</tr>
 	<tr>
 		<td><form:label path="naturalidade">Naturalidade:</form:label></td>
@@ -52,7 +52,7 @@
 </table>	
 </form:form>
 
-<a href="exibeClientes">Exibe Clientes</a>
+<a href="exibeFuncionarios">Exibe Funcionários</a>
 
 	
 

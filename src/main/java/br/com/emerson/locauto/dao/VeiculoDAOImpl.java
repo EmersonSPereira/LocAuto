@@ -66,7 +66,7 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 
 		List<Veiculo> veiculos = null;
 
-		veiculos = sessionFactory.getCurrentSession().createQuery("from Veiculo").list();
+		veiculos = sessionFactory.getCurrentSession().createQuery("from Veiculo",Veiculo.class).list();
 
 		return veiculos;
 	}

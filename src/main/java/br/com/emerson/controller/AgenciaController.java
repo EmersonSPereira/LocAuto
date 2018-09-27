@@ -20,7 +20,7 @@ public class AgenciaController {
 	@Autowired
 	private AgenciaService agenciaService;
 
-	@RequestMapping("/index")
+	@RequestMapping("/agencia")
 	public String listContacts(Map<String, Object> map) {
 
 		map.put("contact", new Agencia());
@@ -34,7 +34,7 @@ public class AgenciaController {
 
 		agenciaService.salvar(agencia);
 
-		return "redirect:/index";
+		return "redirect:/exibeAgencias";
 	}
 
 	@RequestMapping("/delete/{contactId}")

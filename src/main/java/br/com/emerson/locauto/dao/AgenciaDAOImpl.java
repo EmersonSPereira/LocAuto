@@ -67,7 +67,7 @@ public class AgenciaDAOImpl implements AgenciaDAO {
 
 		List<Agencia> agencias = null;
 		
-		agencias = sessionFactory.getCurrentSession().createQuery("from Agencia").list();
+		agencias = sessionFactory.getCurrentSession().createQuery("from Agencia", Agencia.class).list();
 		
 		return agencias;
 //		

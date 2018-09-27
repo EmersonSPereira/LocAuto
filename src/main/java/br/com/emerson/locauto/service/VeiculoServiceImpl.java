@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.emerson.locauto.dao.VeiculoDAO;
-import br.com.emerson.locauto.model.Cliente;
 import br.com.emerson.locauto.model.Veiculo;
 
 @Service

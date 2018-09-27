@@ -8,9 +8,10 @@
 <title>Clientes</title>
 </head>
 <body>
-		<h1>Clientes</h1>
-		<c:if test="${!empty listaclientes}">
-			<table width="300px" border="1px" bordercolor="#000000">
+	<div>
+		<h1>Clientes PF</h1>
+		<c:if test="${!empty listaclientesPF}">
+			<table width="150px" border="1px" bordercolor="#000000">
 				<tr>
 					<td>Nome</td>
 					<td>CPF</td>
@@ -22,8 +23,8 @@
 					<td>Email</td>
 					<td>&nbsp;</td>
 				</tr>
-				<c:forEach items="${listaclientes}" var="cliente">
-					
+				<c:forEach items="${listaclientesPF}" var="cliente">
+
 					<tr>
 						<td>${cliente.nome}</td>
 						<td>${cliente.cpf}</td>
@@ -33,14 +34,49 @@
 						<td>${cliente.endereco}</td>
 						<td>${cliente.telefone}</td>
 						<td>${cliente.email}</td>
-						
+
 						<td><a href="deleteCliente/${cliente.id}">delete</a></td>
 					</tr>
 				</c:forEach>
 			</table>
 		</c:if>
+	</div>
 
-		<a href="clientePF">Cadastro ClientePF</a>
+	<div>
+		<h1>Clientes PJ</h1>
+		<c:if test="${!empty listaclientesPJ}">
+			<table width="150px" border="1px" bordercolor="#000000">
+				<tr>
+					<td>Nome Fantasia</td>
+					<td>Razão Social</td>
+					<td>CNPJ</td>
+					<td>Inscrição Estadual</td>
+					<td>Endereco</td>
+					<td>Telefone</td>
+					<td>Email</td>
+					<td>&nbsp;</td>
+				</tr>
+				<c:forEach items="${listaclientesPJ}" var="cliente">
+
+					<tr>
+						<td>${cliente.nomeFantasia}</td>
+						<td>${cliente.razaoSocial}</td>
+						<td>${cliente.cnpj}</td>
+						<td>${cliente.inscEstadual}</td>
+						<td>${cliente.endereco}</td>
+						<td>${cliente.telefone}</td>
+						<td>${cliente.email}</td>
+
+						<td><a href="deleteCliente/${cliente.id}">delete</a></td>
+					</tr>
+				</c:forEach>
+			</table>
+		</c:if>
+	</div>
+
+	<a href="clientePF">Cadastro ClientePF</a>
+	<a href="clientePJ">Cadastro ClientePJ</a>
+	<a href="/LocAuto/">Home</a>
 
 </body>
 </html>

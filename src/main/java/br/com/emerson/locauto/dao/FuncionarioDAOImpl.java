@@ -12,7 +12,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import br.com.emerson.locauto.model.Cliente;
 
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
@@ -66,7 +65,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
 
 		List<Funcionario> funcionarios = null;
 
-		funcionarios = sessionFactory.getCurrentSession().createQuery("from Funcionario").list();
+		funcionarios = sessionFactory.getCurrentSession().createQuery("from Funcionario", Funcionario.class).list();
 
 		return funcionarios;
 	}

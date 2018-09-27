@@ -59,7 +59,7 @@ public class AgenciaDAOTest {
 	}
 	@Test
 	public void testBuscaPorId() {
-		//alterando a cor da moto com id = 1 para posteriormente comparar no teste de busca
+		//alterando a inscrição estadual para posteriormente comparar no teste de busca
 		ag1.setId(1);
 		ag1.setInscEstadual("888888");
 		dao.salvar(ag1);

@@ -54,7 +54,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 
 		List<Cliente> cliente = null;
 
-		cliente = sessionFactory.getCurrentSession().createQuery("from Cliente").list();
+		cliente = sessionFactory.getCurrentSession().createQuery("from Cliente",Cliente.class).list();
 
 		return cliente;
 	}

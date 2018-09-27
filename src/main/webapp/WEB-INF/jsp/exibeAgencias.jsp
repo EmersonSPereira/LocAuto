@@ -31,7 +31,8 @@
 			</table>
 		</c:if>
 
-		<a href="index">Cadastro Agência</a>
+		<a href="agencia">Cadastro Agência</a>
+		<a href="/LocAuto/">Home</a>
 
 	</div>
 

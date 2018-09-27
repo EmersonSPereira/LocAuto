@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-
 import java.util.List;
 
 import org.junit.Before;
@@ -20,7 +19,7 @@ import br.com.emerson.locauto.model.Locador;
 import br.com.emerson.locauto.service.FuncionarioService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring-servlet-test.xml"})
+@ContextConfiguration(locations = { "classpath:spring-servlet-test.xml" })
 public class FuncionarioDAOTest {
 
 	@Autowired
@@ -32,15 +31,13 @@ public class FuncionarioDAOTest {
 	@Before
 	public void setUp() throws Exception {
 
-		
-
 		f1 = new Gerente();
 		f1.setCpf("454654564-54");
 		f1.setDataNascimento("21/10/1999");
 		f1.setEmail("lalalall@gmail.com,");
 		f1.setEndereco("Rua lalala, monte santo,888, campina grande, Paraiba");
 		f1.setNaturalidade("Campina Grande");
-		f1.setNome("Jï¿½ao Pedro");
+		f1.setNome("João Pedro");
 		f1.setRg("46546465");
 		f1.setTelefone("8399887415");
 
@@ -72,14 +69,21 @@ public class FuncionarioDAOTest {
 	@Test
 	public void testBuscaPorId() {
 		// Salvando um novo funcionario no banco
-		f1.setId(1);
+		dao.salvar(f1);
+
+		// recuperando o id do ultimo cliente adicionado no banco
+
+		funcionarios = dao.buscaTodos();
+		Funcionario funcionario = funcionarios.get(funcionarios.size() - 1); // recuperando o ultimo veiculo inserido no banco 
+		Integer idultimo = funcionario.getId(); // recuperando o id do veiculo
+
+		// alterando o nome para comparar na busca
+		f1.setId(idultimo);
 		f1.setRg("5805933");
 		dao.salvar(f1);
 
-		funcionarios = dao.buscaTodos();
-
 		// teste busca o ultimo funcionario adicionado no banco pelo id e compara seu rg
-		assertEquals("5805933", dao.buscaPorId(1).getRg());
+		assertEquals("5805933", dao.buscaPorId(idultimo).getRg());
 	}
 
 	@Test
@@ -87,8 +91,8 @@ public class FuncionarioDAOTest {
 		dao.salvar(f2);
 
 		/*
-		 * O mï¿½todo buscaTodos retorna uma lista de Funcionarios com todos os veiculos
-		 * contidos no banco, o teste abaixo verifica se a lista ï¿½ vazia, como
+		 * O método buscaTodos retorna uma lista de Funcionarios com todos os veiculos
+		 * contidos no banco, o teste abaixo verifica se a lista não vazia, como
 		 * anteriormente foi inserido um funcionario no banco o teste tem que dar falso.
 		 */
 
@@ -117,14 +121,13 @@ public class FuncionarioDAOTest {
 		 * o id do banco, o teste abaixo deleta o ultimo funcionario inserido no banco.
 		 */
 		assertTrue(dao.deleta(idValido));
-		
+
 		funcionarios = dao.buscaTodos();
 		for (Funcionario f1 : funcionarios) {
 
 			System.out.println(f1.getNome());
 
 		}
-
 
 		// testando o metodo deleta passando um Id inexistente
 		assertFalse(dao.deleta(687684641));

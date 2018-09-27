@@ -7,10 +7,9 @@
 </head>
 <body>
 
-	<h2>Cadastro veículo: Carro</h2>
+	<h2>Cadastro veículo: Motocicleta</h2>
 
-	<form:form method="post" action="salvaVeiculoC.html"
-		modelAttribute="veiculoC">
+	<form:form method="post" action="salvaVeiculoM.html" modelAttribute="veiculoM">
 
 		<table>
 			<tr>
@@ -46,8 +45,12 @@
 				<td><form:input path="agencia" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="acessorios">Acessórios:</form:label></td>
-				<td><form:input path="acessorios" /></td>
+				<td><form:label path="cilindradas">Cilindradas:</form:label></td>
+				<td><form:input path="cilindradas" /></td>
+			</tr>
+			<tr>
+				<td><form:label path="freios">Freios:</form:label></td>
+				<td><form:input path="freios" /></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="salvar" /></td>

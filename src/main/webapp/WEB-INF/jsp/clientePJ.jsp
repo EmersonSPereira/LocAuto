@@ -7,30 +7,26 @@
 </head>
 <body>
 
-<h2>Cadastro cliente pessoa física</h2>
+<h2>Cadastro cliente pessoa juridica</h2>
 
-<form:form method="post" action="salvaClientePF.html" modelAttribute="clientePF">
+<form:form method="post" action="salvaClientePJ.html" modelAttribute="clientePJ">
 
 	<table>
-	<tr>
-		<td><form:label path="nome">Nome:</form:label></td>
-		<td><form:input path="nome" /></td> 
+	<tr> 
+		<td><form:label path="nomeFantasia">Nome Fantasia:</form:label></td>
+		<td><form:input path="nomeFantasia" /></td> 
 	</tr>
 	<tr>
-		<td><form:label path="cpf">CPF:</form:label></td>
-		<td><form:input path="cpf" /></td>
+		<td><form:label path="razaoSocial">Razão Social:</form:label></td>
+		<td><form:input path="razaoSocial" /></td>
 	</tr>
 	<tr>
-		<td><form:label path="rg">RG:</form:label></td>
-		<td><form:input path="rg" /></td>
+		<td><form:label path="cnpj">CNPJ:</form:label></td>
+		<td><form:input path="cnpj" /></td>
 	</tr>
 	<tr>
-		<td><form:label path="datNasc">Data de Nascimento:</form:label></td>
-		<td><form:input path="datNasc" /></td>
-	</tr>
-	<tr>
-		<td><form:label path="naturalidade">Naturalidade:</form:label></td>
-		<td><form:input path="naturalidade" /></td>
+		<td><form:label path="inscEstadual">Inscrição Estadual:</form:label></td>
+		<td><form:input path="inscEstadual" /></td>
 	</tr>
 	<tr>
 		<td><form:label path="endereco">Endereco:</form:label></td>
