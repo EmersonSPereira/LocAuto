@@ -1,5 +1,8 @@
 package br.com.emerson.locauto.model;
 
+
+
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -10,7 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-
+/**
+ * @author Emerson Sousa
+ * 
+ * Esta classe representa os Planos de locação na aplicação.
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo", length = 2, discriminatorType = DiscriminatorType.STRING)

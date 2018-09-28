@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import br.com.emerson.locauto.model.Cliente;
 import br.com.emerson.locauto.model.ClientePF;
 import br.com.emerson.locauto.model.ClientePJ;
+import br.com.emerson.locauto.model.Veiculo;
 import br.com.emerson.locauto.service.ClienteService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,7 +26,6 @@ public class ClienteDAOTest {
 	private ClienteService dao;
 	private ClientePF c1;
 	private ClientePJ c2;
-	private ClientePF c3;
 	private List<Cliente> clientes;
 
 	@Before
@@ -50,7 +50,7 @@ public class ClienteDAOTest {
 		c2.setTelefone("(71) 2903-0490");
 		c2.setEndereco("Avenida Ferreira, 187, Pero Vaz, Salvador,BA");
 
-		c3 = new ClientePF();
+	
 	}
 
 	@Test
@@ -102,6 +102,19 @@ public class ClienteDAOTest {
 		 */
 
 		assertFalse(dao.buscaTodos().isEmpty());
+	}
+	
+	@Test
+	public void testBuscaPorTipo() {
+		// buscando planos do tipo PF = Pessoa fisica
+		clientes = dao.buscaPorTipo("M");
+
+		// verificando se todos os planos trazidos na busca são do tipo Motocicleta
+		for (Cliente cliente : clientes) {
+
+			assertEquals("PF", cliente.getTipo());
+
+		}
 	}
 
 	@Test

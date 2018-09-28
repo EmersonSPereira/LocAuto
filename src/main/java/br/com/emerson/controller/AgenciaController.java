@@ -1,5 +1,8 @@
 package br.com.emerson.controller;
 
+
+
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,41 +16,70 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import br.com.emerson.locauto.model.Agencia;
 import br.com.emerson.locauto.service.AgenciaService;
 
-
+/**
+ * @author Emerson Sousa
+ * 
+ * Esta classe é um controller na aplicação.
+ */
 @Controller
 public class AgenciaController {
 
 	@Autowired
 	private AgenciaService agenciaService;
+	
+	/**
+	 * Esse método trata a requisição "/agencia, adicioa um objeto agencia na view e por fim
+	 * retorna a view "agencia"
+	 * @param map
+	 * @return
+	 */
 
 	@RequestMapping("/agencia")
-	public String listContacts(Map<String, Object> map) {
+	public String agencia(Map<String, Object> map) {
 
-		map.put("contact", new Agencia());
+		map.put("agencia", new Agencia());
 		
 
 		return "agencia";
 	}
 
+	/**
+	 * Esse método trata a requisição "/add" monta o objeto agencia, vindo da view e salva no banco.
+	 * @param agencia
+	 * @param result
+	 * @return
+	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addContact(@ModelAttribute("contact") Agencia agencia, BindingResult result) {
+	public String addAgencia(@ModelAttribute("agencia") Agencia agencia, BindingResult result) {
 
 		agenciaService.salvar(agencia);
 
 		return "redirect:/exibeAgencias";
 	}
 
-	@RequestMapping("/delete/{contactId}")
-	public String deleteContact(@PathVariable("contactId") Integer agenciaId) {
+	/**
+	 * Esse método trata a requisição "/delete/{agenciaId}" recebe o id de uma agencia e deleta do banco
+	 * @param agenciaId
+	 * @return
+	 */
+	@RequestMapping("/delete/{agenciaId}")
+	public String deleteAgencia(@PathVariable("agenciaId") Integer agenciaId) {
 
 		agenciaService.deleta(agenciaId);
 
 		return "redirect:/exibeAgencias";
 	}
 	
+	/**
+	 * Esse método trata a requisição "/exibeAgencias" envia para view "exibeAgencias" uma lista de Agencias para ser exibido
+	 * para o usuário
+	 * @param map
+	 * @return
+	 */
+	
 	@RequestMapping("/exibeAgencias")
 	public String exibeAgencias(Map<String, Object> map) {
-		map.put("contactList", agenciaService.buscaTodos());
+		map.put("agenciaList", agenciaService.buscaTodos());
 		return "exibeAgencias";
 	}
 

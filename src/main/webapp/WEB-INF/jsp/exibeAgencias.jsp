@@ -10,7 +10,7 @@
 <body>
 	<div >
 		<h1>Agências</h1>
-		<c:if test="${!empty contactList}">
+		<c:if test="${!empty agenciaList}">
 			<table width="300px" border="1px" bordercolor="#000000">
 				<tr>
 					<td>CNPJ</td>
@@ -19,13 +19,13 @@
 					<td>Telefone</td>
 					<td>&nbsp;</td>
 				</tr>
-				<c:forEach items="${contactList}" var="contact">
+				<c:forEach items="${agenciaList}" var="agencia">
 					<tr>
-						<td>${contact.cnpj}</td>
-						<td>${contact.inscEstadual}</td>
-						<td>${contact.gerenteResponsavel}</td>
-						<td>${contact.telefone}</td>
-						<td><a href="delete/${contact.id}">delete</a></td>
+						<td>${agencia.cnpj}</td>
+						<td>${agencia.inscEstadual}</td>
+						<td>${agencia.gerenteResponsavel}</td>
+						<td>${agencia.telefone}</td>
+						<td><a href="delete/${agencia.id}">delete</a></td>
 					</tr>
 				</c:forEach>
 			</table>

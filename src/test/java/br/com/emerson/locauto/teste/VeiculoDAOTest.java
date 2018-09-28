@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import br.com.emerson.locauto.model.Carro;
 import br.com.emerson.locauto.model.Cliente;
 import br.com.emerson.locauto.model.Motocicleta;
+import br.com.emerson.locauto.model.Planos;
 import br.com.emerson.locauto.model.Veiculo;
 import br.com.emerson.locauto.service.VeiculoService;
 
@@ -50,7 +51,7 @@ public class VeiculoDAOTest {
 		carro.setCor("Vermelho");
 		carro.setPotencia(65);
 		carro.setRenavam("546546545");
-		carro.setAcessorios("Ar, Trava, Direï¿½ï¿½o");
+		carro.setAcessorios("Ar, Trava, Direestáestáo");
 		carro.setAgencia("Campina Grande");
 		carro.setTipoCombustivel("Gasolina");
 		carro.setAno(2010);
@@ -80,7 +81,7 @@ public class VeiculoDAOTest {
 		Veiculo veiculo = veiculos.get(veiculos.size() - 1); // recuperando o ultimo cliente inserido no banco
 		Integer idultimo = veiculo.getId(); // recuperando o id do cliente
 
-		//alterando a cor para comparar na busca
+		// alterando a cor para comparar na busca
 		moto.setId(idultimo);
 		moto.setCor("Preta");
 		dao.salvar(moto);
@@ -94,11 +95,24 @@ public class VeiculoDAOTest {
 		dao.salvar(carro);
 
 		/*
-		 * O mï¿½todo buscaTodos retorna uma lista de veiculos com todos os veiculos
-		 * contidos no banco, o teste abaixo verifica se a lista ï¿½ vazia, como
+		 * O mestátodo buscaTodos retorna uma lista de veiculos com todos os veiculos
+		 * contidos no banco, o teste abaixo verifica se a lista está vazia, como
 		 * anteriormente foi inserido um veiculo no banco o teste tem que dar falso.
 		 */
 		assertFalse(dao.buscaTodos().isEmpty());
+	}
+
+	@Test
+	public void testBuscaPorTipo() {
+		// buscando planos do tipo M = Motocicleta
+		veiculos = dao.buscaPorTipo("M");
+
+		// verificando se todos os planos trazidos na busca são do tipo Motocicleta
+		for (Veiculo veiculo : veiculos) {
+
+			assertEquals("M", veiculo.getTipo());
+
+		}
 	}
 
 	@Test

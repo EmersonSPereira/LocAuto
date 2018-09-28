@@ -1,8 +1,15 @@
 package br.com.emerson.locauto.model;
 
+
+
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-
+/**
+ * @author Emerson Sousa
+ * 
+ * Esta classe representa o Cliente pessoa juridica na aplicação.
+ */
 @Entity
 @DiscriminatorValue(value = "PJ")
 public class ClientePJ extends Cliente {

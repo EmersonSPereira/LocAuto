@@ -1,5 +1,6 @@
 package br.com.emerson.locauto.service;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.emerson.locauto.dao.FuncionarioDAO;
 import br.com.emerson.locauto.model.Funcionario;
+
+/**
+ * @author Emerson Sousa
+ * 
+ * Esta classe é um service, camada responsávél pela utilização do DAOFuncionario
+ */
 
 
 @Service

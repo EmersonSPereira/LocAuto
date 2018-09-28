@@ -1,6 +1,7 @@
 package br.com.emerson.locauto.teste;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -20,9 +21,9 @@ import br.com.emerson.locauto.service.AgenciaService;
 public class AgenciaDAOTest {
 
 	@Autowired
-	AgenciaService dao;
-	Agencia ag1,ag2;
-	List<Agencia> agencias;
+	private AgenciaService dao;
+	private Agencia ag1,ag2;
+	private List<Agencia> agencias;
 
 	@Before
 	public void setUp() throws Exception {
@@ -32,6 +33,7 @@ public class AgenciaDAOTest {
 		ag1.setGerenteResponsavel("Emerson Sousa ");
 		ag1.setInscEstadual("2152165");
 		ag1.setTelefone("839999999");
+		;
 		
 		ag2 = new Agencia();
 		ag2.setCnpj("546545465451");
@@ -40,6 +42,7 @@ public class AgenciaDAOTest {
 		ag2.setTelefone("839999999");
 		
 		agencias = null;
+		
 		
 	}
 
@@ -51,7 +54,7 @@ public class AgenciaDAOTest {
 		// salvando agencia primeira vez
 		assertEquals(ag1, dao.salvar(ag1));
 
-		// Testando ediï¿½ï¿½o da agencia
+		// Testando edição da agencia
 		ag1.setId(1);// setando o id da agencia a ser editada
 		ag1.setGerenteResponsavel("Emerson");
 		assertEquals("Emerson", dao.salvar(ag1).getGerenteResponsavel());
@@ -72,7 +75,7 @@ public class AgenciaDAOTest {
 	@Test
 	public void TestDeleta() {
 		
-		//inserindo agï¿½cias no banco
+		//inserindo agencias no banco
 		dao.salvar(ag1);
 		dao.salvar(ag2);
 		
@@ -87,8 +90,8 @@ public class AgenciaDAOTest {
 		//O teste deleta uma agencia do banco
 		assertTrue(dao.deleta(idValido));
 		
-		//falha ao deletar id nï¿½o existente
-		//assertFalse(dao.deleta(5464646));
+		//falha ao deletar id não existente
+		assertFalse(dao.deleta(546));
 
 
 		

@@ -9,7 +9,7 @@
 
 <h2>Cadastro Agência</h2>
 
-<form:form method="post" action="add.html" modelAttribute="contact">
+<form:form method="post" action="add.html" modelAttribute="agencia">
 
 	<table>
 	<tr>

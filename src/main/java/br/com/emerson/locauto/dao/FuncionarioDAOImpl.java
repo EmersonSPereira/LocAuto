@@ -1,32 +1,30 @@
 package br.com.emerson.locauto.dao;
 
-/**
- * @author Emerson Sousa
- * 
- * Esta classe faz o gerenciamento (CRUD) da classe Funcionï¿½rio no banco de dados
- */
-import java.util.List;
 
+import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import br.com.emerson.locauto.model.Funcionario;
-
+/**
+ * @author Emerson Sousa
+ * 
+ * Esta classe faz o gerenciamento (CRUD) da classe funcionario no banco de dados
+ */
 @Repository
-public class FuncionarioDAOImpl implements FuncionarioDAO{
+public class FuncionarioDAOImpl implements FuncionarioDAO {
 
-	// private final Logger logger = LoggerFactory.getLogger(FuncionarioDAO.class);
+	private final Logger logger = LoggerFactory.getLogger(FuncionarioDAOImpl.class);
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	/**
-	 * Salva um Funcionario no banco de dados caso a mesmo nï¿½o exista, se jï¿½ existe
+	 * Salva um Funcionario no banco de dados caso a mesmo não exista, se já existe
 	 * faz um upload do Funcionario no banco.
 	 * 
 	 * @param funcionario
@@ -34,14 +32,26 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
 	 */
 	public Funcionario salvar(Funcionario funcionario) {
 
-		sessionFactory.getCurrentSession().saveOrUpdate(funcionario);
+		logger.info("Iniciando transação para salvar/editar registro da funcionario");
+
+		try {
+
+			sessionFactory.getCurrentSession().saveOrUpdate(funcionario);
+
+			logger.info("funcionario salvo com sucesso");
+
+		} catch (Exception e) {
+
+			logger.error("Falha ao salvar funcionario: " + e.getMessage());
+		}
+
 		return funcionario;
 
 	}
 
 	/**
-	 * Busca o funcionï¿½rio no banco de dados pelo o id passado como parï¿½metro e
-	 * retorna o funcionï¿½rio encontrado.
+	 * Busca o funcionario no banco de dados pelo o id passado como parâmetro e
+	 * retorna o funcionario encontrado.
 	 * 
 	 * @param id
 	 * @return
@@ -50,13 +60,24 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
 
 		Funcionario funcionario = null;
 
-		funcionario = sessionFactory.getCurrentSession().find(Funcionario.class, id);
+		logger.info("Iniciando transação para buscar registro da funcionario por id");
+
+		try {
+
+			funcionario = sessionFactory.getCurrentSession().find(Funcionario.class, id);
+
+			logger.info("funcionario encontrada com sucesso");
+
+		} catch (Exception e) {
+
+			logger.error("Falha ao buscar funcionario: " + e.getMessage());
+		}
 
 		return funcionario;
 	}
 
 	/**
-	 * Recupera uma lista de todos os funcionï¿½rios armazenados no banco.
+	 * Recupera uma lista de todos os funcionarios armazenados no banco.
 	 * 
 	 * @return
 	 */
@@ -65,13 +86,25 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
 
 		List<Funcionario> funcionarios = null;
 
-		funcionarios = sessionFactory.getCurrentSession().createQuery("from Funcionario", Funcionario.class).list();
+		logger.info("Iniciando transação para buscar todas as funcionarios no banco");
+
+		try {
+
+			funcionarios = sessionFactory.getCurrentSession().createQuery("from Funcionario", Funcionario.class).list();
+
+			logger.info("funcionarios encontrada com sucesso");
+		} catch (Exception e) {
+
+			logger.error("Falha ao buscar funcionarios: " + e.getMessage());
+		}
 
 		return funcionarios;
 	}
-	
+
 	/**
-	 * Recupera os Funcionários pelo tipo passado pelo parametro podendo ser G para gerente ou L para locador
+	 * Recupera os Funcionários pelo tipo passado pelo parametro podendo ser G para
+	 * gerente ou L para locador
+	 * 
 	 * @param tipo
 	 * @return
 	 */
@@ -79,7 +112,20 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
 
 		List<Funcionario> funcionarios = null;
 
-		funcionarios = sessionFactory.getCurrentSession().createQuery("select c from Funcionario c where c.tipo = :tipo", Funcionario.class).setParameter("tipo", tipo).getResultList();
+		logger.info("Iniciando transação para buscar funcionarios por tipo no banco");
+
+		try {
+
+			funcionarios = sessionFactory.getCurrentSession()
+					.createQuery("select c from Funcionario c where c.tipo = :tipo", Funcionario.class)
+					.setParameter("tipo", tipo).getResultList();
+
+			logger.info("funcionarios encontrado com sucesso");
+
+		} catch (Exception e) {
+
+			logger.error("Falha ao buscar funcionarios do tipo = " + tipo + "erro: " + e.getMessage());
+		}
 
 		return funcionarios;
 	}
@@ -94,17 +140,30 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
 
 		Funcionario funcionario = null;
 
-		funcionario = sessionFactory.getCurrentSession().find(Funcionario.class, id);
+		logger.info("Iniciando transação para deletar funcionario no banco");
 
-		if (funcionario != null) {
+		try {
 
-			sessionFactory.getCurrentSession().delete(funcionario);
+			funcionario = sessionFactory.getCurrentSession().find(Funcionario.class, id);
 
-			return true;
-		} else {
+			if (funcionario != null) {
 
-			return false;
+				sessionFactory.getCurrentSession().delete(funcionario);
+
+				logger.info("sucesso ao deletar funcionario");
+
+				return true;
+			} else {
+
+				logger.error("Falha ao deletar funcionario com id = " + id + " não existe");
+			}
+
+		} catch (Exception e) {
+
+			logger.error("Falha ao deletar funcionario" + "erro:" + e.getMessage());
 		}
+
+		return false;
 
 	}
 }

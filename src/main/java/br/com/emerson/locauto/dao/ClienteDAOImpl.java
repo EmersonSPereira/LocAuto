@@ -1,16 +1,24 @@
 package br.com.emerson.locauto.dao;
 
+
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import br.com.emerson.locauto.model.Cliente;
-
+/**
+ * @author Emerson Sousa
+ * 
+ * Esta classe faz o gerenciamento (CRUD) da classe CLiente no banco de dados
+ */
 @Repository
 public class ClienteDAOImpl implements ClienteDAO {
 
+	private final Logger logger = LoggerFactory.getLogger(ClienteDAOImpl.class);
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -23,7 +31,18 @@ public class ClienteDAOImpl implements ClienteDAO {
 	 */
 	public Cliente salvar(Cliente cliente) {
 
-		sessionFactory.getCurrentSession().saveOrUpdate(cliente);
+		logger.info("Iniciando transação para salvar/editar registro da cliente");
+		try {
+
+			sessionFactory.getCurrentSession().saveOrUpdate(cliente);
+
+			logger.info("cliente salvo com sucesso");
+
+		} catch (Exception e) {
+
+			logger.error("Falha ao salvar cliente: " + e.getMessage());
+		}
+
 		return cliente;
 
 	}
@@ -39,7 +58,18 @@ public class ClienteDAOImpl implements ClienteDAO {
 
 		Cliente cliente = null;
 
-		cliente = sessionFactory.getCurrentSession().find(Cliente.class, id);
+		logger.info("Iniciando transação para buscar registro da cliente por id");
+
+		try {
+
+			cliente = sessionFactory.getCurrentSession().find(Cliente.class, id);
+
+			logger.info("cliente encontrada com sucesso");
+
+		} catch (Exception e) {
+
+			logger.error("Falha ao buscar cliente: " + e.getMessage());
+		}
 
 		return cliente;
 
@@ -54,13 +84,25 @@ public class ClienteDAOImpl implements ClienteDAO {
 
 		List<Cliente> cliente = null;
 
-		cliente = sessionFactory.getCurrentSession().createQuery("from Cliente",Cliente.class).list();
+		logger.info("Iniciando transação para buscar todas as clientes no banco");
+
+		try {
+
+			cliente = sessionFactory.getCurrentSession().createQuery("from Cliente", Cliente.class).list();
+
+			logger.info("clientes encontrada com sucesso");
+
+		} catch (Exception e) {
+
+			logger.error("Falha ao buscar clientes: " + e.getMessage());
+		}
 
 		return cliente;
 	}
-	
+
 	/**
 	 * Recupera os clientes pelo tipo passado pelo parametro podendo ser PF ou PJ
+	 * 
 	 * @param tipo
 	 * @return
 	 */
@@ -68,7 +110,20 @@ public class ClienteDAOImpl implements ClienteDAO {
 
 		List<Cliente> cliente = null;
 
-		cliente = sessionFactory.getCurrentSession().createQuery("select c from Cliente c where c.tipo = :tipo", Cliente.class).setParameter("tipo", tipo).getResultList();
+		logger.info("Iniciando transação para buscar clientes por tipo no banco");
+
+		try {
+
+			cliente = sessionFactory.getCurrentSession()
+					.createQuery("select c from Cliente c where c.tipo = :tipo", Cliente.class)
+					.setParameter("tipo", tipo).getResultList();
+
+			logger.info("clientes encontrado com sucesso");
+
+		} catch (Exception e) {
+
+			logger.error("Falha ao buscar clientes do tipo = " + tipo + "erro: " + e.getMessage());
+		}
 
 		return cliente;
 	}
@@ -83,17 +138,30 @@ public class ClienteDAOImpl implements ClienteDAO {
 
 		Cliente cliente = null;
 
-		cliente = sessionFactory.getCurrentSession().find(Cliente.class, id);
+		logger.info("Iniciando transação para deletar cliente no banco");
+		try {
 
-		if (cliente != null) {
+			cliente = sessionFactory.getCurrentSession().find(Cliente.class, id);
 
-			sessionFactory.getCurrentSession().delete(cliente);
+			if (cliente != null) {
 
-			return true;
-		} else {
+				sessionFactory.getCurrentSession().delete(cliente);
+				logger.info("sucesso ao deletar cliente");
 
-			return false;
+				return true;
+			} else {
+				
+				logger.error("Falha ao deletar cliente com id = " + id + " não existe");
+
+			}
+
+		} catch (Exception e) {
+
+			logger.error("Falha ao deletar cliente" + "erro:" + e.getMessage());
 		}
+		
+		return false;
+
 	}
 
 }

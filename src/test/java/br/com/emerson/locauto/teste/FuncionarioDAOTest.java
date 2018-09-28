@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import br.com.emerson.locauto.model.Funcionario;
 import br.com.emerson.locauto.model.Gerente;
 import br.com.emerson.locauto.model.Locador;
+import br.com.emerson.locauto.model.Planos;
 import br.com.emerson.locauto.service.FuncionarioService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -59,11 +60,11 @@ public class FuncionarioDAOTest {
 		assertEquals(f1, dao.salvar(f1));
 
 		// setando o id do funcionario a ser editado
-		f1.setId(1);
-		f1.setNome("Joï¿½o");
+		f1.setId(2);
+		f1.setNome("João");
 
 		// test editar funcionario
-		assertEquals("Joï¿½o", dao.salvar(f1).getNome());
+		assertEquals("João", dao.salvar(f1).getNome());
 	}
 
 	@Test
@@ -74,7 +75,8 @@ public class FuncionarioDAOTest {
 		// recuperando o id do ultimo cliente adicionado no banco
 
 		funcionarios = dao.buscaTodos();
-		Funcionario funcionario = funcionarios.get(funcionarios.size() - 1); // recuperando o ultimo veiculo inserido no banco 
+		Funcionario funcionario = funcionarios.get(funcionarios.size() - 1); // recuperando o ultimo veiculo inserido no
+																				// banco
 		Integer idultimo = funcionario.getId(); // recuperando o id do veiculo
 
 		// alterando o nome para comparar na busca
@@ -97,6 +99,19 @@ public class FuncionarioDAOTest {
 		 */
 
 		assertFalse(dao.buscaTodos().isEmpty());
+	}
+
+	@Test
+	public void testBuscaPorTipo() {
+		// buscando planos do tipo L = locador
+		funcionarios = dao.buscaPorTipo("L");
+
+		// verificando se todos os planos trazidos na busca são do tipo L
+		for (Funcionario funcionario : funcionarios) {
+
+			assertEquals("L", funcionario.getTipo());
+
+		}
 	}
 
 	@Test

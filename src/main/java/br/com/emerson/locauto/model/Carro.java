@@ -1,14 +1,15 @@
 package br.com.emerson.locauto.model;
 
+
+
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 /**
  * @author Emerson Sousa
  * 
  * Esta classe representa um veículo do tipo carro na aplicação.
  */
-
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-
 @Entity
 @DiscriminatorValue(value = "C")
 public class Carro extends Veiculo {
