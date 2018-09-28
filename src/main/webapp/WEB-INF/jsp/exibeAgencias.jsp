@@ -8,7 +8,7 @@
 <title>Agências</title>
 </head>
 <body>
-	<div width = " 760px" margin = "0 auto">
+	<div >
 		<h1>Agências</h1>
 		<c:if test="${!empty contactList}">
 			<table width="300px" border="1px" bordercolor="#000000">

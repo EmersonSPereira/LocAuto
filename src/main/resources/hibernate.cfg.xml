@@ -16,6 +16,9 @@
 		<mapping class="br.com.emerson.locauto.model.Cliente" />
 		<mapping class="br.com.emerson.locauto.model.ClientePF" />
 		<mapping class="br.com.emerson.locauto.model.ClientePJ" />
+		<mapping class="br.com.emerson.locauto.model.Planos" />
+		<mapping class="br.com.emerson.locauto.model.PlanosCarro" />
+		<mapping class="br.com.emerson.locauto.model.PlanosMoto" />
 	</session-factory>
 
 </hibernate-configuration>

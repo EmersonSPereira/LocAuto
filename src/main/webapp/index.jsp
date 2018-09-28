@@ -16,6 +16,7 @@
 		<a href="funcionarioG">Cadastro Gerente</a>  <a href="funcionarioL">Cadastro locador</a> <br> <br>
 		<a href="clientePF">Cadastro ClientePF</a> <a href="clientePJ">Cadastro ClientePJ</a> <br> <br>
 		<a href="veiculoC">Cadastro Carro</a> <a href="veiculoM">Cadastro Motocicleta</a> <br> <br>
+		<a href="planoC">Cadastro novo plano carro</a> <a href="planoM">Cadastro novo plano motocicleta</a> <br> <br>
 		<a href="agencia">Cadastro Agência</a> <br> <br>
 		
 		<h2>Consultas</h2>
@@ -23,7 +24,8 @@
 		<a href="exibeClientes">Exibe Clientes</a>
 		<a href="exibeFuncionarios">Exibe Funcionários</a> <br><br>
 		<a href="exibeVeiculos">Exibe Veiculos</a>
-		<a href="exibeAgencias">Exibe Agências</a>
+		<a href="exibeAgencias">Exibe Agências</a><br><br>
+		<a href="exibePlanos">Exibe Planos</a>
 		
 
 	</div>

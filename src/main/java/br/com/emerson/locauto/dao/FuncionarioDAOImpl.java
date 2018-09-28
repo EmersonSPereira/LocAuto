@@ -85,7 +85,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
 	}
 
 	/**
-	 * Deleta do banco de dados o funcionï¿½rio com id passado como parï¿½metro.
+	 * Deleta do banco de dados o funcionário com id passado como parâmetro.
 	 * 
 	 * @param id
 	 * @return
