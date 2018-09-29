@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import br.com.emerson.controller.AgenciaController;
+import br.com.emerson.locauto.controller.AgenciaController;
 import br.com.emerson.locauto.service.AgenciaService;
 
 

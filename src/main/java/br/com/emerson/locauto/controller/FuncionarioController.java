@@ -1,4 +1,4 @@
-package br.com.emerson.controller;
+package br.com.emerson.locauto.controller;
 
 import java.util.Map;
 
