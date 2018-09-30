@@ -5,34 +5,46 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+
+<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<script src="<c:url value="resources/js/jquery-3.3.1.min.js "/>"></script>
+<script src="<c:url value="resources/js/bootstrap.js "/>"></script>
+
 <title>Agências</title>
 </head>
 <body>
-	<div >
+	<div class="container">
 		<h1>Agências</h1>
-		<c:if test="${!empty agenciaList}">
-			<table width="300px" border="1px" bordercolor="#000000">
+	</div>
+	<c:if test="${!empty agenciaList}">
+		<div class="container">
+			<table class="table">
 				<tr>
-					<td>CNPJ</td>
-					<td>Inscrição Estadual</td>
-					<td>Gerente Responsavel</td>
-					<td>Telefone</td>
-					<td>&nbsp;</td>
+					<th scope="col">CNPJ</th>
+					<th scope="col">Inscrição Estadual</th>
+					<th scope="col">Gerente Responsavel</th>
+					<th scope="col">Telefone</th>
+					<th scope="col">Ação</th>
 				</tr>
+
 				<c:forEach items="${agenciaList}" var="agencia">
 					<tr>
 						<td>${agencia.cnpj}</td>
 						<td>${agencia.inscEstadual}</td>
 						<td>${agencia.gerenteResponsavel}</td>
 						<td>${agencia.telefone}</td>
-						<td><a href="delete/${agencia.id}">delete</a></td>
+						<td><a href="delete/${agencia.id}" class="badge badge-danger">delete</a></td>
 					</tr>
 				</c:forEach>
 			</table>
-		</c:if>
+		</div>
 
-		<a href="agencia">Cadastro Agência</a>
-		<a href="/LocAuto/">Home</a>
+	</c:if>
+
+
+	<div class="container">
+		<a href="agencia" class="badge badge-primary">Cadastro Agência</a> <a
+			href="/LocAuto/" class="badge badge-primary">Home</a>
 
 	</div>
 

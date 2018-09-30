@@ -3,42 +3,58 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-	<title>Cadastro de agência</title>
+<title>Cadastro de agência</title>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<script src="<c:url value="resources/js/jquery-3.3.1.min.js "/>"></script>
+<script src="<c:url value="resources/js/bootstrap.js "/>"></script>
+
 </head>
 <body>
+	<div class="container">
+		<h2>Cadastro Agência</h2>
 
-<h2>Cadastro Agência</h2>
+	</div>
 
-<form:form method="post" action="add.html" modelAttribute="agencia">
+	<div class="container">
+		<form:form method="post" action="add.html" modelAttribute="agencia">
 
-	<table>
-	<tr>
-		<td><form:label path="cnpj">CNPJ</form:label></td>
-		<td><form:input path="cnpj" /></td> 
-	</tr>
-	<tr>
-		<td><form:label path="GerenteResponsavel">Gerente Responsavél</form:label></td>
-		<td><form:input path="GerenteResponsavel" /></td>
-	</tr>
-	<tr>
-		<td><form:label path="inscEstadual">Inscrição Estadual</form:label></td>
-		<td><form:input path="inscEstadual" /></td>
-	</tr>
-	<tr>
-		<td><form:label path="telefone">Telefone</form:label></td>
-		<td><form:input path="telefone" /></td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<input type="submit" value="salvar"/>
-		</td>
-	</tr>
-</table>	
-</form:form>
+			<div class="form-group">
 
-<a href="exibeAgencias">Exibe Agências</a>
+				<form:label path="cnpj">CNPJ:</form:label>
 
-	
+				<form:input class="form-control" path="cnpj" />
+			</div>
+
+
+			<div class="form-group">
+				<form:label path="GerenteResponsavel">Gerente Responsavél:</form:label>
+
+				<form:input class="form-control" path="GerenteResponsavel" />
+
+			</div>
+			<div class="form-group">
+				<form:label path="inscEstadual">Inscrição Estadual:</form:label>
+
+				<form:input class="form-control" path="inscEstadual" />
+
+			</div>
+			<div class="form-group">
+				<form:label path="telefone">Telefone:</form:label>
+
+				<form:input class="form-control" path="telefone" />
+
+			</div>
+			<button type="submit" class="btn btn-success">Salvar</button>
+		</form:form>
+
+	</div>
+
+	<div class="container">
+		<a href="exibeAgencias" class="badge badge-primary">Exibe Agências</a>
+
+	</div>
+
+
 
 
 
