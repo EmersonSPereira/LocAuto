@@ -13,95 +13,25 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">LocAuto</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link" href="/LocAuto">Home
-						<span class="sr-only">(current)</span>
-				</a></li>
-
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Agência </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="agencia">Cadastrar Agência</a> <a
-							class="dropdown-item" href="exibeAgencias">Exibir Agências</a>
-
-					</div></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Cliente </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="clientePF">Cadastrar Cliente PF</a>
-						<a class="dropdown-item" href="clientePJ">Cadastrar Cliente PJ</a>
-						<a class="dropdown-item" href="exibeClientes">Exibir Clientes</a>
-
-
-					</div></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Funcionário </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="funcionarioG">Cadastrar Gerente</a>
-						<a class="dropdown-item" href="funcionarioL">Cadastrar Locador</a>
-						<a class="dropdown-item" href="exibeFuncionarios">Exibir
-							Funcionários</a>
-
-
-					</div></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Veículo </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="veiculoC">Cadastrar Carro</a> <a
-							class="dropdown-item" href="veiculoM">Cadastrar Motocicleta</a> <a
-							class="dropdown-item" href="exibeVeiculos">Exibir Veículos</a>
-
-
-					</div></li>
-
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Planos </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="planoC">Cadastrar Plano Carro</a> <a
-							class="dropdown-item" href="planoM">Cadastrar Plano
-							Motocicleta</a> <a class="dropdown-item" href="exibePlanos">Exibir
-							Planos</a>
-
-					</div></li>
-
-			</ul>
-
-		</div>
-	</nav>
 	<div>
+		<jsp:include page="navBar.jsp" />
+	</div>
+	<div class="container">
 		<h1>Clientes PF</h1>
-		<c:if test="${!empty listaclientesPF}">
-			<table width="150px" border="1px" bordercolor="#000000">
+	</div>
+	<c:if test="${!empty listaclientesPF}">
+		<div class="container">
+			<table class="table table-striped table-dark">
 				<tr>
-					<td>Nome</td>
-					<td>CPF</td>
-					<td>RG</td>
-					<td>Data de Nascimento</td>
-					<td>Naturalidade</td>
-					<td>Endereco</td>
-					<td>Telefone</td>
-					<td>Email</td>
-					<td>&nbsp;</td>
+					<th scope="col">Nome</th>
+					<th scope="col">CPF</th>
+					<th scope="col">RG</th>
+					<th scope="col">Data de Nascimento</th>
+					<th scope="col">Naturalidade</th>
+					<th scope="col">Endereco</th>
+					<th scope="col">Telefone</th>
+					<th scope="col">Email</th>
+					<th scope="col">Ação</th>
 				</tr>
 				<c:forEach items="${listaclientesPF}" var="cliente">
 
@@ -115,26 +45,31 @@
 						<td>${cliente.telefone}</td>
 						<td>${cliente.email}</td>
 
-						<td><a href="deleteCliente/${cliente.id}">delete</a></td>
+						<td><a href="deleteCliente/${cliente.id}"
+							class="badge badge-danger">delete</a></td>
 					</tr>
 				</c:forEach>
 			</table>
-		</c:if>
-	</div>
+		</div>
+	</c:if>
 
-	<div>
+
+	<div class="container">
 		<h1>Clientes PJ</h1>
-		<c:if test="${!empty listaclientesPJ}">
-			<table width="150px" border="1px" bordercolor="#000000">
+	</div>
+	<c:if test="${!empty listaclientesPJ}">
+
+		<div class="container">
+			<table class="table table-striped table-dark">
 				<tr>
-					<td>Nome Fantasia</td>
-					<td>Razão Social</td>
-					<td>CNPJ</td>
-					<td>Inscrição Estadual</td>
-					<td>Endereco</td>
-					<td>Telefone</td>
-					<td>Email</td>
-					<td>&nbsp;</td>
+					<th scope="col">Nome Fantasia</th>
+					<th scope="col">Razão Social</th>
+					<th scope="col">CNPJ</th>
+					<th scope="col">Inscrição Estadual</th>
+					<th scope="col">Endereco</th>
+					<th scope="col">Telefone</th>
+					<th scope="col">Email</th>
+					<th scope="col">Ação</th>
 				</tr>
 				<c:forEach items="${listaclientesPJ}" var="cliente">
 
@@ -147,16 +82,16 @@
 						<td>${cliente.telefone}</td>
 						<td>${cliente.email}</td>
 
-						<td><a href="deleteCliente/${cliente.id}">delete</a></td>
+						<td><a href="deleteCliente/${cliente.id}"
+							class="badge badge-danger">delete</a></td>
+						
 					</tr>
 				</c:forEach>
 			</table>
-		</c:if>
-	</div>
+		</div>
+	</c:if>
 
-	<a href="clientePF">Cadastro ClientePF</a>
-	<a href="clientePJ">Cadastro ClientePJ</a>
-	<a href="/LocAuto/">Home</a>
+
 
 </body>
 </html>
