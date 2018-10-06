@@ -5,9 +5,10 @@
 <head>
 <title>Cadastro de planos</title>
 
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-<script src="resources/js/jquery-3.3.1.min.js" type="text/javascript"></script>
-<script src="resources/js/bootstrap.min.js" type="text/javascript"></script>
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/bootstrap.min.css"/>">
+<script src="<c:url value="/resources/js/jquery-3.3.1.min.js "/>"></script>
+<script src="<c:url value="/resources/js/bootstrap.js "/>"></script>
 </head>
 <body>
 
@@ -23,6 +24,9 @@
 		<form:form method="post" action="salvaPlanoM.html"
 			modelAttribute="planoM">
 
+			<div class="form-group">
+				<form:input type="hidden" class="form-control" path="id" />
+			</div>
 
 			<div class="form-group">
 				<form:label path="plano">Plano:</form:label>

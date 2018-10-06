@@ -46,7 +46,9 @@
 						<td>${cliente.email}</td>
 
 						<td><a href="deleteCliente/${cliente.id}"
-							class="badge badge-danger">delete</a></td>
+							class="badge badge-danger">delete</a>
+							<a href="editarClientePF/${cliente.id}"
+							class="badge badge-warning">editar</a></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -83,7 +85,9 @@
 						<td>${cliente.email}</td>
 
 						<td><a href="deleteCliente/${cliente.id}"
-							class="badge badge-danger">delete</a></td>
+							class="badge badge-danger">delete</a>
+							<a href="editarClientePJ/${cliente.id}"
+							class="badge badge-warning">editar</a></td>
 						
 					</tr>
 				</c:forEach>

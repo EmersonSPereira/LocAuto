@@ -39,7 +39,8 @@
 						<td>${plano.acessorios}</td>
 
 						<td><a href="deletePlano/${plano.id}"
-							class="badge badge-danger">delete</a></td>
+							class="badge badge-danger">delete</a> <a
+							href="editarPlanoC/${plano.id}" class="badge badge-warning">editar</a></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -68,7 +69,8 @@
 						<td>${plano.cilindradas}</td>
 
 						<td><a href="deletePlano/${plano.id}"
-							class="badge badge-danger">delete</a></td>
+							class="badge badge-danger">delete</a> <a
+							href="editarPlanoM/${plano.id}" class="badge badge-warning">editar</a></td>
 
 					</tr>
 				</c:forEach>

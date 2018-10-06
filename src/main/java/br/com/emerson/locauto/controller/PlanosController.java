@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import br.com.emerson.locauto.model.Agencia;
 import br.com.emerson.locauto.model.PlanosCarro;
 import br.com.emerson.locauto.model.PlanosMoto;
 import br.com.emerson.locauto.service.PlanosService;
@@ -50,12 +52,13 @@ public class PlanosController {
 	}
 
 	/**
-	 * Esse método trata a requisição "/salvaPlanoC" monta o objeto planoC, vindo da view e salva no banco.
+	 * Esse método trata as requisições "/salvaPlanoC","editarPlanoC/salvaPlanoC" monta o objeto planoC, vindo da view
+	 *  caso o objeto não exista salva no banco se já existir edita.
 	 * @param planoCarro
 	 * @param result
 	 * @return
 	 */
-	@RequestMapping(value = "/salvaPlanoC", method = RequestMethod.POST)
+	@RequestMapping(value = {"/salvaPlanoC","editarPlanoC/salvaPlanoC"}, method = RequestMethod.POST)
 	public String addPlanoC(@ModelAttribute("planoC") PlanosCarro planoCarro, BindingResult result) {
 
 		planosService.salvar(planoCarro);
@@ -64,7 +67,7 @@ public class PlanosController {
 	}
 
 	/**
-	 * Esse método trata a requisição "/planoM, adiciona um objeto planoM na view
+	 * Esse método trata as requisição "/planoM, adiciona um objeto planoM na view
 	 *  e por fim retorna a view "planoCarro"
 	 * @param map
 	 * @return
@@ -83,12 +86,13 @@ public class PlanosController {
 	}
 
 	/**
-	 * Esse método trata a requisição "/salvaPlanoM" monta o objeto planoM, vindo da view e salva no banco.
+	 * Esse método trata as requisições "/salvaPlanoM","editaplamoM/salvaPlanoM" monta o objeto planoM, vindo da view
+	 * caso o objeto não exista salva no banco, se já existir edita.
 	 * @param planoMoto
 	 * @param result
 	 * @return
 	 */
-	@RequestMapping(value = "/salvaPlanoM", method = RequestMethod.POST)
+	@RequestMapping(value = {"/salvaPlanoM","editarPlanoM/salvaPlanoM"}, method = RequestMethod.POST)
 	public String addPlanoM(@ModelAttribute("planoM") PlanosMoto planoMoto, BindingResult result) {
 
 		planosService.salvar(planoMoto);
@@ -108,7 +112,43 @@ public class PlanosController {
 
 		return "redirect:/exibePlanos";
 	}
+	
+	/**
+	 * Esse método trata a requisição "/editarPlanoC/{clienteId}" recebe o id de uma plano e carrega o plano do banco
+	 * e envia o objeto para view para ser editado.
+	 * @param clienteId
+	 * @return
+	 */
+	@RequestMapping(value = "/editarPlanoC/{planoId}")
+	public ModelAndView editPlanoC(Map<String, Object> map,@PathVariable("planoId") Integer planoId) {
 
+		ModelAndView view = new ModelAndView();
+		view.setViewName("planoCarro");
+		view.addObject("planoC", planosService.buscaPorId(planoId));
+		
+
+		return view;
+	}
+	
+	
+	/**
+	 * Esse método trata a requisição "/editarPlanoM/{clienteId}" recebe o id de uma plano e carrega o plano do banco
+	 * e envia o objeto para view para ser editado.
+	 * @param clienteId
+	 * @return
+	 */
+	@RequestMapping(value = "/editarPlanoM/{planoId}")
+	public ModelAndView editPlanoM(Map<String, Object> map,@PathVariable("planoId") Integer planoId) {
+
+		ModelAndView view = new ModelAndView();
+		view.setViewName("planoMotocicleta");
+		view.addObject("planoM", planosService.buscaPorId(planoId));
+		
+
+		return view;
+	}
+
+	
 	/**
 	 * Esse método trata a requisição "/exibePlanos" envia para view "exibePlanos" um lista de planoC 
 	 * e uma lista de planoM  para ser exibido

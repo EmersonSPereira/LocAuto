@@ -4,9 +4,9 @@
 <html>
 <head>
 <title>Cadastro de agência</title>
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-<script src="<c:url value="resources/js/jquery-3.3.1.min.js "/>"></script>
-<script src="<c:url value="resources/js/bootstrap.js "/>"></script>
+<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
+<script src="<c:url value="/resources/js/jquery-3.3.1.min.js "/>"></script>
+<script src="<c:url value="/resources/js/bootstrap.js "/>"></script>
 
 </head>
 <body>
@@ -22,6 +22,11 @@
 	<div class="container">
 		<form:form method="post" action="add.html" modelAttribute="agencia">
 
+			<div class="form-group">
+				<form:input type = "hidden" class="form-control" path="id" />
+			</div>
+			
+			
 			<div class="form-group">
 
 				<form:label path="cnpj">CNPJ:</form:label>

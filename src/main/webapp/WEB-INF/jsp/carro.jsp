@@ -4,9 +4,10 @@
 <html>
 <head>
 <title>Cadastro de veículo</title>
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-<script src="<c:url value="resources/js/jquery-3.3.1.min.js "/>"></script>
-<script src="<c:url value="resources/js/bootstrap.js "/>"></script>
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/bootstrap.min.css"/>">
+<script src="<c:url value="/resources/js/jquery-3.3.1.min.js "/>"></script>
+<script src="<c:url value="/resources/js/bootstrap.js "/>"></script>
 </head>
 <body>
 
@@ -14,16 +15,19 @@
 		<jsp:include page="navBar.jsp" />
 	</div>
 
-<div class="container">
-	<h2>Cadastro veículo: Carro</h2>
-	
+	<div class="container">
+		<h2>Cadastro veículo: Carro</h2>
+
 	</div>
 
-<div class="container">
-	<form:form method="post" action="salvaVeiculoC.html"
-		modelAttribute="veiculoC">
+	<div class="container">
+		<form:form method="post" action="salvaVeiculoC.html"
+			modelAttribute="veiculoC">
 
-		
+			<div class="form-group">
+				<form:input type="hidden" class="form-control" path="id" />
+			</div>
+
 			<div class="form-group">
 				<form:label path="renavam">Renavam:</form:label>
 				<form:input class="form-control" path="renavam" />
@@ -61,12 +65,12 @@
 				<form:input class="form-control" path="acessorios" />
 			</div>
 			<button type="submit" class="btn btn-success">Salvar</button>
-		
-	</form:form>
-	
+
+		</form:form>
+
 	</div>
 
-	
+
 
 
 

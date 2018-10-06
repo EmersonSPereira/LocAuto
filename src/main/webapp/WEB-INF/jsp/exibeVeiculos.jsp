@@ -49,7 +49,9 @@
 						<td>${veiculo.acessorios}</td>
 
 						<td><a href="deleteVeiculo/${veiculo.id}"
-							class="badge badge-danger">delete</a></td>
+							class="badge badge-danger">delete</a>
+							<a href="editarVeiculoC/${veiculo.id}"
+							class="badge badge-warning">editar</a></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -92,7 +94,9 @@
 						<td>${veiculo.cilindradas}</td>
 						<td>${veiculo.freios}</td>
 						<td><a href="deleteVeiculo/${veiculo.id}"
-							class="badge badge-danger">delete</a></td>
+							class="badge badge-danger">delete</a>
+							<a href="editarVeiculoM/${veiculo.id}"
+							class="badge badge-warning">editar</a></td></td>
 					</tr>
 				</c:forEach>
 			</table>

@@ -37,7 +37,9 @@
 						<td>${agencia.inscEstadual}</td>
 						<td>${agencia.gerenteResponsavel}</td>
 						<td>${agencia.telefone}</td>
-						<td><a href="delete/${agencia.id}" class="badge badge-danger">delete</a></td>
+						<td><a href="delete/${agencia.id}" class="badge badge-danger">delete</a>
+						<a href="editar/${agencia.id}" class="badge badge-warning">editar</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>

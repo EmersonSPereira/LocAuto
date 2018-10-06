@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.emerson.locauto.model.Agencia;
 import br.com.emerson.locauto.service.AgenciaService;
@@ -56,6 +57,22 @@ public class AgenciaController {
 
 		return "redirect:/exibeAgencias";
 	}
+	
+	/**
+	 * Esse método trata a requisição "editar/add" monta o objeto agencia, vindo da view e edita no banco.
+	 * @param agencia
+	 * @param result
+	 * @return
+	 */
+	@RequestMapping(value = "editar/add", method = RequestMethod.POST)
+	public String editAgencia(@ModelAttribute("agencia") Agencia agencia, BindingResult result) {
+		
+		System.out.println(" O ID da Agencia dentro do quando vou salvar é :" + agencia.getId());
+		agenciaService.salvar(agencia);
+
+		return "redirect:/exibeAgencias";
+	}
+
 
 	/**
 	 * Esse método trata a requisição "/delete/{agenciaId}" recebe o id de uma agencia e deleta do banco
@@ -68,6 +85,23 @@ public class AgenciaController {
 		agenciaService.deleta(agenciaId);
 
 		return "redirect:/exibeAgencias";
+	}
+	
+	/**
+	 * Esse método trata a requisição "/editar/{agenciaId}" recebe o id de uma agencia e edita no banco
+	 * @param agenciaId
+	 * @return
+	 */
+	@RequestMapping(value = "/editar/{agenciaId}")
+	public ModelAndView editAgencia(Map<String, Object> map,@PathVariable("agenciaId") Integer agenciaId) {
+
+		ModelAndView view = new ModelAndView();
+		view.setViewName("agencia");
+		Agencia agencia = agenciaService.buscaPorId(agenciaId);
+		view.addObject("agencia", agencia);
+		
+
+		return view;
 	}
 	
 	/**

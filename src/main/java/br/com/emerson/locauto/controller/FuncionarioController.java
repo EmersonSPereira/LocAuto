@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.emerson.locauto.model.Gerente;
 import br.com.emerson.locauto.model.Locador;
@@ -46,7 +47,7 @@ public class FuncionarioController {
 	 * @param result
 	 * @return
 	 */
-	@RequestMapping(value = "/salvaFuncionarioG", method = RequestMethod.POST)
+	@RequestMapping(value = {"/salvaFuncionarioG","editarFuncionarioG/salvaFuncionarioG"}, method = RequestMethod.POST)
 	public String addFuncionarioG(@ModelAttribute("funcionarioG") Gerente gerente, BindingResult result) {
 
 		funcionarioService.salvar(gerente);
@@ -74,7 +75,7 @@ public class FuncionarioController {
 	 * @param result
 	 * @return
 	 */
-	@RequestMapping(value = "/salvaFuncionarioL", method = RequestMethod.POST)
+	@RequestMapping(value = {"/salvaFuncionarioL","editarFuncionarioL/salvaFuncionarioL"}, method = RequestMethod.POST)
 	public String addFuncionarioL(@ModelAttribute("funcionarioL") Locador locador, BindingResult result) {
 
 		funcionarioService.salvar(locador);
@@ -93,6 +94,40 @@ public class FuncionarioController {
 		funcionarioService.deleta(funcionarioId);
 
 		return "redirect:/exibeFuncionarios";
+	}
+	
+	/**
+	 * Esse método trata a requisição "/editarFuncionarioG/{funcionarioId}" recebe o id de uma funcionario do tipo gerente
+	 *  e carrega o  funcionario do banco e envia o objeto para view para ser editado.
+	 * @param clienteId
+	 * @return
+	 */
+	@RequestMapping(value = "/editarFuncionarioG/{funcionarioId}")
+	public ModelAndView editFuncionarioPF(Map<String, Object> map,@PathVariable("funcionarioId") Integer funcionarioId) {
+
+		ModelAndView view = new ModelAndView();
+		view.setViewName("gerente");
+		view.addObject("funcionarioG", funcionarioService.buscaPorId(funcionarioId));
+		
+
+		return view;
+	}
+	
+	/**
+	 * Esse método trata a requisição "/editarFuncionarioG/{funcionarioId}" recebe o id de uma funcionario do tipo locador
+	 *  e carrega o  funcionario do banco e envia o objeto para view para ser editado.
+	 * @param clienteId
+	 * @return
+	 */
+	@RequestMapping(value = "/editarFuncionarioL/{funcionarioId}")
+	public ModelAndView editFuncionarioPJ(Map<String, Object> map,@PathVariable("funcionarioId") Integer funcionarioId) {
+
+		ModelAndView view = new ModelAndView();
+		view.setViewName("locador");
+		view.addObject("funcionarioL", funcionarioService.buscaPorId(funcionarioId));
+		
+
+		return view;
 	}
 
 	/**

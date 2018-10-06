@@ -4,16 +4,17 @@
 <html>
 <head>
 <title>Cadastro de cliente</title>
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-<script src="resources/js/jquery-3.3.1.min.js" type="text/javascript"></script>
-<script src="resources/js/bootstrap.min.js" type="text/javascript"></script>
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/bootstrap.min.css"/>">
+<script src="<c:url value="/resources/js/jquery-3.3.1.min.js "/>"></script>
+<script src="<c:url value="/resources/js/bootstrap.js "/>"></script>
 </head>
 <body>
 
 	<div>
 		<jsp:include page="navBar.jsp" />
 	</div>
-	
+
 	<div class="container">
 		<h2>Cadastro cliente pessoa física</h2>
 	</div>
@@ -22,13 +23,15 @@
 		<form:form method="post" action="salvaClientePF.html"
 			modelAttribute="clientePF">
 
-
 			<div class="form-group">
-			
+				<form:input type="hidden" class="form-control" path="id" />
+			</div>
+			<div class="form-group">
+
 				<form:label path="nome">Nome:</form:label>
 				<form:input class="form-control" path="nome" />
 			</div>
-			
+
 			<div class="form-group">
 				<form:label path="cpf">CPF:</form:label>
 				<form:input class="form-control" path="cpf" />

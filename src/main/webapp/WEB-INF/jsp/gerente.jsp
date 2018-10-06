@@ -5,9 +5,10 @@
 <head>
 <title>Cadastro de Funcionário</title>
 
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-<script src="<c:url value="resources/js/jquery-3.3.1.min.js "/>"></script>
-<script src="<c:url value="resources/js/bootstrap.js "/>"></script>
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/bootstrap.min.css"/>">
+<script src="<c:url value="/resources/js/jquery-3.3.1.min.js "/>"></script>
+<script src="<c:url value="/resources/js/bootstrap.js "/>"></script>
 </head>
 <body>
 
@@ -24,6 +25,9 @@
 		<form:form method="post" action="salvaFuncionarioG.html"
 			modelAttribute="funcionarioG">
 
+			<div class="form-group">
+				<form:input type="hidden" class="form-control" path="id" />
+			</div>
 
 			<div class="form-group">
 				<form:label path="nome">Nome:</form:label>
@@ -57,7 +61,7 @@
 				<form:label path="email">Email:</form:label>
 				<form:input class="form-control" path="email" />
 			</div>
-			
+
 			<button type="submit" class="btn btn-success">Salvar</button>
 
 
