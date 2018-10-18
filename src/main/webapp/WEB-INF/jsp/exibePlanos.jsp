@@ -48,7 +48,7 @@
 	</c:if>
 
 	<div class="container">
-		>
+		
 		<h1>Planos Motocicleta</h1>
 	</div>
 	<c:if test="${!empty listaPlanosM}">

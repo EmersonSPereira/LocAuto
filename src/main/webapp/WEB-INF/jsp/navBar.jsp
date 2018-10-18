@@ -1,8 +1,8 @@
 
 
-<div id = "navbar">
+<div class="container" id = "navbar">
 
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 			<a class="navbar-brand" href="#">LocAuto</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
@@ -73,10 +73,22 @@
 								Planos</a>
 
 						</div></li>
+						
+						<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Locação </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="locacaoClientePF">Realizar Locação ClientePF</a>
+							<a class="dropdown-item" href="#">Realizar Locação ClientePJ</a> 
+							<a class="dropdown-item" href="exibeLocacoes">Exibir
+								Planos</a>
+
+						</div></li>
 
 				</ul>
 
 			</div>
 		</nav>
 
-	</div>
+	</div><br><br><br><br>

@@ -158,6 +158,11 @@ public class PlanosController {
 	 */
 	@RequestMapping("/exibePlanos")
 	public String exibePlanos(Map<String, Object> map) {
+		
+		if (planosService.buscaTodos().isEmpty()) {
+			salvaPlanosCarro();
+			salvaPlanosMoto();
+		}
 
 		map.put("listaPlanosC", planosService.buscaPorTipo("PC"));
 		map.put("listaPlanosM", planosService.buscaPorTipo("PM"));

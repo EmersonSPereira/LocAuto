@@ -85,7 +85,7 @@ private final Logger logger = LoggerFactory.getLogger(LocacaoDAOImpl.class);
 		
 		try {
 			
-			Locacacoes = sessionFactory.getCurrentSession().createQuery("from Locacao", LocacaoClientePF.class).list();
+			Locacacoes = sessionFactory.getCurrentSession().createQuery("from LocacaoClientePF", LocacaoClientePF.class).list();
 			
 			logger.info("Locacaos encontrada com sucesso");
 			

@@ -24,75 +24,85 @@
 	</div>
 	<br>
 	<br>
-	<form:form>
+	<form:form method="post" action="locacaoClientePF/salvar"
+		modelAttribute="locacao">
 
 		<div class="container">
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="exampleFormControlSelect1">Escolha um Cliente</label> <select
-						class="form-control" id="exampleFormControlSelect1">
+				
+					<label>Escolha um Cliente</label>
+
+					<form:select class="form-control" path="clientePF.id">
 						<c:forEach items="${listaClientes }" var="cliente">
-							<option>${cliente.nome}</option>
+							<form:option value="${cliente.id}">${cliente.nome}</form:option>
 						</c:forEach>
 
-					</select>
+					</form:select>
 				</div>
 
 
 				<div class="form-group col-md-6">
-					<label for="exampleFormControlSelect1">Escolha um Locador</label> <select
-						class="form-control" id="exampleFormControlSelect1">
+				
+					<label >Escolha um Locador</label>
+					<form:select class="form-control" path="locador.id">
 						<c:forEach items="${listaLocadores }" var="locador">
-							<option>${locador.nome}</option>
+							<form:option value="${locador.id}">${locador.nome}</form:option>
 						</c:forEach>
 
-					</select>
+					</form:select>
 				</div>
 			</div>
 		</div>
 
 		<div class="container">
 			<div class="form-group">
-				<label for="exampleFormControlSelect1">Escolha um Veículo</label> <select
-					class="form-control" id="exampleFormControlSelect1">
+			
+				<label >Escolha um Veículo</label>
+				<form:select class="form-control" path="veiculo.id">
 					<c:forEach items="${listaVeiculos }" var="veiculo">
-						<option>Tipo Veículo: ${veiculo.tipo} , Modelo:
-							${veiculo.modelo}</option>
+						<form:option value="${veiculo.id}">Tipo Veículo: ${veiculo.tipo} , Modelo:
+							${veiculo.modelo}</form:option>
 					</c:forEach>
 
-				</select> <label>M = Motocicleta C = Carro</label>
+				</form:select>
+				<label >M = Motocicleta C = Carro</label>
 			</div>
 		</div>
 
 		<div class="container">
 			<div class="form-group">
-				<label for="exampleFormControlSelect1">Escolha um Plano</label> <select
-					class="form-control" id="exampleFormControlSelect1">
+				<label >Escolha um Plano</label>
+				<form:select class="form-control" path="plano.id">
 					<c:forEach items="${listaPlanos }" var="plano">
-						<option>Tipo: ${plano.tipo} Veículo: ${plano.veiculos}</option>
+						<form:option value="${plano.id}">Tipo: ${plano.tipo} Veículo: ${plano.veiculos}</form:option>
 					</c:forEach>
 
-				</select> <label>PC = Plano Carro, PM = Plano Motocicleta</label>
+				</form:select>
+				<label >PC = Plano Carro, PM = Plano Motocicleta</label>
 			</div>
 		</div>
 
 		<div class="container">
 			<div class="form-group">
-				<label for="exampleFormControlSelect1">Escolha um Seguro</label> <select
-					class="form-control" id="exampleFormControlSelect1">
+				<form:label path="seguro">Escolha um Seguro</form:label>
+				<form:select path="seguro" class="form-control" >
 
-					<option>Nenhum</option>
-					<option>Cobertura parcial : arranhões, amassados leves,
-						acessórios danificados</option>
-					<option>Cobertura total: roubo e perda total do veículo.</option>
+					<form:option value="Nenhum">Nenhum</form:option>
+					<form:option value="Parcial">Cobertura parcial : arranhões, amassados leves,
+						acessórios danificados</form:option>
+					<form:option value="Total">Cobertura total: roubo e perda total do veículo.</form:option>
 
-				</select>
+				</form:select>
 
 			</div>
 		</div>
 		<div class="container">
 			<button type="submit" class="btn btn-success">Realizar
-				Locação</button><br><br><br>
+				Locação</button>
+			<br>
+			<br>
+			<br>
 		</div>
 	</form:form>
 

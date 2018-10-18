@@ -20,6 +20,17 @@ public class LocacaoClientePF {
 	private Integer id;
 
 	@ManyToOne
+	private ClientePF clientePF;
+	
+	public ClientePF getClientePF() {
+		return clientePF;
+	}
+
+	public void setClientePF(ClientePF clientePF) {
+		this.clientePF = clientePF;
+	}
+
+	@ManyToOne
 	private Locador locador;
 
 	@ManyToOne
@@ -30,9 +41,9 @@ public class LocacaoClientePF {
 
 	private String Seguro;
 
-	private Date dataLocacao;
+	private String dataLocacao;
 
-	private Date dataDevolucao;
+	private String dataDevolucao;
 
 	public Integer getId() {
 		return id;
@@ -74,19 +85,19 @@ public class LocacaoClientePF {
 		Seguro = seguro;
 	}
 
-	public Date getDataLocacao() {
+	public String getDataLocacao() {
 		return dataLocacao;
 	}
 
-	public void setDataLocacao(Date dataLocacao) {
+	public void setDataLocacao(String dataLocacao) {
 		this.dataLocacao = dataLocacao;
 	}
 
-	public Date getDataDevolucao() {
+	public String getDataDevolucao() {
 		return dataDevolucao;
 	}
 
-	public void setDataDevolucao(Date dataDevolucao) {
+	public void setDataDevolucao(String dataDevolucao) {
 		this.dataDevolucao = dataDevolucao;
 	}
 
