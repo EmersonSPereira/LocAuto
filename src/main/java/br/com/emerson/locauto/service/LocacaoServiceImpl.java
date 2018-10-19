@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.emerson.locauto.dao.LocacaoDAO;
+import br.com.emerson.locauto.model.Locacao;
 import br.com.emerson.locauto.model.LocacaoClientePF;
 
 @Service
@@ -16,19 +17,19 @@ public class LocacaoServiceImpl implements LocacaoService {
 	private LocacaoDAO dao;
 
 	@Transactional
-	public LocacaoClientePF salvar(LocacaoClientePF locacao) {
+	public Locacao salvar(Locacao locacao) {
 
 		return dao.salvar(locacao);
 	}
 
 	@Transactional
-	public LocacaoClientePF buscaPorId(Integer id) {
+	public Locacao buscaPorId(Integer id) {
 
 		return dao.buscaPorId(id);
 	}
 
 	@Transactional
-	public List<LocacaoClientePF> buscaTodos() {
+	public List<Locacao> buscaTodos() {
 
 		return dao.buscaTodos();
 	}
@@ -37,6 +38,12 @@ public class LocacaoServiceImpl implements LocacaoService {
 	public boolean deleta(Integer id) {
 		Boolean result = dao.deleta(id);
 		return result;
+	}
+
+	@Transactional
+	public List<Locacao> buscaPorTipoCliente(String clienteTipo) {
+		
+		return dao.buscaPorTipoCliente(clienteTipo);
 	}
 
 }

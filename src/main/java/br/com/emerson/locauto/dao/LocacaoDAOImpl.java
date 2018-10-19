@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import br.com.emerson.locauto.model.Locacao;
 import br.com.emerson.locauto.model.LocacaoClientePF;
 
 @Repository
@@ -25,7 +26,7 @@ private final Logger logger = LoggerFactory.getLogger(LocacaoDAOImpl.class);
 	 * @param LocacaoClientePF
 	 * @return
 	 */
-	public LocacaoClientePF salvar(LocacaoClientePF locacao) {
+	public Locacao salvar(Locacao locacao) {
 
 		logger.info("Iniciando transação para salvar/editar registro da Locacao");
 		try {
@@ -49,7 +50,7 @@ private final Logger logger = LoggerFactory.getLogger(LocacaoDAOImpl.class);
 	 * @param id
 	 * @return
 	 */
-	public LocacaoClientePF buscaPorId(Integer id) {
+	public Locacao buscaPorId(Integer id) {
 
 		LocacaoClientePF locacao = null;
 		
@@ -71,21 +72,49 @@ private final Logger logger = LoggerFactory.getLogger(LocacaoDAOImpl.class);
 //		
 
 	}
+	
+	/**
+	 * Recupera as Locacaos pelo tipo de cliente passado pelo parametro podendo ser PF ou PJ
+	 * 
+	 * @param tipo
+	 * @return
+	 */
+	public List<Locacao> buscaPorTipoCliente(String tipoCliente) {
+
+		List<Locacao> Locacao = null;
+
+		logger.info("Iniciando transação para buscar Locacaos por tipo no banco");
+
+		try {
+
+			Locacao = sessionFactory.getCurrentSession()
+					.createQuery("select c from Locacao c where c.cliente = :tipoCliente", Locacao.class)
+					.setParameter("tipoCliente", tipoCliente).getResultList();
+
+			logger.info("Locacaos encontrado com sucesso");
+
+		} catch (Exception e) {
+
+			logger.error("Falha ao buscar Locacaos do tipo = " + tipoCliente + " erro: " + e.getMessage());
+		}
+
+		return Locacao;
+	}
 
 	/**
 	 * Recupera uma lista de todas as agências armazenadas no banco
 	 * 
 	 * @return
 	 */
-	public List<LocacaoClientePF> buscaTodos() {
+	public List<Locacao> buscaTodos() {
 
-		List<LocacaoClientePF> Locacacoes = null;
+		List<Locacao> Locacacoes = null;
 		
 		logger.info("Iniciando transação para buscar todas as Locacaos no banco");
 		
 		try {
 			
-			Locacacoes = sessionFactory.getCurrentSession().createQuery("from LocacaoClientePF", LocacaoClientePF.class).list();
+			Locacacoes = sessionFactory.getCurrentSession().createQuery("from Locacao", Locacao.class).list();
 			
 			logger.info("Locacaos encontrada com sucesso");
 			

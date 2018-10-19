@@ -19,7 +19,9 @@
 		<mapping class="br.com.emerson.locauto.model.Planos" />
 		<mapping class="br.com.emerson.locauto.model.PlanosCarro" />
 		<mapping class="br.com.emerson.locauto.model.PlanosMoto" />
+		<mapping class="br.com.emerson.locauto.model.Locacao" />
 		<mapping class="br.com.emerson.locauto.model.LocacaoClientePF" />
+		<mapping class="br.com.emerson.locauto.model.LocacaoClientePJ" />
 		
 		
 		

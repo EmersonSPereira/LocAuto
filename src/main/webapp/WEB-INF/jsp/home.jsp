@@ -17,9 +17,15 @@
 	<div>
 		<jsp:include page="navBar.jsp" />
 	</div>
+	
+	<div class="container">
+	
+	<h1>Essas são as locações ativas no momento:</h1><br><br>
+	
+	</div>
 
 	<div class="container">
-		<h1>Locacações Cliente PF</h1>
+		<h4>Locacações Cliente PF</h4>
 	</div>
 	<c:if test="${!empty locacoesListPF}">
 		<div class="container">

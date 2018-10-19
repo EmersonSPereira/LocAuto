@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.emerson.locauto.model.LocacaoClientePF;
+import br.com.emerson.locauto.model.LocacaoClientePJ;
 import br.com.emerson.locauto.service.ClienteService;
 import br.com.emerson.locauto.service.FuncionarioService;
 import br.com.emerson.locauto.service.LocacaoService;
@@ -36,9 +37,12 @@ public class LocacaoController {
 	@Autowired
 	private FuncionarioService funcionarioService;
 	
-	
+	/**
+	 * 
+	 * @return 
+	 */
 	@RequestMapping("/locacaoClientePF")
-	public ModelAndView agencia() {
+	public ModelAndView LocacaoClientePF() {
 
 	ModelAndView view = new ModelAndView();
 	
@@ -69,13 +73,46 @@ public class LocacaoController {
 		
 	}
 	
+	@RequestMapping("/locacaoClientePJ")
+	public ModelAndView LocacaoClientePJ() {
+
+	ModelAndView view = new ModelAndView();
+	
+	view.setViewName("locacaoClientePJ");
+	view.addObject("locacao", new LocacaoClientePJ());
+	view.addObject("listaClientes", clienteService.buscaPorTipo("PJ"));
+	view.addObject("listaLocadores", funcionarioService.buscaPorTipo("L"));
+	view.addObject("listaVeiculos", veiculoService.buscaTodos());
+	view.addObject("listaPlanos", planosService.buscaTodos());
+		
+
+		return view;
+	}
+	
+	@RequestMapping(value = "/locacaoClientePJ/salvar", method = RequestMethod.POST)
+	public ModelAndView salvarLocacaoClientePJ(@ModelAttribute("locacao") LocacaoClientePJ locacao, BindingResult result) {
+		
+		Date data = new Date();
+		String dataFormatada =  new SimpleDateFormat("dd/MM/yyyy").format(data);
+		
+		locacao.setDataLocacao(dataFormatada);
+		locacaoService.salvar(locacao);
+		
+		ModelAndView view = new ModelAndView();
+		view.setViewName("redirect:/exibeLocacoes");
+		
+		return view;
+		
+	}
+	
 	@RequestMapping("/exibeLocacoes")
 	public ModelAndView exibirLocacoes() {
 		
 		ModelAndView view = new ModelAndView();
 		view.setViewName("exibeLocacoes");
 		
-		view.addObject("locacoesList", locacaoService.buscaTodos());
+		view.addObject("locacoesListPF", locacaoService.buscaPorTipoCliente("PF"));
+		view.addObject("locacoesListPJ", locacaoService.buscaPorTipoCliente("PJ"));
 		
 		return view;
 		

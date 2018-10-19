@@ -80,9 +80,9 @@
 						aria-expanded="false"> Locação </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="locacaoClientePF">Realizar Locação ClientePF</a>
-							<a class="dropdown-item" href="#">Realizar Locação ClientePJ</a> 
+							<a class="dropdown-item" href="locacaoClientePJ">Realizar Locação ClientePJ</a> 
 							<a class="dropdown-item" href="exibeLocacoes">Exibir
-								Planos</a>
+								Locações</a>
 
 						</div></li>
 
