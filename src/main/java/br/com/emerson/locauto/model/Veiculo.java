@@ -33,7 +33,6 @@ public class Veiculo {
 	private String renavam;
 	private String modelo;
 	private String marca;
-	private Integer potencia;
 	private Integer ano;
 	private String cor;
 	private String tipoCombustivel;
@@ -73,13 +72,6 @@ public class Veiculo {
 		this.marca = marca;
 	}
 
-	public Integer getPotencia() {
-		return potencia;
-	}
-
-	public void setPotencia(Integer potencia) {
-		this.potencia = potencia;
-	}
 
 	public Integer getAno() {
 		return ano;

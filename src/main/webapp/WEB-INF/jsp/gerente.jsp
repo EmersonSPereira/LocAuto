@@ -9,6 +9,9 @@
 	href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <script src="<c:url value="/resources/js/jquery-3.3.1.min.js "/>"></script>
 <script src="<c:url value="/resources/js/bootstrap.js "/>"></script>
+
+<script src="<c:url value="/resources/js/validacao.js "/>"></script>
+
 </head>
 <body>
 
@@ -31,35 +34,43 @@
 
 			<div class="form-group">
 				<form:label path="nome">Nome:</form:label>
-				<form:input class="form-control" path="nome" />
+				<form:input required="true" class="form-control" path="nome"
+					maxlength="50" />
 			</div>
 			<div class="form-group">
 				<form:label path="cpf">CPF:</form:label>
-				<form:input class="form-control" path="cpf" />
+				<form:input required="true" name="cpf"
+					onKeyPress="MascaraCPF(this);" onblur="ValidarCPF(this);"
+					maxlength="14" class="form-control" path="cpf" />
 			</div>
 			<div class="form-group">
 				<form:label path="rg">RG:</form:label>
-				<form:input class="form-control" path="rg" />
+				<form:input required="true" class="form-control" path="rg"
+					placeholder="digite seu RG com '.' e '-' " />
 			</div>
 			<div class="form-group">
 				<form:label path="dataNascimento">Data de Nascimento:</form:label>
-				<form:input class="form-control" path="dataNascimento" />
+				<form:input type="date" required="true" class="form-control"
+					path="dataNascimento" />
 			</div>
 			<div class="form-group">
 				<form:label path="naturalidade">Naturalidade:</form:label>
-				<form:input class="form-control" path="naturalidade" />
+				<form:input required="true" class="form-control" path="naturalidade" maxlength="25" />
 			</div>
 			<div class="form-group">
 				<form:label path="endereco">Endereco:</form:label>
-				<form:input class="form-control" path="endereco" />
+				<form:input required="true" class="form-control" path="endereco" maxlength="80" />
 			</div>
 			<div class="form-group">
 				<form:label path="telefone">Telefone:</form:label>
-				<form:input class="form-control" path="telefone" />
+				<form:input required="true" name="telefone"
+					onkeypress="MascaraTelefone(this);" class="form-control"
+					path="telefone" maxlength="16" />
 			</div>
 			<div class="form-group">
 				<form:label path="email">Email:</form:label>
-				<form:input class="form-control" path="email" />
+				<form:input required="true" type="email" class="form-control"
+					path="email" />
 			</div>
 
 			<button type="submit" class="btn btn-success">Salvar</button>

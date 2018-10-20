@@ -31,44 +31,81 @@
 
 			<div class="form-group">
 				<form:label path="renavam">Renavam:</form:label>
-				<form:input class="form-control" path="renavam" />
+				<form:input required="true" class="form-control" path="renavam" />
 			</div>
 			<div class="form-group">
 				<form:label path="modelo">Modelo:</form:label>
-				<form:input class="form-control" path="modelo" />
+				<form:input required="true" class="form-control" path="modelo" />
 			</div>
 			<div class="form-group">
 				<form:label path="marca">Marca:</form:label>
-				<form:input class="form-control" path="marca" />
+				<form:input required="true" class="form-control" path="marca" />
 			</div>
-			<div class="form-group">
-				<form:label path="potencia">Potência:</form:label>
-				<form:input class="form-control" path="potencia" />
-			</div>
+
 			<div class="form-group">
 				<form:label path="ano">Ano:</form:label>
-				<form:input class="form-control" path="ano" />
+				<form:input required="true" class="form-control" path="ano"
+					placeholder="Ano com 4 digitos Ex: 2005" maxlength="4" />
 			</div>
 			<div class="form-group">
 				<form:label path="cor">Cor:</form:label>
-				<form:input class="form-control" path="cor" />
+				<form:input required="true" class="form-control" path="cor" />
 			</div>
+
 			<div class="form-group">
-				<form:label path="tipoCombustivel">Tipo Combustivel:</form:label>
-				<form:input class="form-control" path="tipoCombustivel" />
+				<form:label path="tipoCombustivel">Tipo Combustivél:</form:label>
+				<form:select path="tipoCombustivel" class="form-control">
+
+					<form:option value="Alcool">Alcool</form:option>
+					<form:option value="Gasolina">Gasolina</form:option>
+					<form:option value="Flex">Flex</form:option>
+
+				</form:select>
+
 			</div>
+
 			<div class="form-group">
 				<form:label path="agencia">Agência:</form:label>
-				<form:input class="form-control" path="agencia" />
+				<form:input required="true" class="form-control" path="agencia" />
 			</div>
+
 			<div class="form-group">
 				<form:label path="cilindradas">Cilindradas:</form:label>
-				<form:input class="form-control" path="cilindradas" />
+				<form:select path="cilindradas" class="form-control">
+
+					<form:option value="50">50CC</form:option>
+					<form:option value="100">100CC</form:option>
+					<form:option value="125">125CC</form:option>
+					<form:option value="150">150CC</form:option>
+					<form:option value="160">160CC</form:option>
+					<form:option value="190">190CC</form:option>
+					<form:option value="250">250CC</form:option>
+					<form:option value="300">300CC</form:option>
+					<form:option value="600">600CC</form:option>
+					<form:option value="750">750CC</form:option>
+					<form:option value="900">900CC</form:option>
+					<form:option value="1000">1000CC</form:option>
+					<form:option value="1100">1100CC</form:option>
+					<form:option value="1200">1200CC</form:option>
+
+
+
+				</form:select>
+
 			</div>
+			
+			
 			<div class="form-group">
 				<form:label path="freios">Freios:</form:label>
-				<form:input class="form-control" path="freios" />
+				<form:select path="freios" class="form-control">
+
+					<form:option value="Disco">Disco</form:option>
+					<form:option value="ABS">ABS</form:option>
+
+				</form:select>
+
 			</div>
+		
 			<button type="submit" class="btn btn-success">Salvar</button>
 
 		</form:form>

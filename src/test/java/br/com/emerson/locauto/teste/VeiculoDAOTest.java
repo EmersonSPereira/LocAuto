@@ -38,7 +38,6 @@ public class VeiculoDAOTest {
 		moto.setCor("Azul");
 		moto.setModelo("Titan");
 		moto.setAgencia("Campina Grande");
-		moto.setPotencia(75);
 		moto.setFreios("ABS");
 		moto.setCilindradas(160);
 		moto.setRenavam("545464646464");

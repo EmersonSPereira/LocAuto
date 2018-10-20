@@ -70,12 +70,11 @@
 					<th scope="col">Renavam</th>
 					<th scope="col">Modelo</th>
 					<th scope="col">Marca</th>
-					<th scope="col">Potência</th>
+					<th scope="col">Cilindradas</th>
 					<th scope="col">Ano</th>
 					<th scope="col">Cor</th>
 					<th scope="col">Tipo Combustivel</th>
 					<th scope="col">Agência</th>
-					<th scope="col">Cilindradas</th>
 					<th scope="col">Freios</th>
 
 					<th scope="col">Ação</th>
@@ -86,12 +85,11 @@
 						<td>${veiculo.renavam}</td>
 						<td>${veiculo.modelo}</td>
 						<td>${veiculo.marca}</td>
-						<td>${veiculo.potencia}</td>
+						<td>${veiculo.cilindradas}</td>
 						<td>${veiculo.ano}</td>
 						<td>${veiculo.cor}</td>
 						<td>${veiculo.tipoCombustivel}</td>
 						<td>${veiculo.agencia}</td>
-						<td>${veiculo.cilindradas}</td>
 						<td>${veiculo.freios}</td>
 						<td><a href="deleteVeiculo/${veiculo.id}"
 							class="badge badge-danger">delete</a>
