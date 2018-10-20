@@ -1,5 +1,7 @@
 package br.com.emerson.locauto.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -60,8 +62,31 @@ public class LocacaoController {
 	@RequestMapping(value = "/locacaoClientePF/salvar", method = RequestMethod.POST)
 	public ModelAndView salvarLocacao(@ModelAttribute("locacao") LocacaoClientePF locacao, BindingResult result) {
 		
+		/*
+		 * Aqui é que criada a data de locacão que eh o dia atual, em seguida eh convertida para o formato dd/mm/yyyy
+		 */
 		Date data = new Date();
 		String dataFormatada =  new SimpleDateFormat("dd/MM/yyyy").format(data);
+
+		/*
+		 * Aqui é convertida a data de devolucao da locacão que vem da view no formato "yyyy-mm-dd", 
+		 * em seguida eh convertida para o formato dd/mm/yyyy para poder ser salva no banco
+		 */
+		DateFormat formatUS = new SimpleDateFormat("yyyy-mm-dd");
+		
+		Date date = new Date();
+		try {
+			 date = formatUS.parse(locacao.getDataDevolucao());
+		} catch (ParseException e) {
+			System.out.println("A conversão falhou");
+			e.printStackTrace();
+		}
+		
+		DateFormat formatBR = new SimpleDateFormat("dd/mm/yyyy");
+		String dateFormated = formatBR.format(date);
+		
+		
+		locacao.setDataDevolucao(dateFormated);
 		
 		locacao.setDataLocacao(dataFormatada);
 		locacaoService.salvar(locacao);
@@ -94,6 +119,25 @@ public class LocacaoController {
 		
 		Date data = new Date();
 		String dataFormatada =  new SimpleDateFormat("dd/MM/yyyy").format(data);
+		
+		/*
+		 * Aqui é convertida a data de devolucao da locacão que vem da view no formato "yyyy-mm-dd", 
+		 * em seguida eh convertida para o formato dd/mm/yyyy para poder ser salva no banco
+		 */
+		DateFormat formatUS = new SimpleDateFormat("yyyy-mm-dd");
+		
+		Date date = new Date();
+		try {
+			 date = formatUS.parse(locacao.getDataDevolucao());
+		} catch (ParseException e) {
+			System.out.println("A conversão falhou");
+			e.printStackTrace();
+		}
+		
+		DateFormat formatBR = new SimpleDateFormat("dd/mm/yyyy");
+		String dateFormated = formatBR.format(date);
+		
+		locacao.setDataDevolucao(dateFormated);
 		
 		locacao.setDataLocacao(dataFormatada);
 		locacaoService.salvar(locacao);

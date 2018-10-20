@@ -1,8 +1,5 @@
 package br.com.emerson.locauto.model;
 
-
-
-
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -13,10 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+
 /**
  * @author Emerson Sousa
  * 
- * Esta classe representa os Planos de locação na aplicação.
+ *         Esta classe representa os Planos de locação na aplicação.
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -30,6 +28,7 @@ public class Planos {
 	private String plano;
 	private String veiculos;
 	private Integer cilindradas;
+	private Integer valorDiaria;
 	@Column(insertable = false, updatable = false)
 	private String tipo;
 
@@ -57,8 +56,6 @@ public class Planos {
 		this.veiculos = veiculos;
 	}
 
-	
-
 	public Integer getCilindradas() {
 		return cilindradas;
 	}
@@ -73,6 +70,14 @@ public class Planos {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public Integer getValorDiaria() {
+		return valorDiaria;
+	}
+
+	public void setValorDiaria(Integer valorDiaria) {
+		this.valorDiaria = valorDiaria;
 	}
 
 }

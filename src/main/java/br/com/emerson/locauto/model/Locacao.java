@@ -42,6 +42,8 @@ public class Locacao {
 
 	private String dataDevolucao;
 	
+	private String nivelDoTanque;
+	
 	@Column(insertable = false, updatable = false)
 	private String cliente;
 
@@ -107,6 +109,14 @@ public class Locacao {
 
 	public void setCliente(String cliente) {
 		this.cliente = cliente;
+	}
+
+	public String getNivelDoTanque() {
+		return nivelDoTanque;
+	}
+
+	public void setNivelDoTanque(String nivelDoTanque) {
+		this.nivelDoTanque = nivelDoTanque;
 	}
 
 	

@@ -11,6 +11,57 @@
 <script src="<c:url value="/resources/js/jquery-3.3.1.min.js "/>"></script>
 <script src="<c:url value="/resources/js/bootstrap.js "/>"></script>
 
+<script type="text/javascript">
+function mascara_data(data){ 
+    var mydata = ''; 
+    mydata = mydata + data; 
+    if (mydata.length == 2){ 
+        mydata = mydata + '/'; 
+        document.forms[0].data.value = mydata; 
+    } 
+    if (mydata.length == 5){ 
+        mydata = mydata + '/'; 
+        document.forms[0].data.value = mydata; 
+    } 
+    if (mydata.length == 10){ 
+        verifica_data(); 
+    } 
+} 
+ 
+function verifica_data () { 
+
+  dia = (document.forms[0].data.value.substring(0,2)); 
+  mes = (document.forms[0].data.value.substring(3,5)); 
+  ano = (document.forms[0].data.value.substring(6,10)); 
+
+  situacao = ""; 
+  // verifica o dia valido para cada mes 
+  if ((dia < 01)||(dia < 01 || dia > 30) && (  mes == 04 || mes == 06 || mes == 09 || mes == 11 ) || dia > 31) { 
+      situacao = "falsa"; 
+  } 
+
+  // verifica se o mes e valido 
+  if (mes < 01 || mes > 12 ) { 
+      situacao = "falsa"; 
+  } 
+
+  // verifica se e ano bissexto 
+  if (mes == 2 && ( dia < 01 || dia > 29 || ( dia > 28 && (parseInt(ano / 4) != ano / 4)))){ 
+      situacao = "falsa"; 
+  } 
+
+  if (document.forms[0].data.value == "") { 
+      situacao = "falsa"; 
+  } 
+
+  if (situacao == "falsa") { 
+      alert("Data inválida!"); 
+      document.forms[0].data.focus(); 
+  } 
+} 
+ 
+	
+</script>
 <title>Locação Carro</title>
 </head>
 <body>
@@ -30,7 +81,7 @@
 		<div class="container">
 			<div class="form-row">
 				<div class="form-group col-md-6">
-				
+
 					<label>Escolha um Cliente</label>
 
 					<form:select class="form-control" path="clientePF.id">
@@ -43,8 +94,8 @@
 
 
 				<div class="form-group col-md-6">
-				
-					<label >Escolha um Locador</label>
+
+					<label>Escolha um Locador</label>
 					<form:select class="form-control" path="locador.id">
 						<c:forEach items="${listaLocadores }" var="locador">
 							<form:option value="${locador.id}">${locador.nome}</form:option>
@@ -57,8 +108,8 @@
 
 		<div class="container">
 			<div class="form-group">
-			
-				<label >Escolha um Veículo</label>
+
+				<label>Escolha um Veículo</label>
 				<form:select class="form-control" path="veiculo.id">
 					<c:forEach items="${listaVeiculos }" var="veiculo">
 						<form:option value="${veiculo.id}">Tipo Veículo: ${veiculo.tipo} , Modelo:
@@ -66,27 +117,27 @@
 					</c:forEach>
 
 				</form:select>
-				<label >M = Motocicleta C = Carro</label>
+				<label>M = Motocicleta C = Carro</label>
 			</div>
 		</div>
 
 		<div class="container">
 			<div class="form-group">
-				<label >Escolha um Plano</label>
+				<label>Escolha um Plano</label>
 				<form:select class="form-control" path="plano.id">
 					<c:forEach items="${listaPlanos }" var="plano">
 						<form:option value="${plano.id}">Tipo: ${plano.tipo} Veículo: ${plano.veiculos}</form:option>
 					</c:forEach>
 
 				</form:select>
-				<label >PC = Plano Carro, PM = Plano Motocicleta</label>
+				<label>PC = Plano Carro, PM = Plano Motocicleta</label>
 			</div>
 		</div>
 
 		<div class="container">
 			<div class="form-group">
 				<form:label path="seguro">Escolha um Seguro</form:label>
-				<form:select path="seguro" class="form-control" >
+				<form:select path="seguro" class="form-control">
 
 					<form:option value="Nenhum">Nenhum</form:option>
 					<form:option value="Parcial">Cobertura parcial : arranhões, amassados leves,
@@ -97,12 +148,35 @@
 
 			</div>
 		</div>
+
+		<div class="container">
+			<div class="form-group">
+				<form:label path="nivelDoTanque">Escolha um Seguro</form:label>
+				<form:select path="nivelDoTanque" class="form-control">
+
+					<form:option value="Reserva">Reserva</form:option>
+					<form:option value="Meio Tanque">Meio Tanque</form:option>
+					<form:option value="Tanque Cheio">Tanque Cheio</form:option>
+
+				</form:select>
+
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="form-group">
+
+				<form:label path="dataDevolucao">Data de devolucao:</form:label>
+
+				<form:input type = "date" class="form-control" path="dataDevolucao" />
+			</div>
+
+		</div>
+
 		<div class="container">
 			<button type="submit" class="btn btn-success">Realizar
 				Locação</button>
-			<br>
-			<br>
-			<br>
+			<br> <br> <br>
 		</div>
 	</form:form>
 

@@ -32,6 +32,7 @@
 					<th scope="col">Seguro</th>
 					<th scope="col">Data de Locação</th>
 					<th scope="col">Data de Entrega</th>
+					<th scope="col">Nível do Tanque</th>
 					<th scope="col">Ação</th>
 
 				</tr>
@@ -45,19 +46,18 @@
 						<td>${locacao.seguro}</td>
 						<td>${locacao.dataLocacao}</td>
 						<td>${locacao.dataDevolucao}</td>
-
+						<td>${locacao.nivelDoTanque}</td>
 						<td><a href="#" class="badge badge-success">Finalizar
-								Locação</a><br>
-						<br> <a href="#" class="badge badge-danger">Cancelar
-								Locacão</a></td>
+								Locação</a><br> <br> <a href="#"
+							class="badge badge-danger">Cancelar Locacão</a></td>
 					</tr>
 				</c:forEach>
 			</table>
 		</div>
 
 	</c:if>
-	
-	
+
+
 	<div class="container">
 		<h1>Locacações Cliente PJ</h1>
 	</div>
@@ -72,6 +72,7 @@
 					<th scope="col">Seguro</th>
 					<th scope="col">Data de Locação</th>
 					<th scope="col">Data de Entrega</th>
+					<th scope="col">Nível do Tanque</th>
 					<th scope="col">Ação</th>
 
 				</tr>
@@ -85,11 +86,11 @@
 						<td>${locacao.seguro}</td>
 						<td>${locacao.dataLocacao}</td>
 						<td>${locacao.dataDevolucao}</td>
+						<td>${locacao.nivelDoTanque}</td>
 
 						<td><a href="#" class="badge badge-success">Finalizar
-								Locação</a><br>
-						<br> <a href="#" class="badge badge-danger">Cancelar
-								Locacão</a></td>
+								Locação</a><br> <br> <a href="#"
+							class="badge badge-danger">Cancelar Locacão</a></td>
 					</tr>
 				</c:forEach>
 			</table>

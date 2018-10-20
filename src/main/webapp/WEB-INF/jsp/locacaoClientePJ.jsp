@@ -97,6 +97,31 @@
 
 			</div>
 		</div>
+		
+		<div class="container">
+			<div class="form-group">
+				<form:label path="nivelDoTanque">Escolha um Seguro</form:label>
+				<form:select path="nivelDoTanque" class="form-control">
+
+					<form:option value="Reserva">Reserva</form:option>
+					<form:option value="Meio Tanque">Meio Tanque</form:option>
+					<form:option value="Tanque Cheio">Tanque Cheio</form:option>
+
+				</form:select>
+
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="form-group">
+
+				<form:label path="dataDevolucao">Data de devolucao:</form:label>
+
+				<form:input type = "date" class="form-control" path="dataDevolucao" />
+			</div>
+
+		</div>
+		
 		<div class="container">
 			<button type="submit" class="btn btn-success">Realizar
 				Locação</button>
