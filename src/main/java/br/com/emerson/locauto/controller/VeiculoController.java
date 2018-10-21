@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.emerson.locauto.model.Carro;
 import br.com.emerson.locauto.model.Motocicleta;
+import br.com.emerson.locauto.service.AgenciaService;
 import br.com.emerson.locauto.service.VeiculoService;
 
 /**
@@ -25,6 +26,9 @@ public class VeiculoController {
 
 	@Autowired
 	private VeiculoService veiculoService;
+	
+	@Autowired
+	private AgenciaService agenciaService;
 
 	/**
 	 * Esse método trata a requisição "/veiculoC, adiciona um objeto planoC na view
@@ -37,6 +41,7 @@ public class VeiculoController {
 	public String veiculoC(Map<String, Object> map) {
 
 		map.put("veiculoC", new Carro());
+		map.put("agenciasList", agenciaService.buscaTodos());
 
 		return "carro";
 	}
@@ -68,6 +73,8 @@ public class VeiculoController {
 	public String veiculoM(Map<String, Object> map) {
 
 		map.put("veiculoM", new Motocicleta());
+		map.put("agenciasList", agenciaService.buscaTodos());
+
 
 		return "motocicleta";
 	}

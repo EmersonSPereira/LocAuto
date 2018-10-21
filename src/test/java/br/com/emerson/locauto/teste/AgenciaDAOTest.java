@@ -14,7 +14,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import br.com.emerson.locauto.model.Agencia;
+import br.com.emerson.locauto.model.Gerente;
 import br.com.emerson.locauto.service.AgenciaService;
+import br.com.emerson.locauto.service.FuncionarioService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-servlet-test.xml"})
@@ -22,22 +24,34 @@ public class AgenciaDAOTest {
 
 	@Autowired
 	private AgenciaService dao;
+	
+	@Autowired
+	private FuncionarioService funcionarioService;
+	
 	private Agencia ag1,ag2;
 	private List<Agencia> agencias;
+	private Gerente gerente;
 
 	@Before
 	public void setUp() throws Exception {
 		
+		gerente = new Gerente();
+		gerente.setCpf("888.999.777-53");
+		gerente.setNome("Emerson");
+		gerente.setEmail("gerente@gmail.com");
+		
+		Integer id = funcionarioService.salvar(gerente).getId();
+		
 		ag1 = new Agencia();
 		ag1.setCnpj("546545465451");
-		ag1.setGerenteResponsavel("Emerson Sousa ");
+		ag1.setGerenteResponsavel(gerente);
 		ag1.setInscEstadual("2152165");
 		ag1.setTelefone("839999999");
 		;
 		
 		ag2 = new Agencia();
 		ag2.setCnpj("546545465451");
-		ag2.setGerenteResponsavel("Emerson Sousa ");
+		ag2.setGerenteResponsavel(gerente);
 		ag2.setInscEstadual("2152165");
 		ag2.setTelefone("839999999");
 		
@@ -56,8 +70,8 @@ public class AgenciaDAOTest {
 
 		// Testando edição da agencia
 		ag1.setId(1);// setando o id da agencia a ser editada
-		ag1.setGerenteResponsavel("Emerson");
-		assertEquals("Emerson", dao.salvar(ag1).getGerenteResponsavel());
+		ag1.setGerenteResponsavel(gerente);
+		assertEquals("Emerson", dao.salvar(ag1).getGerenteResponsavel().getNome());
 
 	}
 	@Test

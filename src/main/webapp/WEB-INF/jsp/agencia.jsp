@@ -39,30 +39,38 @@
 					path="cnpj" maxlength="18" onblur="ValidarCNPJ(agencia.cnpj)" />
 			</div>
 
+				<div class="form-group">
 
-			<div class="form-group">
-				<form:label path="GerenteResponsavel">Gerente Responsavél:</form:label>
+						<label>Escolha o Gerente responsavél pela Agência</label>
 
-				<form:input required="true" class="form-control"
-					path="GerenteResponsavel" />
+						<form:select class="form-control" path="GerenteResponsavel.id">
+							<c:forEach items="${listaGerentes }" var="gerente">
+								<form:option value="${gerente.id}">${gerente.nome}</form:option>
+							</c:forEach>
 
-			</div>
-			<div class="form-group">
-				<form:label path="inscEstadual">Inscrição Estadual:</form:label>
+						</form:select>
 
-				<form:input required="true" class="form-control" path="inscEstadual"
-					placeholder="digite a incrição estadual com '. , - , / '" maxlength="20"/>
 
-			</div>
-			<div class="form-group">
-				<form:label path="telefone">Telefone:</form:label>
 
-				<form:input required="true" name="telefone"
-					onkeypress="MascaraTelefone(this);" class="form-control"
-					path="telefone" maxlength="16" />
+				</div>
+				<div class="form-group">
+					<form:label path="inscEstadual">Inscrição Estadual:</form:label>
 
-			</div>
-			<button type="submit" class="btn btn-success">Salvar</button>
+					<form:input required="true" class="form-control"
+						path="inscEstadual"
+						placeholder="digite a incrição estadual com '. , - , / '"
+						maxlength="20" />
+
+				</div>
+				<div class="form-group">
+					<form:label path="telefone">Telefone:</form:label>
+
+					<form:input required="true" name="telefone"
+						onkeypress="MascaraTelefone(this);" class="form-control"
+						path="telefone" maxlength="16" />
+
+				</div>
+				<button type="submit" class="btn btn-success">Salvar</button>
 		</form:form>
 
 	</div>

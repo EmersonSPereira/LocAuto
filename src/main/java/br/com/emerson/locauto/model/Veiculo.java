@@ -20,6 +20,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -36,81 +37,66 @@ public class Veiculo {
 	private Integer ano;
 	private String cor;
 	private String tipoCombustivel;
-	private String agencia;
+	
+	@OneToOne
+	private Agencia agencia;
 	@Column(insertable = false, updatable = false)
 	private String tipo;
-
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 	public String getRenavam() {
 		return renavam;
 	}
-
 	public void setRenavam(String renavam) {
 		this.renavam = renavam;
 	}
-
 	public String getModelo() {
 		return modelo;
 	}
-
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
-
 	public String getMarca() {
 		return marca;
 	}
-
 	public void setMarca(String marca) {
 		this.marca = marca;
 	}
-
-
 	public Integer getAno() {
 		return ano;
 	}
-
 	public void setAno(Integer ano) {
 		this.ano = ano;
 	}
-
 	public String getCor() {
 		return cor;
 	}
-
 	public void setCor(String cor) {
 		this.cor = cor;
 	}
-
 	public String getTipoCombustivel() {
 		return tipoCombustivel;
 	}
-
 	public void setTipoCombustivel(String tipoCombustivel) {
 		this.tipoCombustivel = tipoCombustivel;
 	}
-
-	public String getAgencia() {
+	public Agencia getAgencia() {
 		return agencia;
 	}
-
-	public void setAgencia(String agencia) {
+	public void setAgencia(Agencia agencia) {
 		this.agencia = agencia;
 	}
-
 	public String getTipo() {
 		return tipo;
 	}
-
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+
+	
 
 }

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.emerson.locauto.model.Agencia;
 import br.com.emerson.locauto.service.AgenciaService;
+import br.com.emerson.locauto.service.FuncionarioService;
 
 /**
  * @author Emerson Sousa
@@ -28,6 +29,9 @@ public class AgenciaController {
 	@Autowired
 	private AgenciaService agenciaService;
 	
+	@Autowired
+	private FuncionarioService funcionarioService;
+	
 	/**
 	 * Esse método trata a requisição "/agencia, adicioa um objeto agencia na view e por fim
 	 * retorna a view "agencia"
@@ -39,6 +43,7 @@ public class AgenciaController {
 	public String agencia(Map<String, Object> map) {
 
 		map.put("agencia", new Agencia());
+		map.put("listaGerentes", funcionarioService.buscaPorTipo("G"));
 		
 
 		return "agencia";
@@ -98,6 +103,7 @@ public class AgenciaController {
 		ModelAndView view = new ModelAndView();
 		view.setViewName("agencia");
 		Agencia agencia = agenciaService.buscaPorId(agenciaId);
+		view.addObject("listaGerentes", funcionarioService.buscaPorTipo("G"));
 		view.addObject("agencia", agencia);
 		
 

@@ -1,15 +1,15 @@
 package br.com.emerson.locauto.model;
 
-
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 /**
  * @author Emerson Sousa
  * 
- * Esta classe representa a Agência na aplicação.
+ *         Esta classe representa a Agência na aplicação.
  */
 @Entity
 public class Agencia {
@@ -20,14 +20,14 @@ public class Agencia {
 	private String cnpj;
 	private String inscEstadual;
 	private String telefone;
-	private String GerenteResponsavel;
+	
+	@OneToOne
+	private Gerente GerenteResponsavel;
+	private String localidade;
 
 	public Integer getId() {
 		return id;
-	}
 
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getCnpj() {
@@ -54,12 +54,23 @@ public class Agencia {
 		this.telefone = telefone;
 	}
 
-	public String getGerenteResponsavel() {
+	public Gerente getGerenteResponsavel() {
 		return GerenteResponsavel;
 	}
 
-	public void setGerenteResponsavel(String gerenteResponsavel) {
+	public void setGerenteResponsavel(Gerente gerenteResponsavel) {
 		GerenteResponsavel = gerenteResponsavel;
 	}
 
+	public String getLocalidade() {
+		return localidade;
+	}
+
+	public void setLocalidade(String localidade) {
+		this.localidade = localidade;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 }

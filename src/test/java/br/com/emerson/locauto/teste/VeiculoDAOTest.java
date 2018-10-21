@@ -13,11 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import br.com.emerson.locauto.model.Agencia;
 import br.com.emerson.locauto.model.Carro;
-import br.com.emerson.locauto.model.Cliente;
+import br.com.emerson.locauto.model.Gerente;
 import br.com.emerson.locauto.model.Motocicleta;
-import br.com.emerson.locauto.model.Planos;
 import br.com.emerson.locauto.model.Veiculo;
+import br.com.emerson.locauto.service.AgenciaService;
+import br.com.emerson.locauto.service.FuncionarioService;
 import br.com.emerson.locauto.service.VeiculoService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -26,18 +28,44 @@ public class VeiculoDAOTest {
 
 	@Autowired
 	private VeiculoService dao;
+	
+	@Autowired
+	AgenciaService agenciaService;
+	
+	@Autowired
+	FuncionarioService funcionarioService;
 	private Motocicleta moto;
 	private Carro carro;
 	private List<Veiculo> veiculos;
+	private Gerente gerente;
+	private Agencia agencia;
 
 	@Before
 	public void setUp() throws Exception {
+		
+		gerente = new Gerente();
+		gerente.setCpf("888.999.777-53");
+		gerente.setNome("Emerson");
+		gerente.setEmail("gerente@gmail.com");
+		gerente.setId(1);
+		
+		funcionarioService.salvar(gerente);
+		
+		
+		
+		agencia = new Agencia();
+		agencia.setCnpj("999.9999.9999/59");
+		agencia.setGerenteResponsavel(gerente);
+		agencia.setId(1);
+		
+		agenciaService.salvar(agencia);
+		
 
 		moto = new Motocicleta();
 		moto.setMarca("Honda");
 		moto.setCor("Azul");
 		moto.setModelo("Titan");
-		moto.setAgencia("Campina Grande");
+		moto.setAgencia(agencia);
 		moto.setFreios("ABS");
 		moto.setCilindradas(160);
 		moto.setRenavam("545464646464");
@@ -51,7 +79,7 @@ public class VeiculoDAOTest {
 		carro.setPotencia(65);
 		carro.setRenavam("546546545");
 		carro.setAcessorios("Ar, Trava, Direestáestáo");
-		carro.setAgencia("Campina Grande");
+		carro.setAgencia(agencia);
 		carro.setTipoCombustivel("Gasolina");
 		carro.setAno(2010);
 		veiculos = null;
@@ -59,14 +87,17 @@ public class VeiculoDAOTest {
 
 	@Test
 	public void testSalvar() {
-
+/*
+ * Melhorar esse teste=======================================
+ */
 		// teste salvar
 		assertEquals(moto, dao.salvar(moto));
 
 		// teste editar veiculo
-		moto.setId(1); // setando id do veiculo a ser editado
+		moto.setId(13); // setando id do veiculo a ser editado
 		moto.setCor("Amarela");
-		assertEquals("Amarela", dao.salvar(moto).getCor());
+		dao.salvar(moto);
+		assertEquals("Amarela", dao.buscaPorId(13).getCor());
 	}
 
 	@Test

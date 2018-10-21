@@ -49,9 +49,23 @@
 			</div>
 			<div class="form-group">
 				<form:label path="cor">Cor:</form:label>
-				<form:input required="true" class="form-control" path="cor" />
-			</div>
+				<form:select path="cor" class="form-control">
 
+					<form:option value="Prata">Prata</form:option>
+					<form:option value="Preto">Preto</form:option>
+					<form:option value="Cinza">Cinza</form:option>
+					<form:option value="Branco">Branco</form:option>
+					<form:option value="Vermelho">Vermelho</form:option>
+					<form:option value="Azul">Azul</form:option>
+					<form:option value="Verde">Verde</form:option>
+					<form:option value="Bege">Bege</form:option>
+					<form:option value="Amarelo">Amarelo</form:option>
+					<form:option value="Laranja">Laranja</form:option>
+					<form:option value="Marrom">Marrom</form:option>
+					
+				</form:select>
+
+			</div>
 			<div class="form-group">
 				<form:label path="tipoCombustivel">Tipo Combustivél:</form:label>
 				<form:select path="tipoCombustivel" class="form-control">

@@ -35,7 +35,7 @@
 					<tr>
 						<td>${agencia.cnpj}</td>
 						<td>${agencia.inscEstadual}</td>
-						<td>${agencia.gerenteResponsavel}</td>
+						<td>${agencia.gerenteResponsavel.nome}</td>
 						<td>${agencia.telefone}</td>
 						<td><a href="delete/${agencia.id}" class="badge badge-danger">delete</a>
 						<a href="editar/${agencia.id}" class="badge badge-warning">editar</a>
