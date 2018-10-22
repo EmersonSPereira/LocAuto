@@ -31,7 +31,7 @@
 
 			<div class="form-group">
 				<form:label path="renavam">Renavam:</form:label>
-				<form:input required="true" class="form-control" path="renavam" />
+				<form:input required="true" class="form-control" path="renavam"  />
 			</div>
 			<div class="form-group">
 				<form:label path="modelo">Modelo:</form:label>
@@ -39,9 +39,22 @@
 			</div>
 			<div class="form-group">
 				<form:label path="marca">Marca:</form:label>
-				<form:input required="true" class="form-control" path="marca" />
-			</div>
+				<form:select path="marca" class="form-control">
 
+					<form:option value="Honda">Honda</form:option>
+					<form:option value="Yamaha">Yamaha</form:option>
+					<form:option value="Suzuki">Suzuki</form:option>
+					<form:option value="Dafra">Dafra</form:option>
+					<form:option value="Shineray">Shineray</form:option>
+					<form:option value="Kawasaki">Kawasaki</form:option>
+					<form:option value="Harley Davidson">Harley Davidson</form:option>
+					<form:option value="Traxx">Traxx</form:option>
+
+
+				</form:select>
+
+			</div>
+			
 			<div class="form-group">
 				<form:label path="ano">Ano:</form:label>
 				<form:input required="true" class="form-control" path="ano"
@@ -62,7 +75,7 @@
 					<form:option value="Amarelo">Amarelo</form:option>
 					<form:option value="Laranja">Laranja</form:option>
 					<form:option value="Marrom">Marrom</form:option>
-					
+
 				</form:select>
 
 			</div>
@@ -79,9 +92,17 @@
 			</div>
 
 			<div class="form-group">
-				<form:label path="agencia">Agência:</form:label>
-				<form:input required="true" class="form-control" path="agencia" />
+
+				<label>Escolha uma Agência:</label>
+
+				<form:select class="form-control" path="agencia.id">
+					<c:forEach items="${agenciasList }" var="agencia">
+						<form:option value="${agencia.id}">${agencia.localidade}</form:option>
+					</c:forEach>
+				</form:select>
 			</div>
+
+
 
 			<div class="form-group">
 				<form:label path="cilindradas">Cilindradas:</form:label>
@@ -107,8 +128,8 @@
 				</form:select>
 
 			</div>
-			
-			
+
+
 			<div class="form-group">
 				<form:label path="freios">Freios:</form:label>
 				<form:select path="freios" class="form-control">
@@ -119,9 +140,8 @@
 				</form:select>
 
 			</div>
-		
-			<button type="submit" class="btn btn-success">Salvar</button>
 
+			<button type="submit" class="btn btn-success">Salvar</button>
 		</form:form>
 
 	</div>

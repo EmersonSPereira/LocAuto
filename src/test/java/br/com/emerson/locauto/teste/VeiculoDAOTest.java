@@ -67,7 +67,7 @@ public class VeiculoDAOTest {
 		moto.setModelo("Titan");
 		moto.setAgencia(agencia);
 		moto.setFreios("ABS");
-		moto.setCilindradas(160);
+		moto.setCilindradas("160");
 		moto.setRenavam("545464646464");
 		moto.setTipoCombustivel("Flex");
 		moto.setAno(1995);
@@ -76,7 +76,7 @@ public class VeiculoDAOTest {
 		carro.setMarca("Fiat");
 		carro.setModelo("uno");
 		carro.setCor("Vermelho");
-		carro.setPotencia(65);
+		carro.setPotencia("65");
 		carro.setRenavam("546546545");
 		carro.setAcessorios("Ar, Trava, Direestáestáo");
 		carro.setAgencia(agencia);

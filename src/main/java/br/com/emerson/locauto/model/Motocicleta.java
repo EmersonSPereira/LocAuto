@@ -6,21 +6,21 @@ import javax.persistence.Entity;
 /**
  * @author Emerson Sousa
  * 
- * Esta classe representa um veículo do tipo motocicleta na aplicação.
+ *         Esta classe representa um veículo do tipo motocicleta na aplicação.
  */
 
 @Entity
 @DiscriminatorValue(value = "M")
 public class Motocicleta extends Veiculo {
 
-	private Integer cilindradas;
+	private String cilindradas;
 	private String freios;
 
-	public Integer getCilindradas() {
+	public String getCilindradas() {
 		return cilindradas;
 	}
 
-	public void setCilindradas(Integer cilindradas) {
+	public void setCilindradas(String cilindradas) {
 		this.cilindradas = cilindradas;
 	}
 

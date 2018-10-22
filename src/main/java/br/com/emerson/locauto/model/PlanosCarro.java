@@ -14,6 +14,17 @@ import javax.persistence.Entity;
 public class PlanosCarro extends Planos {
 	
 	private String acessorios;
+	private String potencia;
+	
+	
+
+	public String getPotencia() {
+		return potencia;
+	}
+
+	public void setPotencia(String potencia) {
+		this.potencia = potencia;
+	}
 
 	public String getAcessorios() {
 		return acessorios;

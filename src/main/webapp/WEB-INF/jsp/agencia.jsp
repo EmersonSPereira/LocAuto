@@ -39,38 +39,45 @@
 					path="cnpj" maxlength="18" onblur="ValidarCNPJ(agencia.cnpj)" />
 			</div>
 
-				<div class="form-group">
+			<div class="form-group">
 
-						<label>Escolha o Gerente responsavél pela Agência</label>
+				<label>Escolha o Gerente responsavél pela Agência</label>
 
-						<form:select class="form-control" path="GerenteResponsavel.id">
-							<c:forEach items="${listaGerentes }" var="gerente">
-								<form:option value="${gerente.id}">${gerente.nome}</form:option>
-							</c:forEach>
+				<form:select class="form-control" path="GerenteResponsavel.id">
+					<c:forEach items="${listaGerentes }" var="gerente">
+						<form:option value="${gerente.id}">${gerente.nome}</form:option>
+					</c:forEach>
 
-						</form:select>
+				</form:select>
 
 
 
-				</div>
-				<div class="form-group">
-					<form:label path="inscEstadual">Inscrição Estadual:</form:label>
+			</div>
+			<div class="form-group">
+				<form:label path="inscEstadual">Inscrição Estadual:</form:label>
 
-					<form:input required="true" class="form-control"
-						path="inscEstadual"
-						placeholder="digite a incrição estadual com '. , - , / '"
-						maxlength="20" />
+				<form:input required="true" class="form-control" path="inscEstadual"
+					placeholder="digite a incrição estadual com '. , - , / '"
+					maxlength="20" />
 
-				</div>
-				<div class="form-group">
-					<form:label path="telefone">Telefone:</form:label>
+			</div>
+			<div class="form-group">
+				<form:label path="telefone">Telefone:</form:label>
 
-					<form:input required="true" name="telefone"
-						onkeypress="MascaraTelefone(this);" class="form-control"
-						path="telefone" maxlength="16" />
+				<form:input required="true" name="telefone"
+					onkeypress="MascaraTelefone(this);" class="form-control"
+					path="telefone" maxlength="16" />
 
-				</div>
-				<button type="submit" class="btn btn-success">Salvar</button>
+			</div>
+
+			<div class="form-group">
+				<form:label path="telefone">Localidade:</form:label>
+
+				<form:input required="true" name="localidade" class="form-control"
+					path="localidade" maxlength="70" placeholder="digite a cidade e número da unidade, ex: São Paulo, Unidade 3"/>
+
+			</div>
+			<button type="submit" class="btn btn-success">Salvar</button>
 		</form:form>
 
 	</div>

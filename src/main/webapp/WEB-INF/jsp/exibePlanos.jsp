@@ -26,8 +26,9 @@
 				<tr>
 					<th scope="col">Plano</th>
 					<th scope="col">Veiculos</th>
-					<th scope="col">Cilindradas</th>
+					<th scope="col">Potência</th>
 					<th scope="col">Acessórios</th>
+					<th scope="col">Valor Diária em R$</th>
 					<th scope="col">&nbsp;</th>
 				</tr>
 				<c:forEach items="${listaPlanosC}" var="plano">
@@ -35,12 +36,15 @@
 					<tr>
 						<td>${plano.plano}</td>
 						<td>${plano.veiculos}</td>
-						<td>${plano.cilindradas}</td>
+						<td>${plano.potencia}</td>
 						<td>${plano.acessorios}</td>
+						<td>${plano.valorDiaria}</td>
 
-						<td><a href="deletePlano/${plano.id}"
-							class="badge badge-danger">delete</a> <a
-							href="editarPlanoC/${plano.id}" class="badge badge-warning">editar</a></td>
+
+						<td><a href="editarPlanoC/${plano.id}"
+							class="badge badge-warning">editar</a><br> <a
+							href="deletePlano/${plano.id}" class="badge badge-danger">delete</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -48,7 +52,7 @@
 	</c:if>
 
 	<div class="container">
-		
+
 		<h1>Planos Motocicleta</h1>
 	</div>
 	<c:if test="${!empty listaPlanosM}">
@@ -59,6 +63,7 @@
 					<th scope="col">Plano</th>
 					<th scope="col">Veiculos</th>
 					<th scope="col">Cilindradas</th>
+					<th scope="col">Valor Diária em R$</th>
 					<th scope="col">&nbsp;</th>
 				</tr>
 				<c:forEach items="${listaPlanosM}" var="plano">
@@ -67,10 +72,13 @@
 						<td>${plano.plano}</td>
 						<td>${plano.veiculos}</td>
 						<td>${plano.cilindradas}</td>
+						<td>${plano.valorDiaria}</td>
 
-						<td><a href="deletePlano/${plano.id}"
-							class="badge badge-danger">delete</a> <a
-							href="editarPlanoM/${plano.id}" class="badge badge-warning">editar</a></td>
+
+						<td><a
+							href="editarPlanoM/${plano.id}" class="badge badge-warning">editar</a><br>
+							<a href="deletePlano/${plano.id}"
+							class="badge badge-danger">delete</a> </td>
 
 					</tr>
 				</c:forEach>

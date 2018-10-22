@@ -45,8 +45,9 @@
 						<td>${funcionario.telefone}</td>
 						<td>${funcionario.email}</td>
 						
-						<td><a href="deleteFuncionario/${funcionario.id}" class="badge badge-danger">delete</a>
-						<a href="editarFuncionarioG/${funcionario.id}" class="badge badge-warning">editar</a></td>
+						<td><a href="editarFuncionarioG/${funcionario.id}" class="badge badge-warning">editar</a><br>
+						<a href="deleteFuncionario/${funcionario.id}" class="badge badge-danger">delete</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -85,8 +86,9 @@
 						<td>${funcionario.telefone}</td>
 						<td>${funcionario.email}</td>
 
-						<td><a href="deleteFuncionario/${funcionario.id}" class="badge badge-danger">delete</a>
-						<a href="editarFuncionarioL/${funcionario.id}" class="badge badge-warning">editar</a></td>
+						<td><a href="editarFuncionarioL/${funcionario.id}" class="badge badge-warning">editar</a><br>
+						<a href="deleteFuncionario/${funcionario.id}" class="badge badge-danger">delete</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>

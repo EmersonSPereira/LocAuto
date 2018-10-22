@@ -42,6 +42,7 @@ public class Veiculo {
 	private Agencia agencia;
 	@Column(insertable = false, updatable = false)
 	private String tipo;
+	
 	public Integer getId() {
 		return id;
 	}

@@ -45,13 +45,12 @@
 						<td>${veiculo.ano}</td>
 						<td>${veiculo.cor}</td>
 						<td>${veiculo.tipoCombustivel}</td>
-						<td>${veiculo.agencia}</td>
+						<td>${veiculo.agencia.localidade}</td>
 						<td>${veiculo.acessorios}</td>
 
-						<td><a href="deleteVeiculo/${veiculo.id}"
-							class="badge badge-danger">delete</a>
-							<a href="editarVeiculoC/${veiculo.id}"
-							class="badge badge-warning">editar</a></td>
+						<td><a href="editarVeiculoC/${veiculo.id}"
+							class="badge badge-warning">editar</a><br> <a
+							href="deleteVeiculo/${veiculo.id}" class="badge badge-danger">delete</a></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -89,12 +88,12 @@
 						<td>${veiculo.ano}</td>
 						<td>${veiculo.cor}</td>
 						<td>${veiculo.tipoCombustivel}</td>
-						<td>${veiculo.agencia}</td>
+						<td>${veiculo.agencia.localidade}</td>
 						<td>${veiculo.freios}</td>
-						<td><a href="deleteVeiculo/${veiculo.id}"
-							class="badge badge-danger">delete</a>
-							<a href="editarVeiculoM/${veiculo.id}"
-							class="badge badge-warning">editar</a></td></td>
+						<td><a href="editarVeiculoM/${veiculo.id}"
+							class="badge badge-warning">editar</a><br> <a
+							href="deleteVeiculo/${veiculo.id}" class="badge badge-danger">delete</a></td>
+
 					</tr>
 				</c:forEach>
 			</table>

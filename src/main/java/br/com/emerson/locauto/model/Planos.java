@@ -27,7 +27,6 @@ public class Planos {
 	private Integer id;
 	private String plano;
 	private String veiculos;
-	private Integer cilindradas;
 	private Integer valorDiaria;
 	@Column(insertable = false, updatable = false)
 	private String tipo;
@@ -56,13 +55,6 @@ public class Planos {
 		this.veiculos = veiculos;
 	}
 
-	public Integer getCilindradas() {
-		return cilindradas;
-	}
-
-	public void setCilindradas(Integer cilindradas) {
-		this.cilindradas = cilindradas;
-	}
 
 	public String getTipo() {
 		return tipo;

@@ -16,7 +16,7 @@
 	<div>
 		<jsp:include page="navBar.jsp" />
 	</div>
-	
+
 	<div class="container">
 		<h1>Agências</h1>
 	</div>
@@ -28,7 +28,9 @@
 					<th scope="col">Inscrição Estadual</th>
 					<th scope="col">Gerente Responsavel</th>
 					<th scope="col">Telefone</th>
+					<th scope="col">Localidade</th>
 					<th scope="col">Ação</th>
+
 				</tr>
 
 				<c:forEach items="${agenciaList}" var="agencia">
@@ -37,8 +39,11 @@
 						<td>${agencia.inscEstadual}</td>
 						<td>${agencia.gerenteResponsavel.nome}</td>
 						<td>${agencia.telefone}</td>
-						<td><a href="delete/${agencia.id}" class="badge badge-danger">delete</a>
-						<a href="editar/${agencia.id}" class="badge badge-warning">editar</a>
+						<td>${agencia.localidade}</td>
+						<td>
+						<a href="editar/${agencia.id}" class="badge badge-warning">editar</a><br>
+						<a href="delete/${agencia.id}" class="badge badge-danger">delete</a>
+							
 						</td>
 					</tr>
 				</c:forEach>

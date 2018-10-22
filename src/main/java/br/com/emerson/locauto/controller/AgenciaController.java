@@ -33,7 +33,7 @@ public class AgenciaController {
 	private FuncionarioService funcionarioService;
 	
 	/**
-	 * Esse método trata a requisição "/agencia, adicioa um objeto agencia na view e por fim
+	 * Esse método trata a requisição "/agencia, adiciona um objeto agencia na view e por fim
 	 * retorna a view "agencia"
 	 * @param map
 	 * @return

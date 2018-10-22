@@ -45,10 +45,10 @@
 						<td>${cliente.telefone}</td>
 						<td>${cliente.email}</td>
 
-						<td><a href="deleteCliente/${cliente.id}"
-							class="badge badge-danger">delete</a>
-							<a href="editarClientePF/${cliente.id}"
-							class="badge badge-warning">editar</a></td>
+						<td><a href="editarClientePF/${cliente.id}"
+							class="badge badge-warning">editar</a><br> <a
+							href="deleteCliente/${cliente.id}" class="badge badge-danger">delete</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -84,11 +84,11 @@
 						<td>${cliente.telefone}</td>
 						<td>${cliente.email}</td>
 
-						<td><a href="deleteCliente/${cliente.id}"
-							class="badge badge-danger">delete</a>
-							<a href="editarClientePJ/${cliente.id}"
-							class="badge badge-warning">editar</a></td>
-						
+						<td><a
+							href="editarClientePJ/${cliente.id}" class="badge badge-warning">editar</a><br>
+							<a href="deleteCliente/${cliente.id}"
+							class="badge badge-danger">delete</a> </td>
+
 					</tr>
 				</c:forEach>
 			</table>

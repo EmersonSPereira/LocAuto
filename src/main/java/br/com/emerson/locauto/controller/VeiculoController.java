@@ -124,6 +124,8 @@ public class VeiculoController {
 		ModelAndView view = new ModelAndView();
 		view.setViewName("carro");
 		view.addObject("veiculoC", veiculoService.buscaPorId(veiculoId));
+		view.addObject("agenciasList", agenciaService.buscaTodos());
+
 
 		return view;
 	}
@@ -142,6 +144,8 @@ public class VeiculoController {
 		ModelAndView view = new ModelAndView();
 		view.setViewName("motocicleta");
 		view.addObject("veiculoM", veiculoService.buscaPorId(veiculoId));
+		view.addObject("agenciasList", agenciaService.buscaTodos());
+
 
 		return view;
 	}

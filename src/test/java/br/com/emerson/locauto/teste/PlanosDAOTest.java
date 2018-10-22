@@ -38,13 +38,12 @@ public class PlanosDAOTest {
 		planoCarroA = new PlanosCarro();
 		planoCarroA.setPlano("A");
 		planoCarroA.setVeiculos("Celta, Pálio, Gol ");
-		planoCarroA.setCilindradas(1000);
+
 		planoCarroA.setAcessorios("Sem AC - 2P");
 
 		planoCarroB = new PlanosCarro();
 		planoCarroB.setPlano("B");
 		planoCarroB.setVeiculos("Celta, Pálio, Gol, Sandero ");
-		planoCarroB.setCilindradas(1000);
 		planoCarroB.setAcessorios("AC - 2P/4P");
 
 		planoMotoA = new PlanosMoto();
@@ -58,6 +57,10 @@ public class PlanosDAOTest {
 		planoMotoB.setCilindradas(250);
 
 	}
+	
+	/*
+	 * corrigir teste***********************************************************************
+	 */
 
 	@Test
 	public void testSalvar() {
@@ -67,12 +70,12 @@ public class PlanosDAOTest {
 
 		// setando o id do plano a ser editado
 		planoCarroA.setId(1);
-		planoCarroA.setCilindradas(2000);
+
 
 		// test editar plano
 		Integer cilindradas = 2000;
 		planoCarroA = (PlanosCarro) dao.salvar(planoCarroA);
-		assertEquals(cilindradas, planoCarroA.getCilindradas());
+		
 
 	}
 
