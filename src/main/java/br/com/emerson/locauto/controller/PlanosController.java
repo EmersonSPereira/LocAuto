@@ -177,42 +177,49 @@ public class PlanosController {
 		planoCarroA.setVeiculos("Celta, Pálio, Gol ");
 		planoCarroA.setPotencia("1.0");
 		planoCarroA.setAcessorios("Sem AC - 2P");
+		planoCarroA.setValorDiaria(100);
 
 		planoCarroB = new PlanosCarro();
 		planoCarroB.setPlano("B");
 		planoCarroB.setVeiculos("Celta, Pálio, Gol, Sandero ");
 		planoCarroB.setPotencia("1.0");
 		planoCarroB.setAcessorios("AC - 2P/4P");
+		planoCarroB.setValorDiaria(120);
 
 		planoCarroC = new PlanosCarro();
 		planoCarroC.setPlano("C");
 		planoCarroC.setVeiculos("Corsa, Prisma, Sandero ");
 		planoCarroC.setPotencia("1.4");
 		planoCarroC.setAcessorios("AC - DH - 2P/4P");
+		planoCarroC.setValorDiaria(130);
 
 		planoCarroD = new PlanosCarro();
 		planoCarroD.setPlano("D");
 		planoCarroD.setVeiculos("Clio, Logan, Sandero, Fox ");
 		planoCarroD.setPotencia("1.6");
 		planoCarroD.setAcessorios("AC - DH - VE - 2P/4P");
+		planoCarroD.setValorDiaria(200);
 
 		planoCarroE = new PlanosCarro();
 		planoCarroE.setPlano("E");
 		planoCarroE.setVeiculos("Corsa, Stilo, Prisma ");
 		planoCarroE.setPotencia("1.8");
 		planoCarroE.setAcessorios("Corsa, Stilo, Prisma");
+		planoCarroE.setValorDiaria(220);
 
 		planoCarroF = new PlanosCarro();
 		planoCarroF.setPlano("F");
 		planoCarroF.setVeiculos("Corsa, Vectra, Astra ");
 		planoCarroF.setPotencia("2.0");
 		planoCarroF.setAcessorios("AC - DH - VE - TE - 4P");
+		planoCarroF.setValorDiaria(240);
 
 		planoCarroG = new PlanosCarro();
 		planoCarroG.setPlano("G");
 		planoCarroG.setVeiculos("Corolla XEI, Civic XLS, Jetta ");
 		planoCarroG.setPotencia("1.8");
 		planoCarroG.setAcessorios("Corolla XEI, Civic XLS, Jetta ");
+		planoCarroG.setValorDiaria(280);
 
 		planosService.salvar(planoCarroA);
 		planosService.salvar(planoCarroB);

@@ -65,7 +65,7 @@
 	
 	
 	<div class="container">
-		<h1>Locacações Cliente PJ</h1>
+		<h4>Locacações Cliente PJ</h4>
 	</div>
 	<c:if test="${!empty locacoesListPJ}">
 		<div class="container">

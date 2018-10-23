@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 /**
  * @author Emerson Sousa
  * 
- *         Esta classe representa o Cliente na aplicação.
+ *         Esta classe representa uma Locacão na aplicação.
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -44,8 +44,14 @@ public class Locacao {
 	
 	private String nivelDoTanque;
 	
-	@Column(insertable = false, updatable = false)
-	private String cliente;
+	private String situacao;
+	
+	private Integer valorTotalLocacao;
+	
+	@Column(insertable=false, updatable=false)
+    private String cliente;
+	
+	
 
 	public Integer getId() {
 		return id;
@@ -103,13 +109,6 @@ public class Locacao {
 		this.dataDevolucao = dataDevolucao;
 	}
 
-	public String getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(String cliente) {
-		this.cliente = cliente;
-	}
 
 	public String getNivelDoTanque() {
 		return nivelDoTanque;
@@ -118,6 +117,24 @@ public class Locacao {
 	public void setNivelDoTanque(String nivelDoTanque) {
 		this.nivelDoTanque = nivelDoTanque;
 	}
+
+	public String getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
+	}
+
+	public Integer getValorTotalLocacao() {
+		return valorTotalLocacao;
+	}
+
+	public void setValorTotalLocacao(Integer valorTotalLocacao) {
+		this.valorTotalLocacao = valorTotalLocacao;
+	}
+	
+	
 
 	
 }

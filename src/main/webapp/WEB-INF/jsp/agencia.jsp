@@ -82,10 +82,7 @@
 
 	</div>
 
-	<div class="container">
-		<a href="exibeAgencias" class="badge badge-primary">Exibe Agências</a>
-
-	</div>
+	
 
 
 
