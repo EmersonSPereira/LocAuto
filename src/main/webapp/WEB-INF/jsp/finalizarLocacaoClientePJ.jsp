@@ -10,16 +10,10 @@
 	href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <script src="<c:url value="/resources/js/jquery-3.3.1.min.js "/>"></script>
 <script src="<c:url value="/resources/js/bootstrap.js "/>"></script>
-<script src="<c:url value="/resources/js/bootbox.min.js "/>"></script>
-<script src="<c:url value="/resources/js/sweetalert.min.js "/>"></script>
 
-
-<script type="text/javascript">
-function redirecionar(){
-	swal("Finalizado com Sucesso", "Você será redirecionado para Locações", "success")
-	.then((value) =>{
-		window.location = 'finalizar/${locacao.id }';
-	});
+<script  type="text/javascript">
+function alerta() {
+  alert("A locação será finalizada e você será direcionado para Locações")
 }
 </script>
 
@@ -39,9 +33,7 @@ function redirecionar(){
 
 	<div class="container">
 
-		<h2>Dados da Locação:</h2>
-		<br>
-		<br>
+		<h2>Dados da Locação:</h2><br><br>
 	</div>
 
 	<div class="container">
@@ -81,8 +73,7 @@ function redirecionar(){
 
 		<div class="form-group">
 
-			<b><label>Plano:</label></b> <label>${plano.plano}:
-				${plano.veiculos}</label>
+			<b><label>Plano:</label></b> <label>${plano.plano}: ${plano.veiculos}</label>
 
 
 		</div>
@@ -119,22 +110,18 @@ function redirecionar(){
 
 
 
-		<h2>Dados para pagamento:</h2>
-		<br>
-		<br>
-
+		<h2>Dados para pagamento:</h2><br><br>
+		
 		<div class="form-group">
 
-			<b><label>Valor Unitário Diária: </label></b> <label>${plano.valorDiaria}
-				R$</label>
+			<b><label>Valor Unitário Diária: </label></b> <label>${plano.valorDiaria} R$</label>
 
 
 		</div>
 
 		<div class="form-group">
 
-			<b><label>Valor Diarias: </label></b> <label>${valorDiarias}
-				R$</label>
+			<b><label>Valor Diarias: </label></b> <label>${valorDiarias} R$</label>
 
 
 		</div>
@@ -159,8 +146,8 @@ function redirecionar(){
 
 
 		<h2>
-
-			<button class="btn btn-success" onclick="redirecionar();">Finalizar</button>
+			<a href="finalizar/${locacao.id }"
+				class="badge badge-primary" onClick="alerta()">Finalizar</a>
 		</h2>
 
 

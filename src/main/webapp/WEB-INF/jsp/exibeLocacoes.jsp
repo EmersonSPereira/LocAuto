@@ -36,7 +36,7 @@
 					<th scope="col">Valor Total</th>
 					<th scope="col">Situação</th>
 					<th scope="col">Ação</th>
-					
+
 
 				</tr>
 
@@ -78,6 +78,7 @@
 					<th scope="col">Data de Locação</th>
 					<th scope="col">Data de Entrega</th>
 					<th scope="col">Nível do Tanque</th>
+					<th scope="col">Situação</th>
 					<th scope="col">Ação</th>
 
 				</tr>
@@ -92,6 +93,7 @@
 						<td>${locacao.dataLocacao}</td>
 						<td>${locacao.dataDevolucao}</td>
 						<td>${locacao.nivelDoTanque}</td>
+						<td>${locacao.situacao}</td>
 
 						<td><a href="#" class="badge badge-success">Finalizar
 								Locação</a><br> <br> <a href="#"

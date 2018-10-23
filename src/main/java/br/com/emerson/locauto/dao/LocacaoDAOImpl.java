@@ -52,13 +52,13 @@ private final Logger logger = LoggerFactory.getLogger(LocacaoDAOImpl.class);
 	 */
 	public Locacao buscaPorId(Integer id) {
 
-		LocacaoClientePF locacao = null;
+		Locacao locacao = null;
 		
 		logger.info("Iniciando transação para buscar registro da Locacao por id");
 		
 		try {
 			
-			locacao  =  sessionFactory.getCurrentSession().find(LocacaoClientePF.class, id);
+			locacao  =  sessionFactory.getCurrentSession().find(Locacao.class, id);
 			
 			logger.info("Locacao encontrada com sucesso");
 			

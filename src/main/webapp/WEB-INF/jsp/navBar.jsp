@@ -33,7 +33,7 @@
 					aria-expanded="false"> Cliente </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="/LocAuto/clientePF">Cadastrar
-							Cliente PF</a> <a class="dropdown-item" href="/LocAuto/clientePF">Cadastrar
+							Cliente PF</a> <a class="dropdown-item" href="/LocAuto/clientePJ">Cadastrar
 							Cliente PJ</a> <a class="dropdown-item" href="/LocAuto/exibeClientes">Exibir
 							Clientes</a>
 

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.emerson.locauto.model.ClientePF;
+import br.com.emerson.locauto.model.ClientePJ;
 import br.com.emerson.locauto.model.Locacao;
 import br.com.emerson.locauto.model.LocacaoClientePF;
 import br.com.emerson.locauto.model.LocacaoClientePJ;
@@ -187,11 +188,19 @@ public class LocacaoController {
 		String dataFormatada = new SimpleDateFormat("dd/MM/yyyy").format(dataLocacao);
 
 		/*
+		 * Aqui é que criada a data de locacão que eh o dia atual, em seguida eh
+		 * convertida para o formato dd/mm/yyyy
+		 */
+		Date dataRetirada = new Date();
+		String dataFormatadaPJ = new SimpleDateFormat("dd/MM/yyyy").format(dataRetirada);
+
+		/*
 		 * Aqui é convertida a data de devolucao da locacão que vem da view no formato
 		 * "yyyy-mm-dd", em seguida eh convertida para o formato dd/mm/yyyy para poder
 		 * ser salva no banco
 		 */
-		DateFormat formatUS = new SimpleDateFormat("yyyy-mm-dd");
+
+		DateFormat formatUS = new SimpleDateFormat("yyyy-mm-dd");// formato para exibicao do cliente
 
 		Date dataDevolucao = new Date();
 		try {
@@ -201,16 +210,73 @@ public class LocacaoController {
 			e.printStackTrace();
 		}
 
+		/*
+		 * Formatando data para realizar o calculo de diárias com framework jude-time
+		 */
+
+		DateFormat formatUSCalc = new SimpleDateFormat("yyyy-MM-dd");// formato usado para calculo
+
+		Date dataDevolucaoCalc = new Date();
+		try {
+			dataDevolucaoCalc = formatUSCalc.parse(locacao.getDataDevolucao());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		DateFormat formatBR = new SimpleDateFormat("dd/mm/yyyy");
 		String dateFormated = formatBR.format(dataDevolucao);
 
 		locacao.setDataDevolucao(dateFormated);
 
-		locacao.setDataLocacao(dataFormatada);
-		locacaoService.salvar(locacao);
+		locacao.setDataLocacao(dataFormatadaPJ);
+	
+
+		// utilizando o frameword jude-time para calcular os dias que se passaram entre
+		// uma data e outra
+
+		DateTime dtEntrada = new DateTime(dataRetirada);
+		DateTime dtDevolucao = new DateTime(dataDevolucaoCalc);
+
+		System.out.println("==================================datas====================================");
+		System.out.println("Data entrada: " + dtEntrada + "Data Saida: " + dtDevolucao);
+
+		int diarias = calculaDiasLocacao(dtEntrada, dtDevolucao);
+
+		// recuperando cliente, locador,veiculo e plano
+
+		ClientePJ cliente = (ClientePJ) clienteService.buscaPorId(locacao.getClientePJ().getId());
+		Locador locador = (Locador) funcionarioService.buscaPorId(locacao.getLocador().getId());
+		Planos plano = planosService.buscaPorId(locacao.getPlano().getId());
+		Veiculo veiculo = veiculoService.buscaPorId(locacao.getVeiculo().getId());
+
+		// recuperando valor da diaria do plano
+		int valorPlano = plano.getValorDiaria();
+
+		// Calculando Valores
+		int valorDiarias = diarias * valorPlano;
+
+		int valorSeguro = calcularValorSeguro(valorDiarias, locacao.getSeguro());
+
+		int valorTotal = valorDiarias + valorSeguro;
+
+		// recuperando nome do usuario e do locador
 
 		ModelAndView view = new ModelAndView();
-		view.setViewName("redirect:/exibeLocacoes");
+		view.setViewName("finalizarLocacaoClientePJ");
+		view.addObject("locacao", locacao);
+		view.addObject("diarias", diarias);
+		view.addObject("valorDiarias", valorDiarias);
+		view.addObject("valorSeguro", valorSeguro);
+		view.addObject("valorTotal", valorTotal);
+		view.addObject("nomeCliente", cliente.getNomeFantasia());
+		view.addObject("nomeLocador", locador.getNome());
+		view.addObject("plano", plano);
+		view.addObject("modeloVeiculo", veiculo.getModelo());
+		
+		//atualizando 
+		locacao.setValorTotalLocacao(valorTotal);
+		locacaoService.salvar(locacao);
 
 		return view;
 
@@ -222,6 +288,22 @@ public class LocacaoController {
 		ModelAndView view = new ModelAndView();
 		view.setViewName("redirect:/exibeLocacoes");
 		Locacao locacao = locacaoService.buscaPorId(id);
+
+		locacao.setSituacao("Pago");
+		
+		locacaoService.salvar(locacao);
+
+		return view;
+
+	}
+	
+	@RequestMapping("/locacaoClientePJ/finalizar/{locacaoID}")
+	public ModelAndView finalizarLocacaoClientePJ(@PathVariable("locacaoID") Integer id) {
+
+		ModelAndView view = new ModelAndView();
+		view.setViewName("redirect:/exibeLocacoes");
+		LocacaoClientePJ locacao = (LocacaoClientePJ) locacaoService.buscaPorId(id);
+		System.out.println("=================================="+id);
 
 		locacao.setSituacao("Pago");
 		
