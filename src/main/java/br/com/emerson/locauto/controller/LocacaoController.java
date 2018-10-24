@@ -121,10 +121,13 @@ public class LocacaoController {
 		DateTime dtEntrada = new DateTime(dataRetirada);
 		DateTime dtDevolucao = new DateTime(dataDevolucaoCalc);
 
-		System.out.println("==================================datas====================================");
-		System.out.println("Data entrada: " + dtEntrada + "Data Saida: " + dtDevolucao);
+	
 
-		int diarias = calculaDiasLocacao(dtEntrada, dtDevolucao);
+		/*
+		 * adicionado um pois ó método conta os dias entre as datas exemplo: entre os dias 24 e 26 contém um dia, 
+		 * porém são duas diárias por isso é adicionado 1 a quantidade de diárias
+		 */
+		int diarias = calculaDiasLocacao(dtEntrada, dtDevolucao) + 1;
 
 		// recuperando cliente, locador,veiculo e plano
 
@@ -241,7 +244,11 @@ public class LocacaoController {
 		System.out.println("==================================datas====================================");
 		System.out.println("Data entrada: " + dtEntrada + "Data Saida: " + dtDevolucao);
 
-		int diarias = calculaDiasLocacao(dtEntrada, dtDevolucao);
+		/*
+		 * adicionado um pois ó método conta os dias entre as datas exemplo: entre os dias 24 e 26 contém um dia, 
+		 * porém são duas diárias por isso é adicionado 1 a quantidade de diárias
+		 */
+		int diarias = calculaDiasLocacao(dtEntrada, dtDevolucao) + 1;
 
 		// recuperando cliente, locador,veiculo e plano
 

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.emerson.locauto.model.Agencia;
 import br.com.emerson.locauto.service.AgenciaService;
 import br.com.emerson.locauto.service.FuncionarioService;
+import br.com.emerson.locauto.service.VeiculoService;
 
 /**
  * @author Emerson Sousa
@@ -31,6 +32,9 @@ public class AgenciaController {
 	
 	@Autowired
 	private FuncionarioService funcionarioService;
+	
+	@Autowired
+	private VeiculoService veiculoService;
 	
 	/**
 	 * Esse método trata a requisição "/agencia, adiciona um objeto agencia na view e por fim
@@ -85,11 +89,26 @@ public class AgenciaController {
 	 * @return
 	 */
 	@RequestMapping("/delete/{agenciaId}")
-	public String deleteAgencia(@PathVariable("agenciaId") Integer agenciaId) {
+	public ModelAndView deleteAgencia(@PathVariable("agenciaId") Integer agenciaId) {
 
-		agenciaService.deleta(agenciaId);
+		ModelAndView view = new ModelAndView();
+		view.setViewName("exibeAgencias");
+		view.addObject("agenciaList", agenciaService.buscaTodos());
+		
+		
+		
+		
+		if(veiculoService.buscaTodos().isEmpty()) {
+			agenciaService.deleta(agenciaId);
+			view.setViewName("redirect:exibeAgencias");			
+		}else {
+			view.addObject("status","falha");
+			view.setViewName("falhaDeletarAgencia");
+		}
+		
+		
 
-		return "redirect:/exibeAgencias";
+		return view;
 	}
 	
 	/**

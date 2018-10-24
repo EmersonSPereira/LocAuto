@@ -7,9 +7,32 @@
 <meta charset="ISO-8859-1">
 <title>Agências</title>
 
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <script src="<c:url value="resources/js/jquery-3.3.1.min.js "/>"></script>
 <script src="<c:url value="resources/js/bootstrap.js "/>"></script>
+<script src="<c:url value="/resources/js/sweetalert.min.js "/>"></script>
+
+<script type="text/javascript">
+function redirecionar(id){
+	var url = 'delete/'+ id;
+	swal({
+		  title: "Deseja Mesmo Deletar uma Agência?",
+		  text: "A Agência pode estár associada a um ou mais veículo e a operação pode falhar",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  window.location = url ;
+		  } else {
+		    swal("Operação Cancelada");
+		  }
+		});
+}
+</script>
+
 </head>
 <body>
 
@@ -20,6 +43,8 @@
 	<div class="container">
 		<h1>Agências</h1>
 	</div>
+	
+
 	<c:if test="${!empty agenciaList}">
 		<div class="container">
 			<table class="table table-striped table-dark">
@@ -40,10 +65,11 @@
 						<td>${agencia.gerenteResponsavel.nome}</td>
 						<td>${agencia.telefone}</td>
 						<td>${agencia.localidade}</td>
-						<td>
-						<a href="editar/${agencia.id}" class="badge badge-warning">editar</a><br>
-						<a href="delete/${agencia.id}" class="badge badge-danger">delete</a>
-							
+						<td><a href="editar/${agencia.id}"
+							class="badge badge-warning">editar</a><br> <a
+							href="delete/${agencia.id}" class="badge badge-danger">delete</a>
+							<button class="btn btn-danger" onclick="redirecionar(1);">Deletar</button>
+
 						</td>
 					</tr>
 				</c:forEach>
@@ -53,11 +79,7 @@
 	</c:if>
 
 
-	<div class="container">
-		<a href="agencia" class="badge badge-primary">Cadastro Agência</a> <a
-			href="/LocAuto/" class="badge badge-primary">Home</a>
 
-	</div>
 
 </body>
 </html>

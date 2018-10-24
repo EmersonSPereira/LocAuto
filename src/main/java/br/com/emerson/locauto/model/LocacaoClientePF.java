@@ -3,6 +3,9 @@ package br.com.emerson.locauto.model;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 /**
  * 
  * @author Emerson

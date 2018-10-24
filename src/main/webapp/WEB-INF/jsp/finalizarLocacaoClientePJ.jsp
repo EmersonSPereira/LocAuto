@@ -10,10 +10,16 @@
 	href="<c:url value="/resources/css/bootstrap.min.css"/>">
 <script src="<c:url value="/resources/js/jquery-3.3.1.min.js "/>"></script>
 <script src="<c:url value="/resources/js/bootstrap.js "/>"></script>
+<script src="<c:url value="/resources/js/sweetalert.min.js "/>"></script>
 
-<script  type="text/javascript">
-function alerta() {
-  alert("A locação será finalizada e você será direcionado para Locações")
+
+
+<script type="text/javascript">
+function redirecionar(){
+	swal("Finalizado com Sucesso", "Você será redirecionado para Locações", "success")
+	.then((value) =>{
+		window.location = 'finalizar/${locacao.id }';
+	});
 }
 </script>
 
@@ -146,8 +152,7 @@ function alerta() {
 
 
 		<h2>
-			<a href="finalizar/${locacao.id }"
-				class="badge badge-primary" onClick="alerta()">Finalizar</a>
+			<button class="btn btn-success" onclick="redirecionar();">Finalizar</button>
 		</h2>
 
 
