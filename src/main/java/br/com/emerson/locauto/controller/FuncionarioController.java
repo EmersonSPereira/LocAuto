@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.emerson.locauto.model.Agencia;
 import br.com.emerson.locauto.model.Gerente;
+import br.com.emerson.locauto.model.Locacao;
 import br.com.emerson.locauto.model.Locador;
+import br.com.emerson.locauto.service.AgenciaService;
 import br.com.emerson.locauto.service.FuncionarioService;
+import br.com.emerson.locauto.service.LocacaoService;
 
 /**
  * @author Emerson Sousa
@@ -26,6 +30,12 @@ public class FuncionarioController {
 
 	@Autowired
 	FuncionarioService funcionarioService;
+	
+	@Autowired
+	AgenciaService agenciaService;
+	
+	@Autowired
+	LocacaoService locacaoService;
 	
 	/**
 	 * Esse método trata a requisição "/funcionarioG, adiciona um objeto funcionarioPF na view  e por fim
@@ -89,11 +99,52 @@ public class FuncionarioController {
 	 * @return
 	 */
 	@RequestMapping("/deleteFuncionario/{funcionarioId}")
-	public String deleteFuncionario(@PathVariable("funcionarioId") Integer funcionarioId) {
+	public ModelAndView deleteFuncionario(@PathVariable("funcionarioId") Integer funcionarioId) {
+	
+		ModelAndView view = new ModelAndView();
+		
+		String tipoFuncionario = funcionarioService.buscaPorId(funcionarioId).getTipo();
+		if(tipoFuncionario.equals("G")) {
+			for(Agencia agencia : agenciaService.buscaTodos()) {
+				Integer idGerenteResponsalvel = agencia.getGerenteResponsavel().getId();
+				if(idGerenteResponsalvel==funcionarioId) {
+					view.setViewName("falhaDeletar");
+					view.addObject("alertTitulo", "Falha ao deletar Gerente");
+					view.addObject("alertCorpo", "Não foi possível deletar este gerente, ele é responsavél por uma"
+							+ " agencia, desvincule este gerente da agencia para poder deletalo");
+					view.addObject("location", "/LocAuto/exibeFuncionarios");
+				}else {
+					funcionarioService.deleta(funcionarioId);
+					view.setViewName("sucessoDeletar");			
+					view.addObject("alertTitulo", "Sucessso ao deletar Gerente");
+					view.addObject("alertCorpo", "O Gerente foi deletado com sucesso da base de dados");
+					view.addObject("location", "/LocAuto/exibeFuncionarios");
+					
+				}
+			}
+			}else {
+				for(Locacao locacao : locacaoService.buscaTodos()) {
+					Integer idLocadorLocacao = locacao.getLocador().getId();
+					if(idLocadorLocacao==funcionarioId) {
+						
+						view.setViewName("falhaDeletar");
+						view.addObject("alertTitulo", "Falha ao deletar Locador");
+						view.addObject("alertCorpo", "Não foi possível deletar este Locador, ele está associado a uma locação");
+						view.addObject("location", "/LocAuto/exibeFuncionarios");
+					}else {
+						
+						funcionarioService.deleta(funcionarioId);
+						view.setViewName("sucessoDeletar");			
+						view.addObject("alertTitulo", "Sucessso ao deletar Locador");
+						view.addObject("alertCorpo", "O Locador foi deletado com sucesso da base de dados");
+						view.addObject("location", "/LocAuto/exibeFuncionarios");
+					}
+				}
+			}
 
-		funcionarioService.deleta(funcionarioId);
+		
 
-		return "redirect:/exibeFuncionarios";
+		return view;
 	}
 	
 	/**

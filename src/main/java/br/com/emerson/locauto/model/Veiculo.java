@@ -20,7 +20,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.ManyToAny;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -38,7 +44,8 @@ public class Veiculo {
 	private String cor;
 	private String tipoCombustivel;
 	
-	@OneToOne
+	@ManyToOne(cascade= javax.persistence.CascadeType.MERGE)
+	@JoinColumn(name="agencia_id")
 	private Agencia agencia;
 	@Column(insertable = false, updatable = false)
 	private String tipo;

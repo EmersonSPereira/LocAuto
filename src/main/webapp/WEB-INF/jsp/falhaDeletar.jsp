@@ -13,26 +13,21 @@
 <script src="<c:url value="resources/js/bootstrap.js "/>"></script>
 <script src="<c:url value="/resources/js/sweetalert.min.js "/>"></script>
 
-<script type="text/javascript">
-function redirecionar(id){
-	var url = 'delete/'+ id;
-	
-}
-</script>
+
 
 </head>
 <body>
 
 <script type="text/javascript">
 swal({
-	  title: "Falha ao deletar Agência",
-	  text: "Não foi possível deletar a Agência ela pode estar associada a um ou mais veículos",
+	  title: "${alertTitulo}",
+	  text: "${alertCorpo}",
 	  icon: "error",
 	  dangerMode: true,
 	})
 	.then((willDelete) => {
 	  if (willDelete) {
-		  window.location = '/LocAuto/exibeAgencias' ;
+		  window.location = '${location}' ;
 	    
 	  } else {
 	    swal("Your imaginary file is safe!");

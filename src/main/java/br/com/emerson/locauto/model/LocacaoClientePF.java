@@ -16,7 +16,7 @@ import org.hibernate.annotations.CascadeType;
 public class LocacaoClientePF extends Locacao{
 
 	@ManyToOne
-	private ClientePF clientePF;
+	ClientePF clientePF;
 
 	public ClientePF getClientePF() {
 		return clientePF;
@@ -27,5 +27,6 @@ public class LocacaoClientePF extends Locacao{
 	}
 	
 	
+
 
 }

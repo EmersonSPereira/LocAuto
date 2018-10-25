@@ -4,18 +4,20 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 /**
  * 
- * @author Emerson
- *Essta classe representa uma locação para um clientePF na aplicação
+ * @author Emerson Essta classe representa uma locação para um clientePF na
+ *         aplicação
  */
 @Entity
 @DiscriminatorValue("PJ")
 public class LocacaoClientePJ extends Locacao {
-	
-	
+
 	@ManyToOne
-	private ClientePJ clientePJ;
+	ClientePJ clientePJ;
 
 	public ClientePJ getClientePJ() {
 		return clientePJ;
@@ -24,8 +26,5 @@ public class LocacaoClientePJ extends Locacao {
 	public void setClientePJ(ClientePJ clientePJ) {
 		this.clientePJ = clientePJ;
 	}
-	
-	
-	
 
 }

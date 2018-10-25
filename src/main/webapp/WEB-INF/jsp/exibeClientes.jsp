@@ -10,6 +10,69 @@
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <script src="<c:url value="resources/js/jquery-3.3.1.min.js "/>"></script>
 <script src="<c:url value="resources/js/bootstrap.js "/>"></script>
+<script src="<c:url value="/resources/js/sweetalert.min.js "/>"></script>
+
+
+
+<script type="text/javascript">
+function redirecionar(id){
+	var url = 'deleteCliente/'+ id;
+	swal({
+		  title: "Deseja Mesmo Deletar este Cliente?",
+		  text: "Este Cliente pode estar associado a uma locação e a operação pode falhar",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  window.location = url ;
+		  } else {
+		    swal("Operação Cancelada");
+		  }
+		});
+}
+</script>
+<script>
+function redirecionarEditarPF(id){
+	var url = 'editarClientePF/'+ id;
+	swal({
+		  title: "Deseja Mesmo Editar este Cliente?",
+		  text: "Ao clicar em ok você será direcionado para edição.",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  window.location = url ;
+		  } else {
+		    swal("Operação Cancelada");
+		  }
+		});
+}
+</script>
+<script>
+function redirecionarEditarPJ(id){
+	var url = 'editarClientePJ/'+ id;
+	swal({
+		  title: "Deseja Mesmo Editar este Cliente?",
+		  text: "Ao clicar em ok você será direcionado para edição.",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  window.location = url ;
+		  } else {
+		    swal("Operação Cancelada");
+		  }
+		});
+}
+</script>
+
+
 </head>
 <body>
 
@@ -45,9 +108,12 @@
 						<td>${cliente.telefone}</td>
 						<td>${cliente.email}</td>
 
-						<td><a href="editarClientePF/${cliente.id}"
-							class="badge badge-warning">editar</a><br> <a
-							href="deleteCliente/${cliente.id}" class="badge badge-danger">delete</a>
+						<td>
+							<button class="btn btn-warning btn-sm"
+								onclick="redirecionarEditarPF(${cliente.id});">&nbspEditar&nbsp </button><br><br>
+							<button class="btn btn-danger btn-sm"
+								onclick="redirecionar(${cliente.id});">Deletar</button>
+
 						</td>
 					</tr>
 				</c:forEach>
@@ -84,10 +150,12 @@
 						<td>${cliente.telefone}</td>
 						<td>${cliente.email}</td>
 
-						<td><a
-							href="editarClientePJ/${cliente.id}" class="badge badge-warning">editar</a><br>
-							<a href="deleteCliente/${cliente.id}"
-							class="badge badge-danger">delete</a> </td>
+						<td>
+							<button class="btn btn-warning btn-sm"
+								onclick="redirecionarEditarPF(${cliente.id});">Editar</button>
+							<button class="btn btn-danger btn-sm"
+								onclick="redirecionar(${cliente.id});">Deletar</button>
+						</td>
 
 					</tr>
 				</c:forEach>

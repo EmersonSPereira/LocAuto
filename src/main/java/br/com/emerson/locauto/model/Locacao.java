@@ -11,6 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  * @author Emerson Sousa
@@ -35,6 +39,9 @@ public class Locacao {
 
 	@ManyToOne
 	private Planos plano;
+	
+	
+
 
 	private String Seguro;
 
@@ -132,6 +139,15 @@ public class Locacao {
 
 	public void setValorTotalLocacao(Integer valorTotalLocacao) {
 		this.valorTotalLocacao = valorTotalLocacao;
+	}
+
+
+	public String getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
 	}
 	
 	

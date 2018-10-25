@@ -10,6 +10,66 @@
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <script src="<c:url value="resources/js/jquery-3.3.1.min.js "/>"></script>
 <script src="<c:url value="resources/js/bootstrap.js "/>"></script>
+<script src="<c:url value="/resources/js/sweetalert.min.js "/>"></script>
+
+
+<script type="text/javascript">
+function redirecionar(id){
+	var url = 'deleteFuncionario/'+ id;
+	swal({
+		  title: "Deseja Mesmo Deletar este funcionário?",
+		  text: "O Funcionário pode está associado a uma Agência caso seja Gerente, ou a uma  Locação caso seja Locador impedindo a operação de ser realizada",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  window.location = url ;
+		  } else {
+		    swal("Operação Cancelada");
+		  }
+		});
+}
+</script>
+<script>
+function redirecionarEditarG(id){
+	var url = 'editarFuncionarioG/'+ id;
+	swal({
+		  title: "Deseja Mesmo Editar este Funcionário?",
+		  text: "Ao clicar em ok você será direcionado para edição.",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  window.location = url ;
+		  } else {
+		    swal("Operação Cancelada");
+		  }
+		});
+}
+</script>
+<script>
+function redirecionarEditarL(id){
+	var url = 'editarFuncionarioL/'+ id;
+	swal({
+		  title: "Deseja Mesmo Editar este Funcionário?",
+		  text: "Ao clicar em ok você será direcionado para edição.",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  window.location = url ;
+		  } else {
+		    swal("Operação Cancelada");
+		  }
+		});
+}
+</script>
 </head>
 <body>
 	<div>
@@ -45,8 +105,11 @@
 						<td>${funcionario.telefone}</td>
 						<td>${funcionario.email}</td>
 						
-						<td><a href="editarFuncionarioG/${funcionario.id}" class="badge badge-warning">editar</a><br>
-						<a href="deleteFuncionario/${funcionario.id}" class="badge badge-danger">delete</a>
+						<td>
+						<button class="btn btn-warning btn-sm"
+								onclick="redirecionarEditarG(${funcionario.id});">&nbspEditar&nbsp </button><br><br>
+							<button class="btn btn-danger btn-sm"
+								onclick="redirecionar(${funcionario.id});">Deletar</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -86,8 +149,11 @@
 						<td>${funcionario.telefone}</td>
 						<td>${funcionario.email}</td>
 
-						<td><a href="editarFuncionarioL/${funcionario.id}" class="badge badge-warning">editar</a><br>
-						<a href="deleteFuncionario/${funcionario.id}" class="badge badge-danger">delete</a>
+						<td>
+						<button class="btn btn-warning btn-sm"
+								onclick="redirecionarEditarL(${funcionario.id});">&nbspEditar&nbsp </button><br><br>
+							<button class="btn btn-danger btn-sm"
+								onclick="redirecionar(${funcionario.id});">Deletar</button>
 						</td>
 					</tr>
 				</c:forEach>

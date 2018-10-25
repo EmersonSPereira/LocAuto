@@ -32,6 +32,25 @@ function redirecionar(id){
 		});
 }
 </script>
+<script>
+function redirecionarEditar(id){
+	var url = 'editar/'+ id;
+	swal({
+		  title: "Deseja Mesmo Editar esta Agência?",
+		  text: "Ao clicar em ok você será direcionado para edição.",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  window.location = url ;
+		  } else {
+		    swal("Operação Cancelada");
+		  }
+		});
+}
+</script>
 
 </head>
 <body>
@@ -65,10 +84,9 @@ function redirecionar(id){
 						<td>${agencia.gerenteResponsavel.nome}</td>
 						<td>${agencia.telefone}</td>
 						<td>${agencia.localidade}</td>
-						<td><a href="editar/${agencia.id}"
-							class="badge badge-warning">editar</a><br> <a
-							href="delete/${agencia.id}" class="badge badge-danger">delete</a>
-							<button class="btn btn-danger" onclick="redirecionar(1);">Deletar</button>
+						<td>
+							<button class="btn btn-warning btn-sm" onclick="redirecionarEditar(${agencia.id});">Editar</button>
+							<button class="btn btn-danger btn-sm" onclick="redirecionar(${agencia.id});">Deletar</button>
 
 						</td>
 					</tr>

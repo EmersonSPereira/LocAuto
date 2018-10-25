@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.emerson.locauto.model.Agencia;
+import br.com.emerson.locauto.model.Veiculo;
 import br.com.emerson.locauto.service.AgenciaService;
 import br.com.emerson.locauto.service.FuncionarioService;
 import br.com.emerson.locauto.service.VeiculoService;
@@ -96,14 +97,23 @@ public class AgenciaController {
 		view.addObject("agenciaList", agenciaService.buscaTodos());
 		
 		
-		
-		
-		if(veiculoService.buscaTodos().isEmpty()) {
-			agenciaService.deleta(agenciaId);
-			view.setViewName("redirect:exibeAgencias");			
-		}else {
-			view.addObject("status","falha");
-			view.setViewName("falhaDeletarAgencia");
+		for(Veiculo veiculo: veiculoService.buscaTodos()) {
+			
+			if(veiculo.getAgencia().getId()==agenciaId) {
+				view.setViewName("falhaDeletar");
+				view.addObject("alertTitulo", "Falha ao deletar Agência");
+				view.addObject("alertCorpo", "Não foi possível deletar a Agência ela está associada a um"
+						+ " ou mais veiculos, para poder deletar associe os veículos a outra Agência");
+				view.addObject("location", "/LocAuto/exibeAgencias");
+			}else {
+				
+				agenciaService.deleta(agenciaId);
+				view.setViewName("sucessoDeletar");			
+				view.addObject("alertTitulo", "Sucessso ao deletar Agência");
+				view.addObject("alertCorpo", "Agência foi deletada com sucesso da base de dados");
+				view.addObject("location", "/LocAuto/exibeAgencias");
+
+			}
 		}
 		
 		
