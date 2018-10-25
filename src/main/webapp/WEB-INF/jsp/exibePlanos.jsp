@@ -10,6 +10,67 @@
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <script src="<c:url value="resources/js/jquery-3.3.1.min.js "/>"></script>
 <script src="<c:url value="resources/js/bootstrap.js "/>"></script>
+<script src="<c:url value="/resources/js/sweetalert.min.js "/>"></script>
+
+
+
+<script type="text/javascript">
+function redirecionar(id){
+	var url = 'deletePlano/'+ id;
+	swal({
+		  title: "Deseja Mesmo Deletar este Plano?",
+		  text: "Este Plano pode estar sendo utilizado em uma locação e a operação pode falhar",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  window.location = url ;
+		  } else {
+		    swal("Operação Cancelada");
+		  }
+		});
+}
+</script>
+<script>
+function redirecionarEditarPC(id){
+	var url = 'editarPlanoC/'+ id;
+	swal({
+		  title: "Deseja Mesmo Editar este Carro?",
+		  text: "Ao clicar em ok você será direcionado para edição.",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  window.location = url ;
+		  } else {
+		    swal("Operação Cancelada");
+		  }
+		});
+}
+</script>
+<script>
+function redirecionarEditarPM(id){
+	var url = 'editarPlanoM/'+ id;
+	swal({
+		  title: "Deseja Mesmo Editar esta Motocicleta?",
+		  text: "Ao clicar em ok você será direcionado para edição.",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  window.location = url ;
+		  } else {
+		    swal("Operação Cancelada");
+		  }
+		});
+}
+</script>
 </head>
 <body>
 
@@ -41,9 +102,11 @@
 						<td>${plano.valorDiaria}</td>
 
 
-						<td><a href="editarPlanoC/${plano.id}"
-							class="badge badge-warning">editar</a><br> <a
-							href="deletePlano/${plano.id}" class="badge badge-danger">delete</a>
+						<td>
+							<button class="btn btn-warning btn-sm"
+								onclick="redirecionarEditarPC(${plano.id});">&nbspEditar&nbsp </button><br><br>
+							<button class="btn btn-danger btn-sm"
+								onclick="redirecionar(${plano.id});">Deletar</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -75,10 +138,11 @@
 						<td>${plano.valorDiaria}</td>
 
 
-						<td><a
-							href="editarPlanoM/${plano.id}" class="badge badge-warning">editar</a><br>
-							<a href="deletePlano/${plano.id}"
-							class="badge badge-danger">delete</a> </td>
+						<td>
+							<button class="btn btn-warning btn-sm"
+								onclick="redirecionarEditarPM(${plano.id});">&nbspEditar&nbsp </button><br><br>
+							<button class="btn btn-danger btn-sm"
+								onclick="redirecionar(${plano.id});">Deletar</button></td>
 
 					</tr>
 				</c:forEach>

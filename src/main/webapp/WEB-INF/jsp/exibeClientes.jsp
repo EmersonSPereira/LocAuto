@@ -152,7 +152,7 @@ function redirecionarEditarPJ(id){
 
 						<td>
 							<button class="btn btn-warning btn-sm"
-								onclick="redirecionarEditarPF(${cliente.id});">Editar</button>
+								onclick="redirecionarEditarPF(${cliente.id});">&nbspEditar&nbsp</button><br><br>
 							<button class="btn btn-danger btn-sm"
 								onclick="redirecionar(${cliente.id});">Deletar</button>
 						</td>

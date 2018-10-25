@@ -1,5 +1,6 @@
 package br.com.emerson.locauto.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,49 +111,58 @@ public class ClienteController {
 	public ModelAndView deleteCliente(@PathVariable("clienteId") Integer clienteId) {
 
 		ModelAndView view = new ModelAndView();
-		for (Locacao locacao : locacaoService.buscaTodos()) {
-			//declarando Clientes
-			LocacaoClientePF lcpf = null;
-			LocacaoClientePJ lcpj = null;
-			
-			//Inicializando os IDs com valores que não existem no banco
-			Integer idLCPF = -1 ;
-			Integer idLCPJ = -2;
-			
-			/*
-			 * Esse if verificao se a locação é do tipo cliente PF OU PJ em caso de um ou outro ser verdadeiro
-			 * preenche o objeto declarado anteriormente recupera seu id
-			 */
-			if(locacao.getCliente().equals("PF")) {
-			lcpf = (LocacaoClientePF) locacao;
-			idLCPF = lcpf.getClientePF().getId();
-			}else {
-			lcpj = (LocacaoClientePJ) locacao;
-			 idLCPJ = lcpj.getClientePJ().getId();
+		List<Locacao> locacoes = locacaoService.buscaTodos();
+		if (!locacoes.isEmpty()) {
+			for (Locacao locacao : locacoes) {
+				// declarando Clientes
+				LocacaoClientePF lcpf = null;
+				LocacaoClientePJ lcpj = null;
+
+				// Inicializando os IDs com valores que não existem no banco
+				Integer idLCPF = -1;
+				Integer idLCPJ = -2;
+
+				/*
+				 * Esse if verificao se a locação é do tipo cliente PF OU PJ em caso de um ou
+				 * outro ser verdadeiro preenche o objeto declarado anteriormente recupera seu
+				 * id
+				 */
+				if (locacao.getCliente().equals("PF")) {
+					lcpf = (LocacaoClientePF) locacao;
+					idLCPF = lcpf.getClientePF().getId();
+				} else {
+					lcpj = (LocacaoClientePJ) locacao;
+					idLCPJ = lcpj.getClientePJ().getId();
+				}
+
+				/*
+				 * Verificando se o Cliente está associado a alguma locação caso esteja a
+				 * deleção não é permitida
+				 */
+				if (idLCPF.equals(clienteId) || idLCPJ.equals(clienteId)) {
+
+					view.setViewName("falhaDeletar");
+					view.addObject("alertTitulo", "Falha ao deletar Cliente");
+					view.addObject("alertCorpo",
+							"Não foi possível deletar este cliente, o mesmo está associado a uma Locação");
+					view.addObject("location", "/LocAuto/exibeClientes");
+
+				} else {
+
+					clienteService.deleta(clienteId);
+					view.setViewName("sucessoDeletar");
+					view.addObject("alertTitulo", "Sucessso ao deletar Cliente");
+					view.addObject("alertCorpo", "O CLiente foi deletado com sucesso da base de dados");
+					view.addObject("location", "/LocAuto/exibeClientes");
+
+				}
 			}
-			
-			
-			 
-			/*
-			 * Verificando se o Cliente está associado a alguma locação caso esteja a deleção não é permitida
-			 */
-			if (idLCPF == clienteId || idLCPJ == clienteId) {
-
-				view.setViewName("falhaDeletar");
-				view.addObject("alertTitulo", "Falha ao deletar Cliente");
-				view.addObject("alertCorpo",
-						"Não foi possível deletar este cliente, o mesmo está associado a uma Locação");
-				view.addObject("location", "/LocAuto/exibeClientes");
-
-			} else {
-				
-				clienteService.deleta(clienteId);
-				view.setViewName("sucessoDeletar");
-				view.addObject("alertTitulo", "Sucessso ao deletar Cliente");
-				view.addObject("alertCorpo", "O CLiente foi deletado com sucesso da base de dados");
-				view.addObject("location", "/LocAuto/exibeClientes");
-
-			}
+		} else {
+			clienteService.deleta(clienteId);
+			view.setViewName("sucessoDeletar");
+			view.addObject("alertTitulo", "Sucessso ao deletar Cliente");
+			view.addObject("alertCorpo", "O CLiente foi deletado com sucesso da base de dados");
+			view.addObject("location", "/LocAuto/exibeClientes");
 		}
 
 		return view;

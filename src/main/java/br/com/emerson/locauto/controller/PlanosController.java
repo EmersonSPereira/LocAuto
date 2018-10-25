@@ -1,6 +1,6 @@
 package br.com.emerson.locauto.controller;
 
-
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.emerson.locauto.model.Agencia;
+import br.com.emerson.locauto.model.Locacao;
 import br.com.emerson.locauto.model.PlanosCarro;
 import br.com.emerson.locauto.model.PlanosMoto;
+import br.com.emerson.locauto.service.LocacaoService;
 import br.com.emerson.locauto.service.PlanosService;
+
 /**
  * @author Emerson Sousa
  * 
- * Esta classe é um controller na aplicação.
+ *         Esta classe é um controller na aplicação.
  */
 
 @Controller
@@ -28,12 +30,15 @@ public class PlanosController {
 	@Autowired
 	private PlanosService planosService;
 
+	@Autowired
+	private LocacaoService locacaoService;
+
 	private PlanosCarro planoCarroA, planoCarroB, planoCarroC, planoCarroD, planoCarroE, planoCarroF, planoCarroG;
 	private PlanosMoto planoMotoA, planoMotoB, planoMotoC, planoMotoD;
 
 	/**
-	 * Esse método trata a requisição "/planoC, adiciona um objeto planoC na view
-	 *  e por fim retorna a view "planoCarro"
+	 * Esse método trata a requisição "/planoC, adiciona um objeto planoC na view e
+	 * por fim retorna a view "planoCarro"
 	 * 
 	 * @param map
 	 * @return
@@ -52,13 +57,15 @@ public class PlanosController {
 	}
 
 	/**
-	 * Esse método trata as requisições "/salvaPlanoC","editarPlanoC/salvaPlanoC" monta o objeto planoC, vindo da view
-	 *  caso o objeto não exista salva no banco se já existir edita.
+	 * Esse método trata as requisições "/salvaPlanoC","editarPlanoC/salvaPlanoC"
+	 * monta o objeto planoC, vindo da view caso o objeto não exista salva no banco
+	 * se já existir edita.
+	 * 
 	 * @param planoCarro
 	 * @param result
 	 * @return
 	 */
-	@RequestMapping(value = {"/salvaPlanoC","editarPlanoC/salvaPlanoC"}, method = RequestMethod.POST)
+	@RequestMapping(value = { "/salvaPlanoC", "editarPlanoC/salvaPlanoC" }, method = RequestMethod.POST)
 	public String addPlanoC(@ModelAttribute("planoC") PlanosCarro planoCarro, BindingResult result) {
 
 		planosService.salvar(planoCarro);
@@ -67,8 +74,9 @@ public class PlanosController {
 	}
 
 	/**
-	 * Esse método trata as requisição "/planoM, adiciona um objeto planoM na view
-	 *  e por fim retorna a view "planoCarro"
+	 * Esse método trata as requisição "/planoM, adiciona um objeto planoM na view e
+	 * por fim retorna a view "planoCarro"
+	 * 
 	 * @param map
 	 * @return
 	 */
@@ -86,13 +94,15 @@ public class PlanosController {
 	}
 
 	/**
-	 * Esse método trata as requisições "/salvaPlanoM","editaplamoM/salvaPlanoM" monta o objeto planoM, vindo da view
-	 * caso o objeto não exista salva no banco, se já existir edita.
+	 * Esse método trata as requisições "/salvaPlanoM","editaplamoM/salvaPlanoM"
+	 * monta o objeto planoM, vindo da view caso o objeto não exista salva no banco,
+	 * se já existir edita.
+	 * 
 	 * @param planoMoto
 	 * @param result
 	 * @return
 	 */
-	@RequestMapping(value = {"/salvaPlanoM","editarPlanoM/salvaPlanoM"}, method = RequestMethod.POST)
+	@RequestMapping(value = { "/salvaPlanoM", "editarPlanoM/salvaPlanoM" }, method = RequestMethod.POST)
 	public String addPlanoM(@ModelAttribute("planoM") PlanosMoto planoMoto, BindingResult result) {
 
 		planosService.salvar(planoMoto);
@@ -101,64 +111,95 @@ public class PlanosController {
 	}
 
 	/**
-	 * Esse método trata a requisição "/delete/{planoId}" recebe o id de um plano e deleta do banco
+	 * Esse método trata a requisição "/delete/{planoId}" recebe o id de um plano e
+	 * deleta do banco
+	 * 
 	 * @param planoId
 	 * @return
 	 */
 	@RequestMapping("/deletePlano/{planoId}")
-	public String deletePlano(@PathVariable("planoId") Integer planoId) {
+	public ModelAndView deletePlano(@PathVariable("planoId") Integer planoId) {
 
-		planosService.deleta(planoId);
+		ModelAndView view = new ModelAndView();
+		List<Locacao> locacoes = locacaoService.buscaTodos();
 
-		return "redirect:/exibePlanos";
+		if (!locacoes.isEmpty()) {
+			for (Locacao locacao : locacoes) {
+
+				Integer idPlanoLocacao = locacao.getPlano().getId();
+
+				if (idPlanoLocacao.equals(planoId)) {
+
+					view.setViewName("falhaDeletar");
+					view.addObject("alertTitulo", "Falha ao deletar Plano");
+					view.addObject("alertCorpo",
+							"Este Plano está associado a uma locação" + " e não pode ser deletado");
+					view.addObject("location", "/LocAuto/exibePlanos");
+				} else {
+
+					planosService.deleta(planoId);
+					view.setViewName("sucessoDeletar");
+					view.addObject("alertTitulo", "Sucessso ao deletar Plano");
+					view.addObject("alertCorpo", "O Veículo foi deletado com sucesso da base de dados");
+					view.addObject("location", "/LocAuto/exibePlanos");
+
+				}
+			}
+		} else {
+			planosService.deleta(planoId);
+			view.setViewName("sucessoDeletar");
+			view.addObject("alertTitulo", "Sucessso ao deletar Plano");
+			view.addObject("alertCorpo", "O Veículo foi deletado com sucesso da base de dados");
+			view.addObject("location", "/LocAuto/exibePlanos");
+		}
+
+		return view;
 	}
-	
+
 	/**
-	 * Esse método trata a requisição "/editarPlanoC/{clienteId}" recebe o id de uma plano e carrega o plano do banco
-	 * e envia o objeto para view para ser editado.
+	 * Esse método trata a requisição "/editarPlanoC/{clienteId}" recebe o id de uma
+	 * plano e carrega o plano do banco e envia o objeto para view para ser editado.
+	 * 
 	 * @param clienteId
 	 * @return
 	 */
 	@RequestMapping(value = "/editarPlanoC/{planoId}")
-	public ModelAndView editPlanoC(Map<String, Object> map,@PathVariable("planoId") Integer planoId) {
+	public ModelAndView editPlanoC(Map<String, Object> map, @PathVariable("planoId") Integer planoId) {
 
 		ModelAndView view = new ModelAndView();
 		view.setViewName("planoCarro");
 		view.addObject("planoC", planosService.buscaPorId(planoId));
-		
 
 		return view;
 	}
-	
-	
+
 	/**
-	 * Esse método trata a requisição "/editarPlanoM/{clienteId}" recebe o id de uma plano e carrega o plano do banco
-	 * e envia o objeto para view para ser editado.
+	 * Esse método trata a requisição "/editarPlanoM/{clienteId}" recebe o id de uma
+	 * plano e carrega o plano do banco e envia o objeto para view para ser editado.
+	 * 
 	 * @param clienteId
 	 * @return
 	 */
 	@RequestMapping(value = "/editarPlanoM/{planoId}")
-	public ModelAndView editPlanoM(Map<String, Object> map,@PathVariable("planoId") Integer planoId) {
+	public ModelAndView editPlanoM(Map<String, Object> map, @PathVariable("planoId") Integer planoId) {
 
 		ModelAndView view = new ModelAndView();
 		view.setViewName("planoMotocicleta");
 		view.addObject("planoM", planosService.buscaPorId(planoId));
-		
 
 		return view;
 	}
 
-	
 	/**
-	 * Esse método trata a requisição "/exibePlanos" envia para view "exibePlanos" um lista de planoC 
-	 * e uma lista de planoM  para ser exibido
-	 * para o usuário
+	 * Esse método trata a requisição "/exibePlanos" envia para view "exibePlanos"
+	 * um lista de planoC e uma lista de planoM para ser exibido para o usuário
+	 * 
 	 * @param map
 	 * @return
 	 */
 	@RequestMapping("/exibePlanos")
 	public String exibePlanos(Map<String, Object> map) {
-		
+
 		if (planosService.buscaTodos().isEmpty()) {
 			salvaPlanosCarro();
 			salvaPlanosMoto();
@@ -239,21 +280,25 @@ public class PlanosController {
 		planoMotoA.setPlano("A");
 		planoMotoA.setVeiculos("Honda Biz, Honda CG, Yahama YBR, Traxx Fly");
 		planoMotoA.setCilindradas(125);
+		planoMotoA.setValorDiaria(50);
 
 		planoMotoB = new PlanosMoto();
 		planoMotoB.setPlano("B");
 		planoMotoB.setVeiculos("Honda CBX, Yahaha XTZ ");
 		planoMotoB.setCilindradas(250);
+		planoMotoB.setValorDiaria(80);
 
 		planoMotoC = new PlanosMoto();
 		planoMotoC.setPlano("C");
 		planoMotoC.setVeiculos(" Honda Shadow ");
 		planoMotoC.setCilindradas(400);
+		planoMotoC.setValorDiaria(100);
 
 		planoMotoD = new PlanosMoto();
 		planoMotoD.setPlano("D");
 		planoMotoD.setVeiculos("Kawasaki ZX10");
 		planoMotoD.setCilindradas(1000);
+		planoMotoD.setValorDiaria(150);
 
 		planosService.salvar(planoMotoA);
 		planosService.salvar(planoMotoB);

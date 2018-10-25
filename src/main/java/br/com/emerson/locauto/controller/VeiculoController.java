@@ -1,5 +1,6 @@
 package br.com.emerson.locauto.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.emerson.locauto.model.Carro;
+import br.com.emerson.locauto.model.Locacao;
 import br.com.emerson.locauto.model.Motocicleta;
 import br.com.emerson.locauto.service.AgenciaService;
+import br.com.emerson.locauto.service.LocacaoService;
 import br.com.emerson.locauto.service.VeiculoService;
 
 /**
@@ -26,9 +29,12 @@ public class VeiculoController {
 
 	@Autowired
 	private VeiculoService veiculoService;
-	
+
 	@Autowired
 	private AgenciaService agenciaService;
+
+	@Autowired
+	private LocacaoService locacaoService;
 
 	/**
 	 * Esse método trata a requisição "/veiculoC, adiciona um objeto planoC na view
@@ -47,8 +53,9 @@ public class VeiculoController {
 	}
 
 	/**
-	 * Esse método trata as requisições "/salvaVeiculoC", "editarVeiculoC/salvaVeiculoC" monta o objeto veiculoC,
-	 * vindo da view, caso o veiculo não exista salva no banco, se existir edita.
+	 * Esse método trata as requisições "/salvaVeiculoC",
+	 * "editarVeiculoC/salvaVeiculoC" monta o objeto veiculoC, vindo da view, caso o
+	 * veiculo não exista salva no banco, se existir edita.
 	 * 
 	 * @param carro
 	 * @param result
@@ -75,13 +82,13 @@ public class VeiculoController {
 		map.put("veiculoM", new Motocicleta());
 		map.put("agenciasList", agenciaService.buscaTodos());
 
-
 		return "motocicleta";
 	}
 
 	/**
-	 * Esse método trata as requisições "/salvaVeiculoM", "editarVeiculoM/salvaVeiculoM" monta o objeto veiculoM,
-	 * vindo da view, caso o veiculo não exista salva no banco se existir edita.
+	 * Esse método trata as requisições "/salvaVeiculoM",
+	 * "editarVeiculoM/salvaVeiculoM" monta o objeto veiculoM, vindo da view, caso o
+	 * veiculo não exista salva no banco se existir edita.
 	 * 
 	 * @param moto
 	 * @param result
@@ -103,11 +110,39 @@ public class VeiculoController {
 	 * @return
 	 */
 	@RequestMapping("/deleteVeiculo/{veiculoId}")
-	public String deleteVeiculo(@PathVariable("veiculoId") Integer clienteId) {
+	public ModelAndView deleteVeiculo(@PathVariable("veiculoId") Integer veiculoId) {
 
-		veiculoService.deleta(clienteId);
+		ModelAndView view = new ModelAndView();
+		List<Locacao> locacoes = locacaoService.buscaTodos();
 
-		return "redirect:/exibeVeiculos";
+		if (!locacoes.isEmpty()) {
+			for (Locacao locacao : locacoes) {
+
+				Integer idVeiculoLocacao = locacao.getVeiculo().getId();
+
+				if (idVeiculoLocacao.equals(veiculoId)) {
+					view.setViewName("falhaDeletar");
+					view.addObject("alertTitulo", "Falha ao deletar Veículo");
+					view.addObject("alertCorpo",
+							"Este veículo já foi disponibilizado para uma locacao" + " e não pode ser deletado");
+					view.addObject("location", "/LocAuto/exibeVeiculos");
+				} else {
+					veiculoService.deleta(veiculoId);
+					view.setViewName("sucessoDeletar");
+					view.addObject("alertTitulo", "Sucessso ao deletar Veículo");
+					view.addObject("alertCorpo", "O Veículo foi deletado com sucesso da base de dados");
+					view.addObject("location", "/LocAuto/exibeVeiculos");
+				}
+			}
+		} else {
+			veiculoService.deleta(veiculoId);
+			view.setViewName("sucessoDeletar");
+			view.addObject("alertTitulo", "Sucessso ao deletar Veículo");
+			view.addObject("alertCorpo", "O Veículo foi deletado com sucesso da base de dados");
+			view.addObject("location", "/LocAuto/exibeVeiculos");
+		}
+
+		return view;
 	}
 
 	/**
@@ -125,7 +160,6 @@ public class VeiculoController {
 		view.setViewName("carro");
 		view.addObject("veiculoC", veiculoService.buscaPorId(veiculoId));
 		view.addObject("agenciasList", agenciaService.buscaTodos());
-
 
 		return view;
 	}
@@ -145,7 +179,6 @@ public class VeiculoController {
 		view.setViewName("motocicleta");
 		view.addObject("veiculoM", veiculoService.buscaPorId(veiculoId));
 		view.addObject("agenciasList", agenciaService.buscaTodos());
-
 
 		return view;
 	}

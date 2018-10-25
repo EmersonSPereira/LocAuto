@@ -3,6 +3,7 @@ package br.com.emerson.locauto.controller;
 
 
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,10 +97,17 @@ public class AgenciaController {
 		view.setViewName("exibeAgencias");
 		view.addObject("agenciaList", agenciaService.buscaTodos());
 		
+		List<Veiculo> veiculos = veiculoService.buscaTodos();
 		
+		
+		if(!veiculos.isEmpty()) {
+			
 		for(Veiculo veiculo: veiculoService.buscaTodos()) {
 			
-			if(veiculo.getAgencia().getId()==agenciaId) {
+			Integer idVeiculoAgencia = veiculo.getAgencia().getId();
+			
+			
+			if(idVeiculoAgencia.equals(agenciaId)) {
 				view.setViewName("falhaDeletar");
 				view.addObject("alertTitulo", "Falha ao deletar Agência");
 				view.addObject("alertCorpo", "Não foi possível deletar a Agência ela está associada a um"
@@ -114,6 +122,13 @@ public class AgenciaController {
 				view.addObject("location", "/LocAuto/exibeAgencias");
 
 			}
+		}
+		}else {
+			agenciaService.deleta(agenciaId);
+			view.setViewName("sucessoDeletar");			
+			view.addObject("alertTitulo", "Sucessso ao deletar Agência");
+			view.addObject("alertCorpo", "Agência foi deletada com sucesso da base de dados");
+			view.addObject("location", "/LocAuto/exibeAgencias");
 		}
 		
 		

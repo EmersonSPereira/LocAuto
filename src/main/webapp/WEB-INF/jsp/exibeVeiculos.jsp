@@ -10,6 +10,67 @@
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <script src="<c:url value="resources/js/jquery-3.3.1.min.js "/>"></script>
 <script src="<c:url value="resources/js/bootstrap.js "/>"></script>
+<script src="<c:url value="/resources/js/sweetalert.min.js "/>"></script>
+
+
+
+<script type="text/javascript">
+function redirecionar(id){
+	var url = 'deleteVeiculo/'+ id;
+	swal({
+		  title: "Deseja Mesmo Deletar este Veículo?",
+		  text: "Este Vículo pode ter sido sisponibilizado para locação e a operação pode falhar",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  window.location = url ;
+		  } else {
+		    swal("Operação Cancelada");
+		  }
+		});
+}
+</script>
+<script>
+function redirecionarEditarC(id){
+	var url = 'editarVeiculoC/'+ id;
+	swal({
+		  title: "Deseja Mesmo Editar este Veículo?",
+		  text: "Ao clicar em ok você será direcionado para edição.",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  window.location = url ;
+		  } else {
+		    swal("Operação Cancelada");
+		  }
+		});
+}
+</script>
+<script>
+function redirecionarEditarM(id){
+	var url = 'editarVeiculoM/'+ id;
+	swal({
+		  title: "Deseja Mesmo Editar este Cliente?",
+		  text: "Ao clicar em ok você será direcionado para edição.",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  window.location = url ;
+		  } else {
+		    swal("Operação Cancelada");
+		  }
+		});
+}
+</script>
 </head>
 <body>
 
@@ -48,9 +109,12 @@
 						<td>${veiculo.agencia.localidade}</td>
 						<td>${veiculo.acessorios}</td>
 
-						<td><a href="editarVeiculoC/${veiculo.id}"
-							class="badge badge-warning">editar</a><br> <a
-							href="deleteVeiculo/${veiculo.id}" class="badge badge-danger">delete</a></td>
+						<td>
+							<button class="btn btn-warning btn-sm"
+								onclick="redirecionarEditarC(${veiculo.id});">&nbspEditar&nbsp </button><br><br>
+							<button class="btn btn-danger btn-sm"
+								onclick="redirecionar(${veiculo.id});">Deletar</button>
+							</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -90,9 +154,12 @@
 						<td>${veiculo.tipoCombustivel}</td>
 						<td>${veiculo.agencia.localidade}</td>
 						<td>${veiculo.freios}</td>
-						<td><a href="editarVeiculoM/${veiculo.id}"
-							class="badge badge-warning">editar</a><br> <a
-							href="deleteVeiculo/${veiculo.id}" class="badge badge-danger">delete</a></td>
+						<td>
+							<button class="btn btn-warning btn-sm"
+								onclick="redirecionarEditarM(${veiculo.id});">&nbspEditar&nbsp </button><br><br>
+							<button class="btn btn-danger btn-sm"
+								onclick="redirecionar(${veiculo.id});">Deletar</button>
+							</td>
 
 					</tr>
 				</c:forEach>
