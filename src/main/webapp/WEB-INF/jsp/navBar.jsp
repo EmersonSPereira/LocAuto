@@ -88,6 +88,7 @@
 							Locações</a>
 
 					</div></li>
+				<li class="nav-item"><a class="nav-link" href="/LocAuto/logout">Sair</a></li>
 
 			</ul>
 
