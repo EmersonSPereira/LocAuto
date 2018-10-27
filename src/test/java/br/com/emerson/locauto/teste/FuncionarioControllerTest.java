@@ -17,6 +17,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.emerson.locauto.controller.FuncionarioController;
+import br.com.emerson.locauto.model.Gerente;
+import br.com.emerson.locauto.model.Locador;
+import br.com.emerson.locauto.service.FuncionarioService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,12 +27,25 @@ import br.com.emerson.locauto.controller.FuncionarioController;
 public class FuncionarioControllerTest {
 	
 	private MockMvc mockMvc;
+	
+	@Autowired 
+	private FuncionarioService funcionarioService;
+	
+	private Gerente gerente;
+	private Locador locador;
+	Integer idGerente, idLocador;
+	 
 
 	@Autowired
 	private FuncionarioController controller;
 
 	@Before
 	public void setUp() throws Exception {
+		gerente = new Gerente();
+		locador = new Locador();
+		 idGerente = funcionarioService.salvar(gerente).getId();
+		 idLocador = funcionarioService.salvar(locador).getId();
+		
 		
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/jsp/");
@@ -71,10 +87,19 @@ public class FuncionarioControllerTest {
 	}
 
 	@Test
-	public void testDeleteFuncionario() throws Exception {
+	public void editarGerente() throws Exception {
 
-		mockMvc.perform(post("/deleteFuncionario/3"))
-		.andExpect(view().name("redirect:/exibeFuncionarios"));
+		mockMvc.perform(post("/editarFuncionarioG/" + idGerente))
+        .andExpect(status().isOk())
+        .andExpect(forwardedUrl("/WEB-INF/jsp/gerente.jsp"));
+	}
+	
+	@Test
+	public void editarLocador() throws Exception {
+
+		mockMvc.perform(post("/editarFuncionarioL/" + idLocador))
+        .andExpect(status().isOk())
+        .andExpect(forwardedUrl("/WEB-INF/jsp/locador.jsp"));
 	}
 
 	@Test

@@ -39,26 +39,23 @@ public class Locacao {
 
 	@ManyToOne
 	private Planos plano;
-	
-	
 
+	private String status;
 
 	private String Seguro;
 
 	private String dataLocacao;
 
 	private String dataDevolucao;
-	
+
 	private String nivelDoTanque;
-	
+
 	private String situacao;
-	
+
 	private Integer valorTotalLocacao;
-	
-	@Column(insertable=false, updatable=false)
-    private String cliente;
-	
-	
+
+	@Column(insertable = false, updatable = false)
+	private String cliente;
 
 	public Integer getId() {
 		return id;
@@ -116,7 +113,6 @@ public class Locacao {
 		this.dataDevolucao = dataDevolucao;
 	}
 
-
 	public String getNivelDoTanque() {
 		return nivelDoTanque;
 	}
@@ -141,7 +137,6 @@ public class Locacao {
 		this.valorTotalLocacao = valorTotalLocacao;
 	}
 
-
 	public String getCliente() {
 		return cliente;
 	}
@@ -149,8 +144,13 @@ public class Locacao {
 	public void setCliente(String cliente) {
 		this.cliente = cliente;
 	}
-	
-	
 
-	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 }

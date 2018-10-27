@@ -30,34 +30,24 @@ public class VeiculoDAOTest {
 	private VeiculoService dao;
 	
 	@Autowired
-	AgenciaService agenciaService;
+	private AgenciaService agenciaService;
+
 	
-	@Autowired
-	FuncionarioService funcionarioService;
+	
+	
 	private Motocicleta moto;
 	private Carro carro;
 	private List<Veiculo> veiculos;
-	private Gerente gerente;
 	private Agencia agencia;
+
 
 	@Before
 	public void setUp() throws Exception {
 		
-		gerente = new Gerente();
-		gerente.setCpf("888.999.777-53");
-		gerente.setNome("Emerson");
-		gerente.setEmail("gerente@gmail.com");
-		gerente.setId(1);
-		
-		funcionarioService.salvar(gerente);
 		
 		
 		
 		agencia = new Agencia();
-		agencia.setCnpj("999.9999.9999/59");
-		agencia.setGerenteResponsavel(gerente);
-		agencia.setId(1);
-		
 		agenciaService.salvar(agencia);
 		
 
@@ -65,7 +55,7 @@ public class VeiculoDAOTest {
 		moto.setMarca("Honda");
 		moto.setCor("Azul");
 		moto.setModelo("Titan");
-		moto.setAgencia(agencia);
+	
 		moto.setFreios("ABS");
 		moto.setCilindradas("160");
 		moto.setRenavam("545464646464");
@@ -79,7 +69,7 @@ public class VeiculoDAOTest {
 		carro.setPotencia("65");
 		carro.setRenavam("546546545");
 		carro.setAcessorios("Ar, Trava, Direestáestáo");
-		carro.setAgencia(agencia);
+	
 		carro.setTipoCombustivel("Gasolina");
 		carro.setAno(2010);
 		veiculos = null;
@@ -91,18 +81,22 @@ public class VeiculoDAOTest {
  * Melhorar esse teste=======================================
  */
 		// teste salvar
+		agencia.setId(1);
+		moto.setAgencia(agencia);
 		assertEquals(moto, dao.salvar(moto));
 
 		// teste editar veiculo
-		moto.setId(13); // setando id do veiculo a ser editado
+		moto.setId(1); // setando id do veiculo a ser editado
 		moto.setCor("Amarela");
 		dao.salvar(moto);
-		assertEquals("Amarela", dao.buscaPorId(13).getCor());
+		assertEquals("Amarela", dao.buscaPorId(1).getCor());
 	}
 
 	@Test
 	public void testBuscaPorId() {
 		// salvando um veiculo no banco
+		agencia.setId(1);
+		moto.setAgencia(agencia);
 		dao.salvar(moto);
 
 		// recuperando o id do ultimo cliente adicionado no banco
@@ -114,6 +108,8 @@ public class VeiculoDAOTest {
 		// alterando a cor para comparar na busca
 		moto.setId(idultimo);
 		moto.setCor("Preta");
+		agencia.setId(1);
+		moto.setAgencia(agencia);
 		dao.salvar(moto);
 		// teste de busca
 		assertEquals("Preta", dao.buscaPorId(idultimo).getCor());
@@ -155,6 +151,10 @@ public class VeiculoDAOTest {
 		veiculos = dao.buscaTodos();
 		Veiculo veiculo = veiculos.get(veiculos.size() - 1);
 		Integer idValido = veiculo.getId();
+		
+		carro.setId(idValido);
+		carro.setAgencia(agencia);
+		dao.salvar(carro);
 
 		/*
 		 * O metodo deleta recebe um id como parametro e deleta o veiculo que possui o

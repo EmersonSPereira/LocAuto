@@ -29,7 +29,11 @@ import br.com.emerson.locauto.service.FuncionarioService;
 import br.com.emerson.locauto.service.LocacaoService;
 import br.com.emerson.locauto.service.PlanosService;
 import br.com.emerson.locauto.service.VeiculoService;
-
+/**
+ * @author Emerson Sousa
+ * 
+ *         Esta classe é um controller na aplicação.
+ */
 @Controller
 public class LocacaoController {
 

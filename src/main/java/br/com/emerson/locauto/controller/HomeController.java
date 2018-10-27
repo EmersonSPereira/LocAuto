@@ -7,6 +7,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.emerson.locauto.service.LocacaoService;
 
+/**
+ * @author Emerson Sousa
+ * 
+ *         Esta classe é um controller na aplicação.
+ */
 @Controller
 public class HomeController {
 	

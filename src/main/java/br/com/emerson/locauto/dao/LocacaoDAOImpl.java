@@ -1,3 +1,4 @@
+
 package br.com.emerson.locauto.dao;
 
 import java.util.List;
@@ -10,7 +11,11 @@ import org.springframework.stereotype.Repository;
 
 import br.com.emerson.locauto.model.Locacao;
 import br.com.emerson.locauto.model.LocacaoClientePF;
-
+/**
+ * @author Emerson Sousa
+ * 
+ * Esta classe faz o gerenciamento (CRUD) da classe Locacao no banco de dados
+ */
 @Repository
 public class LocacaoDAOImpl implements LocacaoDAO {
 

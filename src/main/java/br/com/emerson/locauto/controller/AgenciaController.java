@@ -104,6 +104,7 @@ public class AgenciaController {
 			
 		for(Veiculo veiculo: veiculoService.buscaTodos()) {
 			
+			
 			Integer idVeiculoAgencia = veiculo.getAgencia().getId();
 			
 			

@@ -1,6 +1,7 @@
 package br.com.emerson.locauto.teste;
 
-import static org.junit.Assert.assertTrue;
+
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
@@ -17,18 +18,19 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import br.com.emerson.locauto.controller.PlanosController;
+import br.com.emerson.locauto.controller.FuncionarioController;
+import br.com.emerson.locauto.controller.HomeController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-servlet-test.xml" })
-public class PlanosControllerTest {
-
+public class HomeControllerTest {
+	
 	
 	private MockMvc mockMvc;
-
-	@Autowired
-	private PlanosController controller;
 	
+	@Autowired
+	private HomeController controller;
+
 	@Before
 	public void setUp() throws Exception {
 		
@@ -42,59 +44,10 @@ public class PlanosControllerTest {
 	}
 
 	@Test
-	public void testPlanoC() throws Exception {
-		
-		mockMvc.perform(get("/planoC"))
+	public void testHomePage() throws Exception {
+		mockMvc.perform(get("/"))
         .andExpect(status().isOk())
-        .andExpect(forwardedUrl("/WEB-INF/jsp/planoCarro.jsp"));
-	}
-
-	@Test
-	public void testAddPlanoC() throws Exception {
-
-		mockMvc.perform(post("/salvaPlanoC"))
-        .andExpect(view().name("redirect:/exibePlanos"));
-	}
-
-	@Test
-	public void testPlanoM() throws Exception {
-		
-		mockMvc.perform(get("/planoM"))
-        .andExpect(status().isOk())
-        .andExpect(forwardedUrl("/WEB-INF/jsp/planoMotocicleta.jsp"));
-	}
-
-	@Test
-	public void testAddPlanoM() throws Exception {
-
-		mockMvc.perform(post("/salvaPlanoM"))
-        .andExpect(view().name("redirect:/exibePlanos"));
-	}
-
-	/*@Test
-	public void testDeletePlano() throws Exception {
-
-		mockMvc.perform(post("/deletePlano/3"))
-		.andExpect(view().name("sucessoDeletar"));
-	}*/
-
-	@Test
-	public void testExibePlanos() throws Exception {
-		mockMvc.perform(get("/exibePlanos"))
-        .andExpect(status().isOk())
-        .andExpect(forwardedUrl("/WEB-INF/jsp/exibePlanos.jsp"));
-	}
-
-	@Test
-	public void testSalvaPlanosCarro() {
-		
-		assertTrue(controller.salvaPlanosCarro());
-	}
-
-	@Test
-	public void testSalvaPlanosMoto() {
-
-		assertTrue(controller.salvaPlanosMoto());
+        .andExpect(forwardedUrl("/WEB-INF/jsp/home.jsp"));
 	}
 
 }
