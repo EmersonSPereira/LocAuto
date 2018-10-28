@@ -84,8 +84,14 @@
 						<a class="dropdown-item" href="/LocAuto/locacaoClientePF">Realizar
 							Locação ClientePF</a> <a class="dropdown-item"
 							href="/LocAuto/locacaoClientePJ">Realizar Locação ClientePJ</a> <a
-							class="dropdown-item" href="/LocAuto/exibeLocacoes">Exibir
-							Locações</a>
+							class="dropdown-item" href="/LocAuto/exibeLocacoesAtiva">Exibir
+							Locações Ativas</a>
+							<a
+							class="dropdown-item" href="/LocAuto/exibeLocacoesFinalizada">Exibir
+							Locações Finalizadas</a>
+							<a
+							class="dropdown-item" href="/LocAuto/exibeLocacoesCancelada">Exibir
+							Locações Canceladas</a>
 
 					</div></li>
 				<li class="nav-item"><a class="nav-link" href="/LocAuto/logout">Sair</a></li>

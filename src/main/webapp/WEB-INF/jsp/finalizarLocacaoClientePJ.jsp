@@ -16,7 +16,7 @@
 
 <script type="text/javascript">
 function redirecionar(){
-	swal("Finalizado com Sucesso", "Você será redirecionado para Locações", "success")
+	swal("Finalizado com Sucesso", "Você será redirecionado para Locações Ativas", "success")
 	.then((value) =>{
 		window.location = 'finalizar/${locacao.id }';
 	});

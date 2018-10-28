@@ -176,7 +176,6 @@ private final Logger logger = LoggerFactory.getLogger(LocacaoDAOImpl.class);
 		
 	}
 
-	@Override
 	public List<Locacao> buscaPorTipoClienteStatus(String clienteTipo, String status) {
 		
 		List<Locacao> Locacao = null;
@@ -186,7 +185,7 @@ private final Logger logger = LoggerFactory.getLogger(LocacaoDAOImpl.class);
 		try {
 
 			Locacao = sessionFactory.getCurrentSession()
-					.createQuery("select c from Locacao c where c.cliente = :tipoCliente where c.status", Locacao.class)
+					.createQuery("select c from Locacao c where c.cliente = :tipoCliente and c.status =:status", Locacao.class)
 					.setParameter("tipoCliente", clienteTipo).setParameter("status", status).getResultList();
 
 			logger.info("Locacaos encontrado com sucesso");

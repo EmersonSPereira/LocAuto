@@ -165,6 +165,7 @@ public class LocacaoController {
 		view.addObject("modeloVeiculo", veiculo.getModelo());
 
 		// atualizando
+		locacao.setStatus("Ativa");
 		locacao.setValorTotalLocacao(valorTotal);
 		locacaoService.salvar(locacao);
 
@@ -284,6 +285,7 @@ public class LocacaoController {
 
 		// atualizando
 		locacao.setValorTotalLocacao(valorTotal);
+		locacao.setStatus("Ativa");
 		locacaoService.salvar(locacao);
 
 		return view;
@@ -294,7 +296,7 @@ public class LocacaoController {
 	public ModelAndView finalizarLocacaoClientePF(@PathVariable("locacaoID") Integer id) {
 
 		ModelAndView view = new ModelAndView();
-		view.setViewName("redirect:/exibeLocacoes");
+		view.setViewName("redirect:/exibeLocacoesAtiva");
 		Locacao locacao = locacaoService.buscaPorId(id);
 
 		locacao.setSituacao("Pago");
@@ -309,9 +311,9 @@ public class LocacaoController {
 	public ModelAndView finalizarLocacaoClientePJ(@PathVariable("locacaoID") Integer id) {
 
 		ModelAndView view = new ModelAndView();
-		view.setViewName("redirect:/exibeLocacoes");
+		view.setViewName("redirect:/exibeLocacoesAtiva");
 		LocacaoClientePJ locacao = (LocacaoClientePJ) locacaoService.buscaPorId(id);
-		System.out.println("==================================" + id);
+		
 
 		locacao.setSituacao("Pago");
 
@@ -403,7 +405,7 @@ public class LocacaoController {
 		view.setViewName("sucessoSalvar");
 		view.addObject("alertTitulo", "Sucesso ao salvar Devolução");
 		view.addObject("alertCorpo", "Você será direcionado para: Locações Finalizadas");
-		view.addObject("location", "/LocAuto/exibeLocacoes");
+		view.addObject("location", "/LocAuto/exibeLocacoesFinalizada");
 		
 		return view;
 		
@@ -421,14 +423,39 @@ public class LocacaoController {
 
 	}
 
-	@RequestMapping("/exibeLocacoes")
-	public ModelAndView exibirLocacoes() {
+	@RequestMapping("/exibeLocacoesAtiva")
+	public ModelAndView exibirLocacoesAtivas() {
 
 		ModelAndView view = new ModelAndView();
-		view.setViewName("exibeLocacoes");
+		view.setViewName("exibeLocacoesAtiva");
 
-		view.addObject("locacoesListPF", locacaoService.buscaPorTipoCliente("PF"));
-		view.addObject("locacoesListPJ", locacaoService.buscaPorTipoCliente("PJ"));
+		view.addObject("locacoesListPF", locacaoService.buscaPorTipoClienteStatus("PF", "Ativa"));
+		view.addObject("locacoesListPJ", locacaoService.buscaPorTipoClienteStatus("PJ", "Ativa"));
+
+		return view;
+
+	}
+	@RequestMapping("/exibeLocacoesFinalizada")
+	public ModelAndView exibirLocacoesFinalizada() {
+
+		ModelAndView view = new ModelAndView();
+		view.setViewName("exibeLocacoesFinalizada");
+
+		view.addObject("locacoesListPF", locacaoService.buscaPorTipoClienteStatus("PF", "Finalizada"));
+		view.addObject("locacoesListPJ", locacaoService.buscaPorTipoClienteStatus("PJ", "Finalizada"));
+
+		return view;
+
+	}
+	
+	@RequestMapping("/exibeLocacoesCancelada")
+	public ModelAndView exibirLocacoesCancelada() {
+
+		ModelAndView view = new ModelAndView();
+		view.setViewName("exibeLocacoesCancelada");
+
+		view.addObject("locacoesListPF", locacaoService.buscaPorTipoClienteStatus("PF", "Cancelada"));
+		view.addObject("locacoesListPJ", locacaoService.buscaPorTipoClienteStatus("PJ", "Cancelada"));
 
 		return view;
 

@@ -19,7 +19,8 @@
 	</div>
 
 	<div class="container">
-		<h1>Locacações Cliente PF</h1>
+	<h1>Locações Canceladas</h1><br><br>
+		<h3>Locacações Cliente PF</h3>
 	</div>
 	<c:if test="${!empty locacoesListPF}">
 		<div class="container">
@@ -35,7 +36,7 @@
 					<th scope="col">Nível do Tanque</th>
 					<th scope="col">Valor Total</th>
 					<th scope="col">Situação</th>
-					<th scope="col">Ação</th>
+					
 
 
 				</tr>
@@ -52,9 +53,7 @@
 						<td>${locacao.nivelDoTanque}</td>
 						<td>${locacao.valorTotalLocacao}</td>
 						<td>${locacao.situacao}</td>
-						<td><a href="#" class="badge badge-success">Finalizar
-								Locação</a><br> <br> <a href="#"
-							class="badge badge-danger">Cancelar Locacão</a></td>
+						
 					</tr>
 				</c:forEach>
 			</table>
@@ -64,7 +63,7 @@
 
 
 	<div class="container">
-		<h1>Locacações Cliente PJ</h1>
+		<h3>Locacações Cliente PJ</h3>
 	</div>
 	<c:if test="${!empty locacoesListPJ}">
 		<div class="container">
@@ -79,7 +78,7 @@
 					<th scope="col">Data de Entrega</th>
 					<th scope="col">Nível do Tanque</th>
 					<th scope="col">Situação</th>
-					<th scope="col">Ação</th>
+					
 
 				</tr>
 
@@ -95,9 +94,7 @@
 						<td>${locacao.nivelDoTanque}</td>
 						<td>${locacao.situacao}</td>
 
-						<td><a href="#" class="badge badge-success">Finalizar
-								Locação</a><br> <br> <a href="#"
-							class="badge badge-danger">Cancelar Locacão</a></td>
+						
 					</tr>
 				</c:forEach>
 			</table>
