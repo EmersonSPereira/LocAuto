@@ -75,11 +75,17 @@ public class ClienteController {
 	 * @return
 	 */
 	@RequestMapping(value = { "/salvaClientePF", "editarClientePF/salvaClientePF" }, method = RequestMethod.POST)
-	public String addClientePF(@ModelAttribute("clientePF") ClientePF clientePF, BindingResult result) {
+	public ModelAndView addClientePF(@ModelAttribute("clientePF") ClientePF clientePF, BindingResult result) {
 
 		clienteService.salvar(clientePF);
 
-		return "redirect:/exibeClientes";
+		ModelAndView view = new ModelAndView();
+		view.setViewName("sucessoSalvar");
+		view.addObject("alertTitulo", "Sucesso ao salvar Cliente");
+		view.addObject("alertCorpo", "Você será direcionado para: Clientes");
+		view.addObject("location", "/LocAuto/exibeClientes");
+		
+		return view;
 	}
 
 	/**
@@ -93,11 +99,17 @@ public class ClienteController {
 	 * @return
 	 */
 	@RequestMapping(value = { "/salvaClientePJ", "editarClientePJ/salvaClientePJ" }, method = RequestMethod.POST)
-	public String addClientePJ(@ModelAttribute("cliente") ClientePJ clientePJ, BindingResult result) {
+	public ModelAndView addClientePJ(@ModelAttribute("cliente") ClientePJ clientePJ, BindingResult result) {
 
 		clienteService.salvar(clientePJ);
 
-		return "redirect:/exibeClientes";
+		ModelAndView view = new ModelAndView();
+		view.setViewName("sucessoSalvar");
+		view.addObject("alertTitulo", "Sucesso ao salvar Cliente");
+		view.addObject("alertCorpo", "Você será direcionado para: Clientes");
+		view.addObject("location", "/LocAuto/exibeClientes");
+		
+		return view;
 	}
 
 	/**

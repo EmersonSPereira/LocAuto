@@ -62,11 +62,17 @@ public class AgenciaController {
 	 * @return
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addAgencia(@ModelAttribute("agencia") Agencia agencia, BindingResult result) {
+	public ModelAndView addAgencia(@ModelAttribute("agencia") Agencia agencia, BindingResult result) {
 
 		agenciaService.salvar(agencia);
 
-		return "redirect:/exibeAgencias";
+		ModelAndView view = new ModelAndView();
+		view.setViewName("sucessoSalvar");
+		view.addObject("alertTitulo", "Sucesso ao salvar Agência");
+		view.addObject("alertCorpo", "Você será direcionado para: Agências");
+		view.addObject("location", "/LocAuto/exibeAgencias");
+		
+		return view;
 	}
 	
 	/**

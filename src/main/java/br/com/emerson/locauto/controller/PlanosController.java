@@ -66,11 +66,17 @@ public class PlanosController {
 	 * @return
 	 */
 	@RequestMapping(value = { "/salvaPlanoC", "editarPlanoC/salvaPlanoC" }, method = RequestMethod.POST)
-	public String addPlanoC(@ModelAttribute("planoC") PlanosCarro planoCarro, BindingResult result) {
+	public ModelAndView addPlanoC(@ModelAttribute("planoC") PlanosCarro planoCarro, BindingResult result) {
 
 		planosService.salvar(planoCarro);
 
-		return "redirect:/exibePlanos";
+		ModelAndView view = new ModelAndView();
+		view.setViewName("sucessoSalvar");
+		view.addObject("alertTitulo", "Sucesso ao salvar Plano");
+		view.addObject("alertCorpo", "Você será direcionado para: Planos");
+		view.addObject("location", "/LocAuto/exibePlanos");
+		
+		return view;
 	}
 
 	/**
@@ -103,11 +109,17 @@ public class PlanosController {
 	 * @return
 	 */
 	@RequestMapping(value = { "/salvaPlanoM", "editarPlanoM/salvaPlanoM" }, method = RequestMethod.POST)
-	public String addPlanoM(@ModelAttribute("planoM") PlanosMoto planoMoto, BindingResult result) {
+	public ModelAndView addPlanoM(@ModelAttribute("planoM") PlanosMoto planoMoto, BindingResult result) {
 
 		planosService.salvar(planoMoto);
 
-		return "redirect:/exibePlanos";
+		ModelAndView view = new ModelAndView();
+		view.setViewName("sucessoSalvar");
+		view.addObject("alertTitulo", "Sucesso ao salvar Plano");
+		view.addObject("alertCorpo", "Você será direcionado para: Planos");
+		view.addObject("location", "/LocAuto/exibePlanos");
+		
+		return view;
 	}
 
 	/**

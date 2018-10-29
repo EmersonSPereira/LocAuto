@@ -62,11 +62,17 @@ public class VeiculoController {
 	 * @return
 	 */
 	@RequestMapping(value = { "/salvaVeiculoC", "editarVeiculoC/salvaVeiculoC" }, method = RequestMethod.POST)
-	public String addCarro(@ModelAttribute("veiculoC") Carro carro, BindingResult result) {
+	public ModelAndView addCarro(@ModelAttribute("veiculoC") Carro carro, BindingResult result) {
 
 		veiculoService.salvar(carro);
 
-		return "redirect:/exibeVeiculos";
+		ModelAndView view = new ModelAndView();
+		view.setViewName("sucessoSalvar");
+		view.addObject("alertTitulo", "Sucesso ao salvar Carro");
+		view.addObject("alertCorpo", "Você será direcionado para: Veículos");
+		view.addObject("location", "/LocAuto/exibeVeiculos");
+		
+		return view;
 	}
 
 	/**
@@ -95,11 +101,17 @@ public class VeiculoController {
 	 * @return
 	 */
 	@RequestMapping(value = { "/salvaVeiculoM", "editarVeiculoM/salvaVeiculoM" }, method = RequestMethod.POST)
-	public String addMotocicleta(@ModelAttribute("veiculoM") Motocicleta moto, BindingResult result) {
+	public ModelAndView addMotocicleta(@ModelAttribute("veiculoM") Motocicleta moto, BindingResult result) {
 
 		veiculoService.salvar(moto);
-
-		return "redirect:/exibeVeiculos";
+		
+		ModelAndView view = new ModelAndView();
+		view.setViewName("sucessoSalvar");
+		view.addObject("alertTitulo", "Sucesso ao salvar Motocicleta");
+		view.addObject("alertCorpo", "Você será direcionado para: Veículos");
+		view.addObject("location", "/LocAuto/exibeVeiculos");
+		
+		return view;
 	}
 
 	/**

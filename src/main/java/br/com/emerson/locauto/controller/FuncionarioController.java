@@ -63,11 +63,16 @@ public class FuncionarioController {
 	 */
 	@RequestMapping(value = { "/salvaFuncionarioG",
 			"editarFuncionarioG/salvaFuncionarioG" }, method = RequestMethod.POST)
-	public String addFuncionarioG(@ModelAttribute("funcionarioG") Gerente gerente, BindingResult result) {
+	public ModelAndView addFuncionarioG(@ModelAttribute("funcionarioG") Gerente gerente, BindingResult result) {
 
 		funcionarioService.salvar(gerente);
-
-		return "redirect:/exibeFuncionarios";
+		ModelAndView view = new ModelAndView();
+		view.setViewName("sucessoSalvar");
+		view.addObject("alertTitulo", "Sucesso ao salvar Gerente");
+		view.addObject("alertCorpo", "Você será direcionado para: Funcionários");
+		view.addObject("location", "/LocAuto/exibeFuncionarios");
+		
+		return view;
 	}
 
 	/**
@@ -95,11 +100,17 @@ public class FuncionarioController {
 	 */
 	@RequestMapping(value = { "/salvaFuncionarioL",
 			"editarFuncionarioL/salvaFuncionarioL" }, method = RequestMethod.POST)
-	public String addFuncionarioL(@ModelAttribute("funcionarioL") Locador locador, BindingResult result) {
+	public ModelAndView addFuncionarioL(@ModelAttribute("funcionarioL") Locador locador, BindingResult result) {
 
 		funcionarioService.salvar(locador);
 
-		return "redirect:/exibeFuncionarios";
+		ModelAndView view = new ModelAndView();
+		view.setViewName("sucessoSalvar");
+		view.addObject("alertTitulo", "Sucesso ao salvar Locador");
+		view.addObject("alertCorpo", "Você será direcionado para: Funcionários");
+		view.addObject("location", "/LocAuto/exibeFuncionarios");
+		
+		return view;
 	}
 
 	/**

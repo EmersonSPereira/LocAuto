@@ -23,8 +23,8 @@ public class HomeController {
 		
 		ModelAndView view = new  ModelAndView();
 		view.setViewName("home");
-		view.addObject("locacoesListPF", locacaoService.buscaPorTipoCliente("PF"));
-		view.addObject("locacoesListPJ", locacaoService.buscaPorTipoCliente("PJ"));
+		view.addObject("locacoesListPF", locacaoService.buscaPorTipoClienteStatus("PF", "Ativa"));
+		view.addObject("locacoesListPJ", locacaoService.buscaPorTipoClienteStatus("PJ", "Ativa"));
 		
 		
 		return view;

@@ -36,6 +36,8 @@
 					<th scope="col">Nível do Tanque</th>
 					<th scope="col">Valor Total</th>
 					<th scope="col">Situação</th>
+					<th scope="col">Status Locacão</th>
+					
 					
 
 
@@ -53,6 +55,7 @@
 						<td>${locacao.nivelDoTanque}</td>
 						<td>${locacao.valorTotalLocacao}</td>
 						<td>${locacao.situacao}</td>
+						<td>${locacao.status}</td>
 						
 					</tr>
 				</c:forEach>

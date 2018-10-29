@@ -323,6 +323,96 @@ public class LocacaoController {
 
 	}
 
+	@RequestMapping("/locacaoClientePJ/calcularDebitos/{locacaoID}")
+	public ModelAndView calcularDebitosClientePJ(@PathVariable("locacaoID") Integer id) {
+
+		ModelAndView view = new ModelAndView();
+		view.setViewName("saldarDebitosClientePJ");
+		view.addObject("devolucao", new Devolucao());
+
+		LocacaoClientePJ locacao = (LocacaoClientePJ) locacaoService.buscaPorId(id);
+		ClientePJ cliente = (ClientePJ) clienteService.buscaPorId(locacao.getClientePJ().getId());
+		Locador locador = (Locador) funcionarioService.buscaPorId(locacao.getLocador().getId());
+		Planos plano = planosService.buscaPorId(locacao.getPlano().getId());
+		Veiculo veiculo = veiculoService.buscaPorId(locacao.getVeiculo().getId());
+
+		view.addObject("locacao", locacao);
+		view.addObject("nomeCliente", cliente.getNomeFantasia());
+		view.addObject("nomeLocador", locador.getNome());
+		view.addObject("plano", plano);
+		view.addObject("modeloVeiculo", veiculo.getModelo());
+
+		return view;
+
+	}
+
+	@RequestMapping(value = "/locacaoClientePJ/finalizarSaldarDebitos", method = RequestMethod.POST)
+	public ModelAndView finalizarSaldarDebitosClientePJ(@ModelAttribute("devolucao") Devolucao devolucao,
+			BindingResult result) throws ParseException {
+
+		LocacaoClientePJ locacao = (LocacaoClientePJ) locacaoService.buscaPorId(devolucao.getLocacaoId());
+		Planos plano = planosService.buscaPorId(locacao.getPlano().getId());
+		ClientePJ cliente = (ClientePJ) clienteService.buscaPorId(locacao.getClientePJ().getId());
+		Locador locador = (Locador) funcionarioService.buscaPorId(locacao.getLocador().getId());
+		Veiculo veiculo = veiculoService.buscaPorId(locacao.getVeiculo().getId());
+
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		Date dtDevolucaoPrevista = formato.parse(locacao.getDataDevolucao());
+
+		DateTime dataDevolucaoFinal = new DateTime();
+		DateTime dataDevolucaoPrevista = new DateTime(dtDevolucaoPrevista);
+
+		int diasDeAtraso = calculaDiasLocacao(dataDevolucaoPrevista, dataDevolucaoFinal) ;
+		int valorDiaria = plano.getValorDiaria();
+		int valorMulta = (5 * (diasDeAtraso * plano.getValorDiaria())) / 100;
+		int valorDiariasAtrasadas = diasDeAtraso * valorDiaria;
+		int valorTotalatraso = valorDiariasAtrasadas + valorMulta;
+		int taxaAbastecimento = calculaTanque(devolucao.getNivelDoTanque());
+		int danos = calculaDanos(devolucao.getDanos());
+		int totalDevolucao = valorTotalatraso + taxaAbastecimento + danos;
+
+		locacao.setValorTotalLocacao(locacao.getValorTotalLocacao() + valorTotalatraso);
+		locacaoService.salvar(locacao);
+
+		ModelAndView view = new ModelAndView();
+		view.setViewName("finalizarSaldarDebitosPJ");
+
+		view.addObject("locacao", locacao);
+		view.addObject("nomeCliente", cliente.getNomeFantasia());
+		view.addObject("nomeLocador", locador.getNome());
+		view.addObject("plano", plano);
+		view.addObject("modeloVeiculo", veiculo.getModelo());
+		view.addObject("diasDeAtraso", diasDeAtraso);
+		view.addObject("valorMulta", valorMulta);
+		view.addObject("valorTotalatraso", valorTotalatraso);
+		view.addObject("valorDiariasAtrasadas", valorDiariasAtrasadas);
+		view.addObject("danos", danos);
+		view.addObject("taxaAbastecimento", taxaAbastecimento);
+		view.addObject("totalDevolucao", totalDevolucao);
+		
+		return view;
+
+	}
+	
+	@RequestMapping("/locacaoClientePJ/finalizarSaldarDebitos/finalizar/{locacaoID}")
+	public ModelAndView finalizarDebitosClientePJ(@PathVariable("locacaoID") Integer id) {
+		
+		LocacaoClientePJ locacao = (LocacaoClientePJ) locacaoService.buscaPorId(id);
+		locacao.setStatus("Finalizada");
+		locacaoService.salvar(locacao);
+		
+		ModelAndView view = new ModelAndView();
+		view.setViewName("sucessoSalvar");
+		view.addObject("alertTitulo", "Sucesso ao salvar Devolução");
+		view.addObject("alertCorpo", "Você será direcionado para: Locações Finalizadas");
+		view.addObject("location", "/LocAuto/exibeLocacoesFinalizada");
+		
+		return view;
+		
+	}
+	
+
+
 	@RequestMapping("/locacaoClientePF/calcularDebitos/{locacaoID}")
 	public ModelAndView calcularDebitosClientePF(@PathVariable("locacaoID") Integer id) {
 
@@ -410,18 +500,23 @@ public class LocacaoController {
 		return view;
 		
 	}
-
-	@RequestMapping("/locacaoClientePJ/calcularDebitos/{locacaoID}")
-	public ModelAndView calcularDebitosClientePJ(@PathVariable("locacaoID") Integer id) {
-
+	
+	@RequestMapping("/locacao/cancelar/{locacaoID}")
+	public ModelAndView cancelarLocacao(@PathVariable("locacaoID") Integer idLocacao) {
+		
+		Locacao locacao = locacaoService.buscaPorId(idLocacao);
+		locacao.setStatus("Cancelada");
+		locacaoService.salvar(locacao);
+		
 		ModelAndView view = new ModelAndView();
-		view.setViewName("calcalarDebitosPJ");
-		LocacaoClientePJ locacao = (LocacaoClientePJ) locacaoService.buscaPorId(id);
-		view.addObject("locacao", locacao);
-
+		view.setViewName("sucessoSalvar");
+		view.addObject("alertTitulo", "Sucesso ao cancelar locação");
+		view.addObject("alertCorpo", "Você será direcionado para: Locações Canceladas");
+		view.addObject("location", "/LocAuto/exibeLocacoesCancelada");
+		
 		return view;
-
 	}
+
 
 	@RequestMapping("/exibeLocacoesAtiva")
 	public ModelAndView exibirLocacoesAtivas() {

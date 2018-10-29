@@ -81,7 +81,7 @@
 			<div class="form-group">
 				<form:label path="ano">Ano:</form:label>
 				<form:input required="true" class="form-control" path="ano"
-					placeholder="digite o ano com 4 dígitos, ex:1999" />
+					placeholder="digite o ano com 4 dígitos, ex:1999" maxlength="4" />
 			</div>
 			<div class="form-group">
 				<form:label path="cor">Cor:</form:label>

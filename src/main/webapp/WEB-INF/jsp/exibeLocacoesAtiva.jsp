@@ -34,7 +34,46 @@ function redirecionarFinalizarPF(id){
 </script>
 <script>
 function redirecionarCancelarPF(id){
-	var url = 'editar/'+ id;
+	var url = '/LocAuto/locacao/cancelar/'+ id;
+	swal({
+		  title: "Deseja mesmo cancelar esta locação?",
+		  text: "A locação será cancelada e você será direcionado para Locações Canceladas.",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  window.location = url ;
+		  } else {
+		    swal("Operação Cancelada");
+		  }
+		});
+}
+</script>
+
+<script type="text/javascript">
+function redirecionarFinalizarPJ(id){
+	var url = '/LocAuto/locacaoClientePJ/calcularDebitos/'+ id;
+	swal({
+		  title: "Deseja Mesmo Finalizar/SaldarDebitos desta Locação?",
+		  text: "Você sera direcionado para Tela onde será calculado o valor da devolução ",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  window.location = url ;
+		  } else {
+		    swal("Operação Cancelada");
+		  }
+		});
+}
+</script>
+<script>
+function redirecionarCancelarPJ(id){
+	var url = '/LocAuto/locacao/cancelar/'+ id;
 	swal({
 		  title: "Deseja mesmo cancelar esta locação?",
 		  text: "A locação será cancelada e você será direcionado para Locações Canceladas.",
@@ -93,11 +132,14 @@ function redirecionarCancelarPF(id){
 						<td>${locacao.nivelDoTanque}</td>
 						<td>${locacao.valorTotalLocacao}</td>
 						<td>${locacao.situacao}</td>
-						<td><a href="#" class="badge badge-success">Finalizar
-								Locação</a><br> <br> <a href="#"
-							class="badge badge-danger">Cancelar Locacão</a>
-							<button class="btn btn-warning btn-sm" onclick="redirecionarFinalizarPF(${locacao.id});">Finalizar</button>
-							<button class="btn btn-danger btn-sm" onclick="redirecionarCancelarPF(${locacao.id});">Cancelar</button></td>
+						<td>
+							<button class="btn btn-success btn-sm"
+								onclick="redirecionarFinalizarPF(${locacao.id});">Finalizar</button>
+							<br>
+						<br>
+							<button class="btn btn-danger btn-sm"
+								onclick="redirecionarCancelarPF(${locacao.id});">Cancelar</button>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -138,9 +180,13 @@ function redirecionarCancelarPF(id){
 						<td>${locacao.nivelDoTanque}</td>
 						<td>${locacao.situacao}</td>
 
-						<td><a href="#" class="badge badge-success">Finalizar
-								Locação</a><br> <br> <a href="#"
-							class="badge badge-danger">Cancelar Locacão</a></td>
+						<td><button class="btn btn-success btn-sm"
+								onclick="redirecionarFinalizarPJ(${locacao.id});">Finalizar</button>
+							<br>
+						<br>
+							<button class="btn btn-danger btn-sm"
+								onclick="redirecionarCancelarPJ(${locacao.id});">Cancelar</button></td>
+						
 					</tr>
 				</c:forEach>
 			</table>
