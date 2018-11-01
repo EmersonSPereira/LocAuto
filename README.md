@@ -13,7 +13,7 @@
 5 - Execulte a aplicação no servidor TOMCAT.<br>
 
 Obs.: * Requerido MySql 5.7<br>
-=====================================Instruções de Uso=========================================================
+========================Instruções de Uso==============================
 
 1. Logar na aplicação Login: admin,Senha: 1234
 2. Cadastre um Gerênte.
