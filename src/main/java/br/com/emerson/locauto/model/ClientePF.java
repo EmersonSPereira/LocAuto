@@ -14,6 +14,10 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value = "PF")
 public class ClientePF extends Cliente {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nome;
 	private String cpf;
 	private String rg;

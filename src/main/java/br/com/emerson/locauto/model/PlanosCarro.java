@@ -13,6 +13,10 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value = "PC")
 public class PlanosCarro extends Planos {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String acessorios;
 	private String potencia;
 	

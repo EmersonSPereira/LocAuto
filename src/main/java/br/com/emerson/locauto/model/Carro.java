@@ -14,6 +14,10 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value = "C")
 public class Carro extends Veiculo {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String acessorios;
 	private String potencia;
 	public String getAcessorios() {

@@ -17,7 +17,11 @@ import br.com.emerson.locauto.model.ClientePF;
 import br.com.emerson.locauto.model.ClientePJ;
 import br.com.emerson.locauto.model.Veiculo;
 import br.com.emerson.locauto.service.ClienteService;
-
+/**
+ * Esta é uma classe de test e testa o DAO: Cliente
+ * @author Emerson
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-servlet-test.xml" })
 public class ClienteDAOTest {

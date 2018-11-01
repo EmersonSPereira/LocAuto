@@ -55,6 +55,8 @@ public class LocacaoController {
 	private FuncionarioService funcionarioService;
 
 	/**
+	 * Este método recebe uma requisição "/locacaoClientePF" e retorna uma view de
+	 * cadastro para um clientePF
 	 * 
 	 * @return
 	 */
@@ -73,6 +75,14 @@ public class LocacaoController {
 		return view;
 	}
 
+	/**
+	 * Este método recebe uma requisição post"/locacaoClientePF/salvar"" com um
+	 * formulário ClientePF e salva o cliente no Banco
+	 * 
+	 * @param locacao
+	 * @param result
+	 * @return
+	 */
 	@RequestMapping(value = "/locacaoClientePF/salvar", method = RequestMethod.POST)
 	public ModelAndView salvarLocacao(@ModelAttribute("locacao") LocacaoClientePF locacao, BindingResult result) {
 
@@ -173,6 +183,12 @@ public class LocacaoController {
 
 	}
 
+	/**
+	 * Este método recebe uma requisição "/locacaoClientePJ" e retorna uma view de
+	 * cadastro para um clientePJ
+	 * 
+	 * @return
+	 */
 	@RequestMapping("/locacaoClientePJ")
 	public ModelAndView LocacaoClientePJ() {
 
@@ -188,6 +204,14 @@ public class LocacaoController {
 		return view;
 	}
 
+	/**
+	 * Este método recebe uma requisição post"/locacaoClientePJ/salvar"" com um
+	 * formulário ClientePJ e salva o cliente no Banco
+	 * 
+	 * @param locacao
+	 * @param result
+	 * @return
+	 */
 	@RequestMapping(value = "/locacaoClientePJ/salvar", method = RequestMethod.POST)
 	public ModelAndView salvarLocacaoClientePJ(@ModelAttribute("locacao") LocacaoClientePJ locacao,
 			BindingResult result) {
@@ -292,6 +316,12 @@ public class LocacaoController {
 
 	}
 
+	/**
+	 * Este método trata a requisição "/locacaoClientePF/finalizar/{locacaoID}" é execultado após o cliente 
+	 * Fazer o pagamento para pegar o veículo
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("/locacaoClientePF/finalizar/{locacaoID}")
 	public ModelAndView finalizarLocacaoClientePF(@PathVariable("locacaoID") Integer id) {
 
@@ -307,13 +337,18 @@ public class LocacaoController {
 
 	}
 
+	/**
+	 *  Este método trata a requisição "/locacaoClientePJ/finalizar/{locacaoID}" é execultado após o cliente 
+	 * Fazer o pagamento para pegar o veículo
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("/locacaoClientePJ/finalizar/{locacaoID}")
 	public ModelAndView finalizarLocacaoClientePJ(@PathVariable("locacaoID") Integer id) {
 
 		ModelAndView view = new ModelAndView();
 		view.setViewName("redirect:/exibeLocacoesAtiva");
 		LocacaoClientePJ locacao = (LocacaoClientePJ) locacaoService.buscaPorId(id);
-		
 
 		locacao.setSituacao("Pago");
 
@@ -323,6 +358,12 @@ public class LocacaoController {
 
 	}
 
+	/**
+	 * Este método trata a requisição "/locacaoClientePJ/calcularDebitos/{locacaoID}" e retorna uma view com os dados da locação
+	 * e um form onde será preenchido os dados da devolução.
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("/locacaoClientePJ/calcularDebitos/{locacaoID}")
 	public ModelAndView calcularDebitosClientePJ(@PathVariable("locacaoID") Integer id) {
 
@@ -346,6 +387,14 @@ public class LocacaoController {
 
 	}
 
+	/**
+	 * Esté método trata a requisição "/locacaoClientePJ/finalizarSaldarDebitos" e retorna uma view com os dados
+	 * para pagamento da devolução.
+	 * @param devolucao
+	 * @param result
+	 * @return
+	 * @throws ParseException
+	 */
 	@RequestMapping(value = "/locacaoClientePJ/finalizarSaldarDebitos", method = RequestMethod.POST)
 	public ModelAndView finalizarSaldarDebitosClientePJ(@ModelAttribute("devolucao") Devolucao devolucao,
 			BindingResult result) throws ParseException {
@@ -362,7 +411,7 @@ public class LocacaoController {
 		DateTime dataDevolucaoFinal = new DateTime();
 		DateTime dataDevolucaoPrevista = new DateTime(dtDevolucaoPrevista);
 
-		int diasDeAtraso = calculaDiasLocacao(dataDevolucaoPrevista, dataDevolucaoFinal) ;
+		int diasDeAtraso = calculaDiasLocacao(dataDevolucaoPrevista, dataDevolucaoFinal);
 		int valorDiaria = plano.getValorDiaria();
 		int valorMulta = (5 * (diasDeAtraso * plano.getValorDiaria())) / 100;
 		int valorDiariasAtrasadas = diasDeAtraso * valorDiaria;
@@ -389,30 +438,40 @@ public class LocacaoController {
 		view.addObject("danos", danos);
 		view.addObject("taxaAbastecimento", taxaAbastecimento);
 		view.addObject("totalDevolucao", totalDevolucao);
-		
+
 		return view;
 
 	}
-	
+
+	/**
+	 * Este método trata a requisição  "/locacaoClientePJ/finalizarSaldarDebitos/finalizar/{locacaoID}" e seta
+	 * o status da locação para "Finalizada".
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("/locacaoClientePJ/finalizarSaldarDebitos/finalizar/{locacaoID}")
 	public ModelAndView finalizarDebitosClientePJ(@PathVariable("locacaoID") Integer id) {
-		
+
 		LocacaoClientePJ locacao = (LocacaoClientePJ) locacaoService.buscaPorId(id);
 		locacao.setStatus("Finalizada");
 		locacaoService.salvar(locacao);
-		
+
 		ModelAndView view = new ModelAndView();
 		view.setViewName("sucessoSalvar");
 		view.addObject("alertTitulo", "Sucesso ao salvar Devolução");
 		view.addObject("alertCorpo", "Você será direcionado para: Locações Finalizadas");
 		view.addObject("location", "/LocAuto/exibeLocacoesFinalizada");
-		
+
 		return view;
-		
+
 	}
-	
 
-
+	/**
+	 * Este método trata a requisição "/locacaoClientePF/calcularDebitos/{locacaoID}" e retorna uma view com os dados da locação
+	 * e um form onde será preenchido os dados da devolução.
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("/locacaoClientePF/calcularDebitos/{locacaoID}")
 	public ModelAndView calcularDebitosClientePF(@PathVariable("locacaoID") Integer id) {
 
@@ -436,6 +495,14 @@ public class LocacaoController {
 
 	}
 
+	/**
+	 * Esté método trata a requisição "/locacaoClientePF/finalizarSaldarDebitos" e retorna uma view com os dados
+	 * para pagamento da devolução.
+	 * @param devolucao
+	 * @param result
+	 * @return
+	 * @throws ParseException
+	 */
 	@RequestMapping(value = "/locacaoClientePf/finalizarSaldarDebitos", method = RequestMethod.POST)
 	public ModelAndView finalizarSaldarDebitosClientePF(@ModelAttribute("devolucao") Devolucao devolucao,
 			BindingResult result) throws ParseException {
@@ -452,7 +519,7 @@ public class LocacaoController {
 		DateTime dataDevolucaoFinal = new DateTime();
 		DateTime dataDevolucaoPrevista = new DateTime(dtDevolucaoPrevista);
 
-		int diasDeAtraso = calculaDiasLocacao(dataDevolucaoPrevista, dataDevolucaoFinal) ;
+		int diasDeAtraso = calculaDiasLocacao(dataDevolucaoPrevista, dataDevolucaoFinal);
 		int valorDiaria = plano.getValorDiaria();
 		int valorMulta = (5 * (diasDeAtraso * plano.getValorDiaria())) / 100;
 		int valorDiariasAtrasadas = diasDeAtraso * valorDiaria;
@@ -479,45 +546,59 @@ public class LocacaoController {
 		view.addObject("danos", danos);
 		view.addObject("taxaAbastecimento", taxaAbastecimento);
 		view.addObject("totalDevolucao", totalDevolucao);
-		
+
 		return view;
 
 	}
-	
+
+	/**
+	 * Este método trata a requisição  "/locacaoClientePF/finalizarSaldarDebitos/finalizar/{locacaoID}" e seta
+	 * o status da locação para "Finalizada".
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("/locacaoClientePf/finalizarSaldarDebitos/finalizar/{locacaoID}")
 	public ModelAndView finalizarDebitosClientePF(@PathVariable("locacaoID") Integer id) {
-		
+
 		LocacaoClientePF locacao = (LocacaoClientePF) locacaoService.buscaPorId(id);
 		locacao.setStatus("Finalizada");
 		locacaoService.salvar(locacao);
-		
+
 		ModelAndView view = new ModelAndView();
 		view.setViewName("sucessoSalvar");
 		view.addObject("alertTitulo", "Sucesso ao salvar Devolução");
 		view.addObject("alertCorpo", "Você será direcionado para: Locações Finalizadas");
 		view.addObject("location", "/LocAuto/exibeLocacoesFinalizada");
-		
+
 		return view;
-		
+
 	}
-	
+
+	/**
+	 * Este méto trata a requisição "/locacao/cancelar/{locacaoID}" e seta seu status para "Cancelada"
+	 * @param idLocacao
+	 * @return
+	 */
 	@RequestMapping("/locacao/cancelar/{locacaoID}")
 	public ModelAndView cancelarLocacao(@PathVariable("locacaoID") Integer idLocacao) {
-		
+
 		Locacao locacao = locacaoService.buscaPorId(idLocacao);
 		locacao.setStatus("Cancelada");
 		locacaoService.salvar(locacao);
-		
+
 		ModelAndView view = new ModelAndView();
 		view.setViewName("sucessoSalvar");
 		view.addObject("alertTitulo", "Sucesso ao cancelar locação");
 		view.addObject("alertCorpo", "Você será direcionado para: Locações Canceladas");
 		view.addObject("location", "/LocAuto/exibeLocacoesCancelada");
-		
+
 		return view;
 	}
 
-
+	/**
+	 * Este método trata a requisição "/exibeLocacoesAtiva" e retorna um view com as locações Ativas.
+	 * @return
+	 */
 	@RequestMapping("/exibeLocacoesAtiva")
 	public ModelAndView exibirLocacoesAtivas() {
 
@@ -530,6 +611,11 @@ public class LocacaoController {
 		return view;
 
 	}
+
+	/**
+	 * Este método trata a requisição "/exibeLocacoesFinalizada" e retorna um view com as locações Finalizadas.
+	 * @return
+	 */
 	@RequestMapping("/exibeLocacoesFinalizada")
 	public ModelAndView exibirLocacoesFinalizada() {
 
@@ -542,7 +628,11 @@ public class LocacaoController {
 		return view;
 
 	}
-	
+
+	/**
+	 * Este método trata a requisição "/exibeLocacoesCancelada" e retorna um view com as locações Canceladas.
+	 * @return
+	 */
 	@RequestMapping("/exibeLocacoesCancelada")
 	public ModelAndView exibirLocacoesCancelada() {
 
@@ -622,7 +712,7 @@ public class LocacaoController {
 		} else if (danos.equals("rouboPerda")) {
 			valor = 5000;
 		}
-		
+
 		return valor;
 	}
 }

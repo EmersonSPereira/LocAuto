@@ -20,7 +20,11 @@ import br.com.emerson.locauto.controller.ClienteController;
 import br.com.emerson.locauto.model.ClientePF;
 import br.com.emerson.locauto.model.ClientePJ;
 import br.com.emerson.locauto.service.ClienteService;
-
+/**
+ * Esta é uma classe de test e testa a classe: ClienteController
+ * @author Emerson
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-servlet-test.xml" })
 public class ClienteControllerTest {
@@ -75,13 +79,13 @@ public class ClienteControllerTest {
 	@Test
 	public void testAddCliente() throws Exception {
 		mockMvc.perform(post("/salvaClientePF"))
-        .andExpect(view().name("redirect:/exibeClientes"));
+        .andExpect(view().name("sucessoSalvar"));
 	}
 
 	@Test
 	public void testAddClientePJ() throws Exception {
 		mockMvc.perform(post("/salvaClientePJ"))
-		.andExpect(view().name("redirect:/exibeClientes"));
+		.andExpect(view().name("sucessoSalvar"));
 	}
 
 	@Test

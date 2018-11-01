@@ -22,24 +22,36 @@ public class ClienteServiceImpl implements ClienteService {
 	@Autowired
 	private ClienteDAO dao;
 
+	/**
+	 * Este método usa DAO para salvar um cliente no banco
+	 */
 	@Transactional
 	public Cliente salvar(Cliente cliente) {
 
 		return dao.salvar(cliente);
 	}
 
+	/**
+	 * Este método usa DAO para buscar um cliente pelo id
+	 */
 	@Transactional
 	public Cliente buscaPorId(Integer id) {
 
 		return dao.buscaPorId(id);
 	}
 
+	/**
+	 * Este método usa DAO para buscar todos os clientes no banco
+	 */
 	@Transactional
 	public List<Cliente> buscaTodos() {
 
 		return dao.buscaTodos();
 	}
 	
+	/**
+	 * Este método usa DAO para buscar os clientes por tipo no banco
+	 */
 	@Transactional
 	public List<Cliente> buscaPorTipo(String tipo) {
 

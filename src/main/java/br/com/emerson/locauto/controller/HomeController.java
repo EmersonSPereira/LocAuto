@@ -17,7 +17,10 @@ public class HomeController {
 	
 	@Autowired
 	LocacaoService locacaoService;
-	
+	/**
+	 * Este método recebe uma requisição "/" e retorna a HomePage
+	 * @return
+	 */
 	@RequestMapping("/")
 	public ModelAndView homePage() {
 		

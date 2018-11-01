@@ -11,16 +11,18 @@ import org.springframework.stereotype.Repository;
 
 import br.com.emerson.locauto.model.Locacao;
 import br.com.emerson.locauto.model.LocacaoClientePF;
+
 /**
  * @author Emerson Sousa
  * 
- * Esta classe faz o gerenciamento (CRUD) da classe Locacao no banco de dados
+ *         Esta classe faz o gerenciamento (CRUD) da classe Locacao no banco de
+ *         dados
  */
 @Repository
 public class LocacaoDAOImpl implements LocacaoDAO {
 
-private final Logger logger = LoggerFactory.getLogger(LocacaoDAOImpl.class);
-	
+	private final Logger logger = LoggerFactory.getLogger(LocacaoDAOImpl.class);
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -35,51 +37,52 @@ private final Logger logger = LoggerFactory.getLogger(LocacaoDAOImpl.class);
 
 		logger.info("Iniciando transação para salvar/editar registro da Locacao");
 		try {
-			
+
 			sessionFactory.getCurrentSession().saveOrUpdate(locacao);
-			
+
 			logger.info("Locacao salva com sucesso");
-			
+
 		} catch (Exception e) {
-			
-			logger.error("Falha ao salvar Locacao: " + e.getMessage() );
+
+			logger.error("Falha ao salvar Locacao: " + e.getMessage());
 		}
-		
-		
+
 		return locacao;
 //		
 	}
 
 	/**
-	 * Busca  a agência no banco de dados pelo o id passado como parâmetro e retorna a agência encontrada.
+	 * Busca a Locacao no banco de dados pelo o id passado como parâmetro e retorna
+	 * a agência encontrada.
+	 * 
 	 * @param id
 	 * @return
 	 */
 	public Locacao buscaPorId(Integer id) {
 
 		Locacao locacao = null;
-		
+
 		logger.info("Iniciando transação para buscar registro da Locacao por id");
-		
+
 		try {
-			
-			locacao  =  sessionFactory.getCurrentSession().find(Locacao.class, id);
-			
+
+			locacao = sessionFactory.getCurrentSession().find(Locacao.class, id);
+
 			logger.info("Locacao encontrada com sucesso");
-			
+
 		} catch (Exception e) {
-			
-			logger.error("Falha ao buscar Locacao: " + e.getMessage() );
+
+			logger.error("Falha ao buscar Locacao: " + e.getMessage());
 		}
-		
-		
+
 		return locacao;
 //		
 
 	}
-	
+
 	/**
-	 * Recupera as Locacaos pelo tipo de cliente passado pelo parametro podendo ser PF ou PJ
+	 * Recupera as Locacaos pelo tipo de cliente passado pelo parametro podendo ser
+	 * PF ou PJ
 	 * 
 	 * @param tipo
 	 * @return
@@ -114,23 +117,21 @@ private final Logger logger = LoggerFactory.getLogger(LocacaoDAOImpl.class);
 	public List<Locacao> buscaTodos() {
 
 		List<Locacao> Locacacoes = null;
-		
-		logger.info("Iniciando transação para buscar todas as Locacaos no banco");
-		
-		try {
-			
-			Locacacoes = sessionFactory.getCurrentSession().createQuery("from Locacao", Locacao.class).list();
-			
-			logger.info("Locacaos encontrada com sucesso");
-			
-		} catch (Exception e) {
-			
-			logger.error("Falha ao buscar Locacaos: " + e.getMessage() );
 
+		logger.info("Iniciando transação para buscar todas as Locacaos no banco");
+
+		try {
+
+			Locacacoes = sessionFactory.getCurrentSession().createQuery("from Locacao", Locacao.class).list();
+
+			logger.info("Locacaos encontrada com sucesso");
+
+		} catch (Exception e) {
+
+			logger.error("Falha ao buscar Locacaos: " + e.getMessage());
 
 		}
-		
-		
+
 		return Locacacoes;
 //		
 	}
@@ -145,39 +146,39 @@ private final Logger logger = LoggerFactory.getLogger(LocacaoDAOImpl.class);
 	public boolean deleta(Integer id) {
 
 		LocacaoClientePF locacao = null;
-		
+
 		logger.info("Iniciando transação para deletar Locacao no banco");
-		
+
 		try {
-			
+
 			locacao = sessionFactory.getCurrentSession().find(LocacaoClientePF.class, id);
-			
-			if(locacao != null) {
-				
+
+			if (locacao != null) {
+
 				sessionFactory.getCurrentSession().delete(locacao);
-				
+
 				logger.info("sucesso ao deletar Locacao");
-				
+
 				return true;
-			}else {
-				
+			} else {
+
 				logger.error("Falha ao deletar Locacao com id = " + id + " não existe");
 			}
-			
+
 		} catch (Exception e) {
-			
+
 			logger.error("Falha ao deletar Locacao" + "erro:" + e.getMessage());
 		}
 		return false;
-		
-		
-		
-		
-		
+
 	}
 
+	/**
+	 * Recupera as Locacaos pelo tipo de cliente, podendo ser PF ou PJ e por status da locação  podendo ser
+	 * "Ativa", "Cancelada", "Finalizada".
+	 */
 	public List<Locacao> buscaPorTipoClienteStatus(String clienteTipo, String status) {
-		
+
 		List<Locacao> Locacao = null;
 
 		logger.info("Iniciando transação para buscar Locacaos por tipo e situação no banco");
@@ -185,7 +186,8 @@ private final Logger logger = LoggerFactory.getLogger(LocacaoDAOImpl.class);
 		try {
 
 			Locacao = sessionFactory.getCurrentSession()
-					.createQuery("select c from Locacao c where c.cliente = :tipoCliente and c.status =:status", Locacao.class)
+					.createQuery("select c from Locacao c where c.cliente = :tipoCliente and c.status =:status",
+							Locacao.class)
 					.setParameter("tipoCliente", clienteTipo).setParameter("status", status).getResultList();
 
 			logger.info("Locacaos encontrado com sucesso");
@@ -197,8 +199,5 @@ private final Logger logger = LoggerFactory.getLogger(LocacaoDAOImpl.class);
 
 		return Locacao;
 	}
-
-	
-
 
 }

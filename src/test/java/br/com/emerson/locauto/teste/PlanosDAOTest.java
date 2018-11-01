@@ -20,7 +20,11 @@ import br.com.emerson.locauto.model.Planos;
 import br.com.emerson.locauto.model.PlanosCarro;
 import br.com.emerson.locauto.model.PlanosMoto;
 import br.com.emerson.locauto.service.PlanosService;
-
+/**
+ * Esta é uma classe de test e testa o DAO: Planos
+ * @author Emerson
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-servlet-test.xml" })
 public class PlanosDAOTest {

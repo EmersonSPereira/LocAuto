@@ -1,7 +1,11 @@
 package br.com.emerson.locauto.model;
 
 import java.util.Date;
-
+/**
+ * Esta classe representa uma devolução na aplicação.
+ * @author Emerson
+ *
+ */
 public class Devolucao {
 
 	private Integer locacaoId;

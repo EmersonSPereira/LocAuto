@@ -14,6 +14,10 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value = "PJ")
 public class ClientePJ extends Cliente {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String cnpj;
 	private String razaoSocial;
 	private String nomeFantasia;

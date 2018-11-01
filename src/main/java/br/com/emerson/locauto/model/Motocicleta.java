@@ -13,6 +13,10 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value = "M")
 public class Motocicleta extends Veiculo {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String cilindradas;
 	private String freios;
 

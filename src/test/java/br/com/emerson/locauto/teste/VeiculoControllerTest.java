@@ -17,7 +17,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.emerson.locauto.controller.VeiculoController;
-
+/**
+ * Esta é uma classe de test e testa a classe: VeiculoController
+ * @author Emerson
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-servlet-test.xml" })
 public class VeiculoControllerTest {
@@ -49,7 +53,7 @@ public class VeiculoControllerTest {
 	public void testAddCarro() throws Exception {
 
 		mockMvc.perform(post("/salvaVeiculoC"))
-        .andExpect(view().name("redirect:/exibeVeiculos"));
+        .andExpect(view().name("sucessoSalvar"));
 	}
 
 	@Test
@@ -64,7 +68,7 @@ public class VeiculoControllerTest {
 	public void testAddMotocicleta() throws Exception {
 
 		mockMvc.perform(post("/salvaVeiculoM"))
-        .andExpect(view().name("redirect:/exibeVeiculos"));
+        .andExpect(view().name("sucessoSalvar"));
 	}
 
 	/*@Test

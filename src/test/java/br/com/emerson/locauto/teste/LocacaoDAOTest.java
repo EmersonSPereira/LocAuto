@@ -21,7 +21,11 @@ import br.com.emerson.locauto.model.Locacao;
 import br.com.emerson.locauto.model.LocacaoClientePF;
 import br.com.emerson.locauto.service.ClienteService;
 import br.com.emerson.locauto.service.LocacaoService;
-
+/**
+ * Esta é uma classe de test e testa o DAO: Locacao
+ * @author Emerson
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-servlet-test.xml"})
 public class LocacaoDAOTest {
@@ -43,7 +47,9 @@ public class LocacaoDAOTest {
 		clienteService.salvar(clientepf);
 		lc1 = new Locacao();
 		lc1.setNivelDoTanque("Cheio");
+		
 		lc2 = new LocacaoClientePF();
+		lc2.setStatus("Ativa");
 		lc2.setClientePF(clientepf);
 		
 	}
@@ -85,6 +91,13 @@ public class LocacaoDAOTest {
 		
 		Integer idValido = dao.salvar(lc2).getId();
 		assertTrue(dao.deleta(idValido));
+	}
+	
+	@Test
+	public void testBuscaporTipoStatus() {
+		dao.salvar(lc2);
+		locacoes = dao.buscaPorTipoClienteStatus("PF", "Ativa");
+		assertFalse(locacoes.isEmpty());
 	}
 
 }

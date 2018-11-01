@@ -12,6 +12,10 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue(value = "PM")
 public class PlanosMoto extends Planos {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer cilindradas;
 
 	public Integer getCilindradas() {

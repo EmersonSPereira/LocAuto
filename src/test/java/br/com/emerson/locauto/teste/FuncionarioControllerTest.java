@@ -21,7 +21,11 @@ import br.com.emerson.locauto.model.Gerente;
 import br.com.emerson.locauto.model.Locador;
 import br.com.emerson.locauto.service.FuncionarioService;
 
-
+/**
+ * Esta é uma classe de test e testa a classe: FuncionarioController
+ * @author Emerson
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-servlet-test.xml" })
 public class FuncionarioControllerTest {
@@ -68,7 +72,7 @@ public class FuncionarioControllerTest {
 	public void testAddFuncionarioG() throws Exception {
 
 		mockMvc.perform(post("/salvaFuncionarioG"))
-        .andExpect(view().name("redirect:/exibeFuncionarios"));
+        .andExpect(view().name("sucessoSalvar"));
 	}
 
 	@Test
@@ -83,7 +87,7 @@ public class FuncionarioControllerTest {
 	public void testAddFuncionarioL() throws Exception {
 
 		mockMvc.perform(post("/salvaFuncionarioL"))
-        .andExpect(view().name("redirect:/exibeFuncionarios"));
+        .andExpect(view().name("sucessoSalvar"));
 	}
 
 	@Test

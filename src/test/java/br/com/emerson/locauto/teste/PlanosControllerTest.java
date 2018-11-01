@@ -18,7 +18,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.emerson.locauto.controller.PlanosController;
-
+/**
+ * Esta é uma classe de test e testa a classe: PlanosController
+ * @author Emerson
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-servlet-test.xml" })
 public class PlanosControllerTest {
@@ -53,7 +57,7 @@ public class PlanosControllerTest {
 	public void testAddPlanoC() throws Exception {
 
 		mockMvc.perform(post("/salvaPlanoC"))
-        .andExpect(view().name("redirect:/exibePlanos"));
+        .andExpect(view().name("sucessoSalvar"));
 	}
 
 	@Test
@@ -68,15 +72,9 @@ public class PlanosControllerTest {
 	public void testAddPlanoM() throws Exception {
 
 		mockMvc.perform(post("/salvaPlanoM"))
-        .andExpect(view().name("redirect:/exibePlanos"));
+        .andExpect(view().name("sucessoSalvar"));
 	}
 
-	/*@Test
-	public void testDeletePlano() throws Exception {
-
-		mockMvc.perform(post("/deletePlano/3"))
-		.andExpect(view().name("sucessoDeletar"));
-	}*/
 
 	@Test
 	public void testExibePlanos() throws Exception {

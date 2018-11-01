@@ -19,7 +19,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import br.com.emerson.locauto.controller.AgenciaController;
 import br.com.emerson.locauto.service.AgenciaService;
 
-
+/**
+ * Esta é uma classe de test e testa a classe: AgenciaController
+ * @author Emerson
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-servlet-test.xml" })
 public class AgenciaControllerTest {
@@ -57,7 +61,7 @@ public class AgenciaControllerTest {
 	public void testAddAgencia() throws Exception {
 
 		mockMvc.perform(post("/add"))
-        .andExpect(view().name("redirect:/exibeAgencias"));
+        .andExpect(view().name("sucessoSalvar"));
 	}
 	@Test
 	public void editarAgencia() throws Exception {

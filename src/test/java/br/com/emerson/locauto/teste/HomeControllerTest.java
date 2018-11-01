@@ -20,7 +20,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.emerson.locauto.controller.FuncionarioController;
 import br.com.emerson.locauto.controller.HomeController;
-
+/**
+ * Esta é uma classe de test e testa a classe: HomeController
+ * @author Emerson
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-servlet-test.xml" })
 public class HomeControllerTest {

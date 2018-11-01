@@ -1,5 +1,7 @@
 package br.com.emerson.locauto.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -25,7 +27,12 @@ import org.hibernate.annotations.CascadeType;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "Cliente", length = 2, discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("C")
-public class Locacao {
+public class Locacao implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

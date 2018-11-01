@@ -13,4 +13,9 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value = "L")
 public class Locador extends Funcionario {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 }

@@ -15,6 +15,10 @@ import org.hibernate.annotations.CascadeType;
 @DiscriminatorValue("PF")
 public class LocacaoClientePF extends Locacao{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@ManyToOne
 	ClientePF clientePF;
 

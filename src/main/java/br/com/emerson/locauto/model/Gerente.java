@@ -12,4 +12,9 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value = "G")
 public class Gerente extends Funcionario {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 }

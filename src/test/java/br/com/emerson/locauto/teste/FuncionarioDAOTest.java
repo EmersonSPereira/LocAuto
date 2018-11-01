@@ -18,7 +18,11 @@ import br.com.emerson.locauto.model.Gerente;
 import br.com.emerson.locauto.model.Locador;
 import br.com.emerson.locauto.model.Planos;
 import br.com.emerson.locauto.service.FuncionarioService;
-
+/**
+ * Esta é uma classe de test e testa o DAO: Funcionario
+ * @author Emerson
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-servlet-test.xml" })
 public class FuncionarioDAOTest {
