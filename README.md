@@ -27,4 +27,12 @@ Obs.: * Requerido MySql 5.7<br>
 ou para uma data após a data de devolução para simular uma devolução com multa.
 10. Para Cancelar uma Locação,na tela de locações ativas escolha uma locação para cancelar. 
 
+========================Tecnológias Usadas ==============================
+1. Spring MVC.
+2. Spring Security.
+3. JPA + Hibernate.
+4. Banco de dados MySQL.
+5. JSP.
+
+
 
