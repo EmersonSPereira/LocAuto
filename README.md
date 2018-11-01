@@ -1,7 +1,7 @@
 # LocAuto
 
 
-1 - Crie uma base de dados MYSQL chamada "locauto".
+1 - Crie uma base de dados MYSQL chamada "locauto".<br>
 2 - No Eclipse importe o projeto como projeto maven.
 3 - Vá até /locauto/src/main/webapp/WEB-INF/jdbc.properties , abra o arquivo jdbc.properties.
 4 -altere os seguintes dados no arquivo:
