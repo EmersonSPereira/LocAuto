@@ -2,17 +2,17 @@
 
 
 1 - Crie uma base de dados MYSQL chamada "locauto".<br>
-2 - No Eclipse importe o projeto como projeto maven.
-3 - Vá até /locauto/src/main/webapp/WEB-INF/jdbc.properties , abra o arquivo jdbc.properties.
+2 - No Eclipse importe o projeto como projeto maven.<br>
+3 - Vá até /locauto/src/main/webapp/WEB-INF/jdbc.properties , abra o arquivo jdbc.properties.<br>
 4 -altere os seguintes dados no arquivo:
 
 	jdbc.username=root  --> altere "root" para o usuário do seu servidor mysql
 	jdbc.password=root  --> altere "root" para a senha do seu servidor mysql
 
 
-5 - Execulte a aplicação no servidor TOMCAT.
+5 - Execulte a aplicação no servidor TOMCAT.<br>
 
-Obs.: * Requerido MySql 5.7
+Obs.: * Requerido MySql 5.7<br>
 =====================================Instruções de Uso=========================================================
 
 1. Logar na aplicação Login: admin,Senha: 1234
