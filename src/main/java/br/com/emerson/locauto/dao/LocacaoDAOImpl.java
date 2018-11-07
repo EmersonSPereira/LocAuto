@@ -176,5 +176,30 @@ private final Logger logger = LoggerFactory.getLogger(LocacaoDAOImpl.class);
 		
 	}
 
+	@Override
+	public List<Locacao> buscaPorTipoClienteStatus(String clienteTipo, String status) {
+		
+		List<Locacao> Locacao = null;
+
+		logger.info("Iniciando transação para buscar Locacaos por tipo e situação no banco");
+
+		try {
+
+			Locacao = sessionFactory.getCurrentSession()
+					.createQuery("select c from Locacao c where c.cliente = :tipoCliente where c.status", Locacao.class)
+					.setParameter("tipoCliente", clienteTipo).setParameter("status", status).getResultList();
+
+			logger.info("Locacaos encontrado com sucesso");
+
+		} catch (Exception e) {
+
+			logger.error("Falha ao buscar Locacaos do tipo = " + clienteTipo + " erro: " + e.getMessage());
+		}
+
+		return Locacao;
+	}
+
+	
+
 
 }

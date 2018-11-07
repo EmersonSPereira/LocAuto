@@ -46,4 +46,10 @@ public class LocacaoServiceImpl implements LocacaoService {
 		return dao.buscaPorTipoCliente(clienteTipo);
 	}
 
+	@Transactional
+	public List<Locacao> buscaPorTipoClienteStatus(String clienteTipo, String situacao) {
+		// TODO Auto-generated method stub
+		return dao.buscaPorTipoClienteStatus(clienteTipo, situacao);
+	}
+
 }

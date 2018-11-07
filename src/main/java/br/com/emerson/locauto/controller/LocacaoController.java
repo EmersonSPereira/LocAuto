@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.emerson.locauto.model.ClientePF;
 import br.com.emerson.locauto.model.ClientePJ;
+import br.com.emerson.locauto.model.Devolucao;
 import br.com.emerson.locauto.model.Locacao;
 import br.com.emerson.locauto.model.LocacaoClientePF;
 import br.com.emerson.locauto.model.LocacaoClientePJ;
@@ -29,6 +30,7 @@ import br.com.emerson.locauto.service.FuncionarioService;
 import br.com.emerson.locauto.service.LocacaoService;
 import br.com.emerson.locauto.service.PlanosService;
 import br.com.emerson.locauto.service.VeiculoService;
+
 /**
  * @author Emerson Sousa
  * 
@@ -117,7 +119,6 @@ public class LocacaoController {
 		locacao.setDataDevolucao(dateFormated);
 
 		locacao.setDataLocacao(dataFormatada);
-	
 
 		// utilizando o frameword jude-time para calcular os dias que se passaram entre
 		// uma data e outra
@@ -125,11 +126,10 @@ public class LocacaoController {
 		DateTime dtEntrada = new DateTime(dataRetirada);
 		DateTime dtDevolucao = new DateTime(dataDevolucaoCalc);
 
-	
-
 		/*
-		 * adicionado um pois ó método conta os dias entre as datas exemplo: entre os dias 24 e 26 contém um dia, 
-		 * porém são duas diárias por isso é adicionado 1 a quantidade de diárias
+		 * adicionado um pois ó método conta os dias entre as datas exemplo: entre os
+		 * dias 24 e 26 contém um dia, porém são duas diárias por isso é adicionado 1 a
+		 * quantidade de diárias
 		 */
 		int diarias = calculaDiasLocacao(dtEntrada, dtDevolucao) + 1;
 
@@ -163,8 +163,8 @@ public class LocacaoController {
 		view.addObject("nomeLocador", locador.getNome());
 		view.addObject("plano", plano);
 		view.addObject("modeloVeiculo", veiculo.getModelo());
-		
-		//atualizando 
+
+		// atualizando
 		locacao.setValorTotalLocacao(valorTotal);
 		locacaoService.salvar(locacao);
 
@@ -237,7 +237,6 @@ public class LocacaoController {
 		locacao.setDataDevolucao(dateFormated);
 
 		locacao.setDataLocacao(dataFormatadaPJ);
-	
 
 		// utilizando o frameword jude-time para calcular os dias que se passaram entre
 		// uma data e outra
@@ -245,12 +244,10 @@ public class LocacaoController {
 		DateTime dtEntrada = new DateTime(dataRetirada);
 		DateTime dtDevolucao = new DateTime(dataDevolucaoCalc);
 
-		System.out.println("==================================datas====================================");
-		System.out.println("Data entrada: " + dtEntrada + "Data Saida: " + dtDevolucao);
-
 		/*
-		 * adicionado um pois ó método conta os dias entre as datas exemplo: entre os dias 24 e 26 contém um dia, 
-		 * porém são duas diárias por isso é adicionado 1 a quantidade de diárias
+		 * adicionado um pois ó método conta os dias entre as datas exemplo: entre os
+		 * dias 24 e 26 contém um dia, porém são duas diárias por isso é adicionado 1 a
+		 * quantidade de diárias
 		 */
 		int diarias = calculaDiasLocacao(dtEntrada, dtDevolucao) + 1;
 
@@ -284,8 +281,8 @@ public class LocacaoController {
 		view.addObject("nomeLocador", locador.getNome());
 		view.addObject("plano", plano);
 		view.addObject("modeloVeiculo", veiculo.getModelo());
-		
-		//atualizando 
+
+		// atualizando
 		locacao.setValorTotalLocacao(valorTotal);
 		locacaoService.salvar(locacao);
 
@@ -301,24 +298,124 @@ public class LocacaoController {
 		Locacao locacao = locacaoService.buscaPorId(id);
 
 		locacao.setSituacao("Pago");
-		
+
 		locacaoService.salvar(locacao);
 
 		return view;
 
 	}
-	
+
 	@RequestMapping("/locacaoClientePJ/finalizar/{locacaoID}")
 	public ModelAndView finalizarLocacaoClientePJ(@PathVariable("locacaoID") Integer id) {
 
 		ModelAndView view = new ModelAndView();
 		view.setViewName("redirect:/exibeLocacoes");
 		LocacaoClientePJ locacao = (LocacaoClientePJ) locacaoService.buscaPorId(id);
-		System.out.println("=================================="+id);
+		System.out.println("==================================" + id);
 
 		locacao.setSituacao("Pago");
-		
+
 		locacaoService.salvar(locacao);
+
+		return view;
+
+	}
+
+	@RequestMapping("/locacaoClientePF/calcularDebitos/{locacaoID}")
+	public ModelAndView calcularDebitosClientePF(@PathVariable("locacaoID") Integer id) {
+
+		ModelAndView view = new ModelAndView();
+		view.setViewName("saldarDebitosClientePF");
+		view.addObject("devolucao", new Devolucao());
+
+		LocacaoClientePF locacao = (LocacaoClientePF) locacaoService.buscaPorId(id);
+		ClientePF cliente = (ClientePF) clienteService.buscaPorId(locacao.getClientePF().getId());
+		Locador locador = (Locador) funcionarioService.buscaPorId(locacao.getLocador().getId());
+		Planos plano = planosService.buscaPorId(locacao.getPlano().getId());
+		Veiculo veiculo = veiculoService.buscaPorId(locacao.getVeiculo().getId());
+
+		view.addObject("locacao", locacao);
+		view.addObject("nomeCliente", cliente.getNome());
+		view.addObject("nomeLocador", locador.getNome());
+		view.addObject("plano", plano);
+		view.addObject("modeloVeiculo", veiculo.getModelo());
+
+		return view;
+
+	}
+
+	@RequestMapping(value = "/locacaoClientePf/finalizarSaldarDebitos", method = RequestMethod.POST)
+	public ModelAndView finalizarSaldarDebitosClientePF(@ModelAttribute("devolucao") Devolucao devolucao,
+			BindingResult result) throws ParseException {
+
+		LocacaoClientePF locacao = (LocacaoClientePF) locacaoService.buscaPorId(devolucao.getLocacaoId());
+		Planos plano = planosService.buscaPorId(locacao.getPlano().getId());
+		ClientePF cliente = (ClientePF) clienteService.buscaPorId(locacao.getClientePF().getId());
+		Locador locador = (Locador) funcionarioService.buscaPorId(locacao.getLocador().getId());
+		Veiculo veiculo = veiculoService.buscaPorId(locacao.getVeiculo().getId());
+
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		Date dtDevolucaoPrevista = formato.parse(locacao.getDataDevolucao());
+
+		DateTime dataDevolucaoFinal = new DateTime();
+		DateTime dataDevolucaoPrevista = new DateTime(dtDevolucaoPrevista);
+
+		int diasDeAtraso = calculaDiasLocacao(dataDevolucaoPrevista, dataDevolucaoFinal) ;
+		int valorDiaria = plano.getValorDiaria();
+		int valorMulta = (5 * (diasDeAtraso * plano.getValorDiaria())) / 100;
+		int valorDiariasAtrasadas = diasDeAtraso * valorDiaria;
+		int valorTotalatraso = valorDiariasAtrasadas + valorMulta;
+		int taxaAbastecimento = calculaTanque(devolucao.getNivelDoTanque());
+		int danos = calculaDanos(devolucao.getDanos());
+		int totalDevolucao = valorTotalatraso + taxaAbastecimento + danos;
+
+		locacao.setValorTotalLocacao(locacao.getValorTotalLocacao() + valorTotalatraso);
+		locacaoService.salvar(locacao);
+
+		ModelAndView view = new ModelAndView();
+		view.setViewName("finalizarSaldarDebitosPF");
+
+		view.addObject("locacao", locacao);
+		view.addObject("nomeCliente", cliente.getNome());
+		view.addObject("nomeLocador", locador.getNome());
+		view.addObject("plano", plano);
+		view.addObject("modeloVeiculo", veiculo.getModelo());
+		view.addObject("diasDeAtraso", diasDeAtraso);
+		view.addObject("valorMulta", valorMulta);
+		view.addObject("valorTotalatraso", valorTotalatraso);
+		view.addObject("valorDiariasAtrasadas", valorDiariasAtrasadas);
+		view.addObject("danos", danos);
+		view.addObject("taxaAbastecimento", taxaAbastecimento);
+		view.addObject("totalDevolucao", totalDevolucao);
+		
+		return view;
+
+	}
+	
+	@RequestMapping("/locacaoClientePf/finalizarSaldarDebitos/finalizar/{locacaoID}")
+	public ModelAndView finalizarDebitosClientePF(@PathVariable("locacaoID") Integer id) {
+		
+		LocacaoClientePF locacao = (LocacaoClientePF) locacaoService.buscaPorId(id);
+		locacao.setStatus("Finalizada");
+		locacaoService.salvar(locacao);
+		
+		ModelAndView view = new ModelAndView();
+		view.setViewName("sucessoSalvar");
+		view.addObject("alertTitulo", "Sucesso ao salvar Devolução");
+		view.addObject("alertCorpo", "Você será direcionado para: Locações Finalizadas");
+		view.addObject("location", "/LocAuto/exibeLocacoes");
+		
+		return view;
+		
+	}
+
+	@RequestMapping("/locacaoClientePJ/calcularDebitos/{locacaoID}")
+	public ModelAndView calcularDebitosClientePJ(@PathVariable("locacaoID") Integer id) {
+
+		ModelAndView view = new ModelAndView();
+		view.setViewName("calcalarDebitosPJ");
+		LocacaoClientePJ locacao = (LocacaoClientePJ) locacaoService.buscaPorId(id);
+		view.addObject("locacao", locacao);
 
 		return view;
 
@@ -377,5 +474,33 @@ public class LocacaoController {
 		}
 
 		return valorSeguro;
+	}
+
+	public int calculaTanque(String nivelDoTanque) {
+
+		int valor = 0;
+
+		if (nivelDoTanque.equals("cobrar")) {
+
+			valor = 150;
+		}
+
+		return valor;
+	}
+
+	public int calculaDanos(String danos) {
+		int valor = 0;
+
+		if (danos.equals("arranhao")) {
+			valor = 80;
+		} else if (danos.equals("amassadoLeve")) {
+			valor = 180;
+		} else if (danos.equals("amassadoGrave")) {
+			valor = 350;
+		} else if (danos.equals("rouboPerda")) {
+			valor = 5000;
+		}
+		
+		return valor;
 	}
 }
